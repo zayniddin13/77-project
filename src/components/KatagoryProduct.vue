@@ -1,13 +1,15 @@
 <template>
   <div
-    class="flex items-center rounded-xl shadow-little border border-gray-300 relative pr-3 py-3"
+    class="flex items-center rounded-xl shadow-little border border-gray-300 relative pr-3 py-3 group hover:border-blue-500 hover:cursor-pointer transition-300"
   >
-    <img
+   <div class="p-4 ml-0 -translate-x-1/2 my-auto mr-6 bg-white border border-gray-300 shadow-some rounded-md group-hover:border-blue-500">
+     <img
       name="prefix"
-      class="category-icon  relative ml-0 -translate-x-1/2 my-auto mr-6 w-10 h-10 bg-white"
+      class="category-icon  relative w-8 h-6"
       :src="image"
       alt=""
     />
+   </div>
     <div class="flex w-full justify-between items-center">
 <div class="product_about">
       <div
@@ -21,7 +23,7 @@
         {{ adds + " " + "объявлений"}}
       </div>
     </div>
-    <span class="icon-to-bottom text-xs"></span>
+    <span class="icon-to-bottom text-xs  group-hover:text-blue-500"></span>
     </div>
     
   </div>
@@ -37,8 +39,8 @@ const props = defineProps<{
 </script>
 <style scoped>
 .category-icon {
-  filter: invert(0) sepia(0%) saturate(4419%) hue-rotate(200deg)
-    brightness(100%) contrast(100%);
+      filter: invert(54%) sepia(52%) saturate(4419%) hue-rotate(194deg) brightness(98%) contrast(95%);
+
 }
  /* filter: invert(54%) sepia(52%) saturate(4419%) hue-rotate(194deg)
     brightness(98%) contrast(95%); */

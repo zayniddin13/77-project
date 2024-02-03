@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
+    "axios": "^1.6.7",
     "dayjs": "^1.11.10",
     "nvm": "^0.0.4",
     "vue": "^3.3.11",

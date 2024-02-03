@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
- 
+
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
@@ -123,7 +123,8 @@ export default {
       grey: "0px 12px 36px 0px rgba(14, 17, 22, 0.10)",
       dropShadow: "0px 2px 28px 0px rgba(23, 24, 26, 0.20)",
       little: "0px 4px 16px 0px rgba(23, 24, 26, 0.02)",
-      anounce:"box-shadow: 0px 4px 15px 0px rgba(56, 143, 243, 0.12)"
+      anounce: "box-shadow: 0px 4px 15px 0px rgba(56, 143, 243, 0.12)",
+      some: "0px 4px 20px 0px rgba(0, 0, 0, 0.08)",
     },
     boxShadowColor: ({ theme }) => theme("colors"),
     brightness: {

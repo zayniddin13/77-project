@@ -1,5 +1,5 @@
 <template>
-  <form :class="variants[backgronud]">
+  <form :class="variants[backgronud]" class="xs:px-3 px-1">
     <slot name="prefix"></slot>
     <input
       :type="variants[type]"

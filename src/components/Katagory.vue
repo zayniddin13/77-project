@@ -1,17 +1,17 @@
 <template>
-  <div class="katagory bg-white mt-16 pt-14 pb-9 relative z-4">
+  <div class="container katagory bg-white mt-8 sm:mt-16 pt-8 sm:pt-14 pb-3 sm:pb-9 relative z-0">
       <MainForm
       
         placeholder="main"
         type="text"
         backgronud="mainBg"
-        class="flex items-center w-8/12 mx-auto border transition-300  p-2 max-w-[580px] bg-white  rounded-lg absolute z-20 top-0 -translate-y-1/2 left-1/2 -translate-x-2/4 focus:border-2 "
+        class="flex items-center w-8/12 mx-auto border transition-300  p-2 max-w-[580px] bg-white  rounded-lg absolute top-0 -translate-y-1/2 left-1/2 -translate-x-2/4 focus:border-2 "
       >
-      <template #prefix class="mx-3">
+      <template #prefix>
       <span class="icon-search text-gray-400"></span>
         </template>
         <template #suffix>
-          <EnterButton variant="primary" title="Поиск" class="px-7 py-3" />
+          <EnterButton variant="primary" title="Поиск" class="px-3 py-1 sm:px-7 sm:py-3" />
         </template>
       </MainForm>
 
