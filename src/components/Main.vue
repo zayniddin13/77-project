@@ -1,10 +1,10 @@
 <template>
 <div>
-      <Katagory />
-  <AnounsSection/> 
+      <Category />
+  <AddSection/> 
 </div>
 </template>
 <script setup>
-import Katagory from "./Katagory.vue";
-import AnounsSection from "./AnounsSection.vue";
+import Category from "./CategorySection.vue";
+import AddSection from "./AddSection.vue";
 </script>

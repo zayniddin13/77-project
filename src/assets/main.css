@@ -1,7 +1,9 @@
 @import "./base.css";
 @import "./index.css";
 @import "./icomoon/style.css";
-
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -28,3 +30,5 @@ body{
    position: relative;
 }
 }
+
+

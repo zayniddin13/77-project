@@ -12,16 +12,16 @@
           облегчает покупки и продажи, связывая продавцов с потенциальными
           клиентами.
         </p>
-        <div class="using_site block sm:flex items-center justify-center gap-5 md:gap-20">
+        <div class=" block sm:flex items-center justify-center gap-5 md:gap-20">
           <router-link to="/about-us" target="_blank"
-            class="aboutUs flex items-center justify-center gap-1">
+            class=" flex items-center justify-center gap-1">
           <img src="/public/images/footerLogo.svg" alt="" /><span
               >Доска объявлений</span
             >
           </router-link>
           <router-link to="/using-rules"
             target="_blank"
-            class="using_rules flex items-center justify-center gap-1"
+            class=" flex items-center justify-center gap-1"
             ><img src="/public/images/footerLogo.svg" alt="" /><span
               >Условия пользования</span
             ></router-link
@@ -29,14 +29,14 @@
           <a
             href="tel: +998 88 278 96 96"
             target="_blank"
-            class="connecting_us flex items-center justify-center gap-1"
+            class=" flex items-center justify-center gap-1"
             ><img src="/public/images/footerLogo.svg" alt="" /><span
               >+998 88 500 50 00</span
             ></a
           >
         </div>
         <div
-          class="downloading_content mt-6 mb-2 flex items-center justify-center gap-6"
+          class="mt-6 mb-2 flex items-center justify-center gap-6"
         >
           <a href="http://" target="_blank"
             ><img src="/public/images/appStore.svg" alt=""

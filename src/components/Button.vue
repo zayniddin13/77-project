@@ -10,12 +10,12 @@ import { defineProps } from 'vue';
 
 const props = defineProps<{
   title?: string
-  variant?: 'primary' | 'secondary' 
+  variant?: 'primary' | 'secondary' | 'download'
   showing?:string
 }>()
 const variants = {
   primary: 'bg-black text-white active:scale-95 hover:bg-zinc-700',
   secondary: 'bg-gray-400 text-black active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400',
-  
+  download:'bg-blue-300 text-blue-500 hover:bg-blue-400 hover:cursor-pointer active:scale-95'
 }
 </script>

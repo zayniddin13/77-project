@@ -1,5 +1,5 @@
 <template>
-  <form :class="variants[backgronud]" class="xs:px-3 px-1">
+  <div :class="variants[backgronud]" class="xs:px-3 px-1">
     <slot name="prefix"></slot>
     <input
       :type="variants[type]"
@@ -7,7 +7,7 @@
       :placeholder="variants[placeholder]"
     />
     <slot name="suffix"></slot>
-  </form>
+  </div>
 </template>
 <script setup lang="ts">
 import { defineProps } from "vue";

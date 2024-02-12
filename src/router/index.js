@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 import AboutUs from "../components/AboutUs.vue";
 import Main from "../components/Main.vue";
 import UsingRules from "../components/UsingRules.vue";
 import Saved from "../components/Saved.vue";
+import SingleProduct from "../components/SinglePageProduct.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,7 +27,15 @@ const router = createRouter({
       name: "saved",
       component: Saved,
     },
+    {
+      path:"/products"
+    },
+    {
+      path: "/products/:slug",
+      name: "SingleProduct",
+      component: SingleProduct,
+    },
   ],
 });
 
-export default router
+export default router;
