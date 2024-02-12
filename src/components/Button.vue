@@ -1,14 +1,18 @@
 <template>
- <div  :class="variants[variant]" class="px-4 py-2 flex items-center rounded-lg gap-1" >
-  <slot name="prefix"></slot>
-  <button :class="showing">{{ title }}</button>
-  <slot name="suffix"></slot>
- </div>
+  <div
+    :class="variants[variant]"
+    class="px-4 py-2 flex items-center rounded-lg gap-2 font-semibold"
+  >
+    <slot name="prefix"></slot>
+    <button :class="showing">{{ title }}</button>
+    <slot name="suffix"></slot>
+  </div>
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 const props = defineProps<{
+<<<<<<< HEAD
   title?: string
   variant?: 'primary' | 'secondary' | 'download'
   showing?:string
@@ -19,3 +23,15 @@ const variants = {
   download:'bg-blue-300 text-blue-500 hover:bg-blue-400 hover:cursor-pointer active:scale-95'
 }
 </script>
+=======
+  title?: string;
+  variant?: "primary" | "secondary";
+  showing?: string;
+}>();
+const variants = {
+  primary: "bg-black text-white active:scale-95 hover:bg-zinc-700",
+  secondary:
+    "bg-[#EAEDF0] text-black active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400",
+};
+</script>
+>>>>>>> e7bac29 (updated styles)
