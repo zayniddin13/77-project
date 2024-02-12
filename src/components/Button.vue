@@ -12,18 +12,6 @@
 import { defineProps } from "vue";
 
 const props = defineProps<{
-<<<<<<< HEAD
-  title?: string
-  variant?: 'primary' | 'secondary' | 'download'
-  showing?:string
-}>()
-const variants = {
-  primary: 'bg-black text-white active:scale-95 hover:bg-zinc-700',
-  secondary: 'bg-gray-400 text-black active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400',
-  download:'bg-blue-300 text-blue-500 hover:bg-blue-400 hover:cursor-pointer active:scale-95'
-}
-</script>
-=======
   title?: string;
   variant?: "primary" | "secondary";
   showing?: string;
@@ -34,4 +22,3 @@ const variants = {
     "bg-[#EAEDF0] text-black active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400",
 };
 </script>
->>>>>>> e7bac29 (updated styles)
