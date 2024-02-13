@@ -79,7 +79,7 @@
           <span class="max-md:hidden test-sm font-semibold">Избранные</span>
         </router-link>
         <span class="w-px h-8 bg-gray-300 max-sm:hidden"></span>
-        <EnterButton title="Войти" showing="max-sm:hidden" variant="secondary">
+        <EnterButton title="Войти" style="max-sm:hidden" variant="secondary">
           <template #suffix>
             <span class="icon-logenter"></span>
           </template>

@@ -1,6 +1,8 @@
 <template>
-  <div class="py-3 overflow-x-hidden max-md:hidden">
-    <div class="container flex items-center gap-1.5 md:overflow-hidden">
+  <div class="container">
+    <div
+      class="py-5 flex items-center gap-1.5 md:overflow-hidden overflow-x-hidden max-md:hidden"
+    >
       <a
         href="/"
         class="flex-y-center gap-1 text-dark leading-130 text-sm font-medium transition-300 hover:text-blue-400 group"
@@ -32,74 +34,178 @@
         >
       </div>
     </div>
-    <div class="body grid grid-cols-2 gap-10">
-      <div class="about_img">
-        <swiper v-if="product"
-          :style="{
-            '--swiper-navigation-color': '#fff',
-            '--swiper-pagination-color': '#fff',
-          }"
-          :spaceBetween="10"
-          :navigation="true"
-          :thumbs="{ swiper: thumbsSwiper }"
-          :modules="modules"
-          class="mySwiper2"
-        >
-          <swiper-slide 
-            class="activeImg"
-            v-for="(image, index) in product.photos"
-            :key="index"
-            style="width:100vw margin-right:0"
+    <div class="body md:flex gap-10 block">
+      <div class="md:w-8/12 w-full">
+        <div v-if="product" class="px-6 py-5 bg-white rounded-2xl">
+          <swiper
+            :style="{
+              '--swiper-navigation-color': '#fff',
+              '--swiper-pagination-color': '#fff',
+            }"
+            :spaceBetween="10"
+            :navigation="true"
+            :thumbs="{ swiper: thumbsSwiper }"
+            :modules="modules"
+            class="mySwiper2"
           >
-            <img :src="image" />
-          </swiper-slide>
-        </swiper>
+            <swiper-slide
+              class="activeImg"
+              v-for="(image, index) in product.photos"
+              :key="index"
+              style="width:100vw margin-right:0"
+            >
+              <img
+                class="rounded-2xl object-cover object-center"
+                :src="image"
+              />
+            </swiper-slide>
+          </swiper>
 
-        <swiper v-if="product"
-          @swiper="setThumbsSwiper"
-          :spaceBetween="10"
-          :slidesPerView="4"
-          :freeMode="true"
-          :watchSlidesProgress="true"
-          :modules="modules"
-          class="mySwiper"
-        >
-          <swiper-slide v-for="(img, index) in product.photos" :key="index">
-            <img :src="img" />
-          </swiper-slide>
-        </swiper>
-      </div>
-      <div v-if="product" class="img_adress">
-        <div class="product_seller">
-          <div>
-            <img v-if="product.seller.profile_photo" :src="product.seller.profile_photo" />
-            <div v-if="product.seller" class="profile_name">
-              <h1>{{ product.seller.full_name }}</h1>
-              <h3>{{ product.seller.id }}</h3>
+          <swiper
+            v-if="product"
+            @swiper="setThumbsSwiper"
+            :spaceBetween="10"
+            :slidesPerView="4"
+            :freeMode="true"
+            :watchSlidesProgress="true"
+            :modules="modules"
+            class="mySwiper"
+          >
+            <swiper-slide v-for="(img, index) in product.photos" :key="index">
+              <img class="rounded-2xl" :src="img" />
+            </swiper-slide>
+          </swiper>
+          <h3 class="my-4 font-inter font-bold text-xl text-black">
+            {{ product.name }}
+          </h3>
+          <div class="flex gap-4 pt-4 pb-6">
+            <div class="bg-gray-300 py-1 px-2 rounded-md">
+              {{ formatPublishedTime(product.updated_time) }}
+            </div>
+            <div
+              class="bg-gray-300 py-1 px-2 rounded-md font-inter text-sm font-normal"
+            >
+              {{ product.address.district.name }}
             </div>
           </div>
-          <h1 v-if="product.seller" class="profile_number">{{ product.seller.phone_number }}</h1>
-          <EnterButton title="Все объявления" variant="secondary"> 
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="font-inter font-bold text-3xl text-black">{{
+                formatMoneyDecimal(product.price)
+              }}</span
+              ><span class="font-inter font-mediumn text-lg text-blue-600 ml-2"
+                >UZS</span
+              >
+            </div>
+            <a href="tel:+998 71 200 70 07" target="_blank">
+              <EnterButton
+                title="+998 71 200 70 07"
+                variant="phone"
+                class="flex items-center justify-center"
+              >
+                <template #prefix>
+                  <span class="icon-phone text-white"></span>
+                </template>
+              </EnterButton>
+            </a>
+          </div>
+        </div>
+        <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
+          <h3 class="font-inter font-bold text-black text-2xl">Описание</h3>
+          <div class="font-ibmPlex font-normal text-base">
+            {{ product.description }}
+          </div>
+        </div>
+        <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
+          <h3 class="font-inter font-bold text-black text-2xl">Продавец</h3>
+          <div class="flex justify-between items-center">
+  <div class="flex items-center gap-3">
+            <img
+              v-if="product.seller.profile_photo"
+              :src="product.seller.profile_photo"
+              class="w-10 h-10 rounded-lg"
+            />
+            <div class="profile_name block">
+              <h1 class="font-semibold text-black font-inter text-base">
+                {{ product.seller.full_name }}
+              </h1>
+              <h3 class="font-inter font-normal text-xs text-gray-500">
+                ID: {{ product.seller.id }}
+              </h3>
+            </div>
+          </div>
+          <a href="tel: +998 71 200 70 07" target="_blank" class="font-inter text-black font-semibold text-base">+998 71 200 70 07</a>
+          </div>
+        
+        </div>
+      </div>
+
+      <div v-if="product" class="img_adress max-w-xs w-full">
+        <div class="product_seller p-4 bg-white rounded-2xl">
+          <div class="flex items-center gap-3">
+            <img
+              v-if="product.seller.profile_photo"
+              :src="product.seller.profile_photo"
+              class="w-10 h-10 rounded-lg"
+            />
+            <div v-if="product.seller" class="profile_name block">
+              <h1 class="font-semibold text-black font-inter text-base">
+                {{ product.seller.full_name }}
+              </h1>
+              <h3 class="font-inter font-normal text-xs text-gray-500">
+                ID: {{ product.seller.id }}
+              </h3>
+            </div>
+          </div>
+          <h1
+            v-if="product.seller"
+            class="profile_number font-inter font-semibold text-base mt-3 mb-5"
+          >
+            {{ product.seller.phone_number }}
+          </h1>
+          <EnterButton
+            title="Все объявления"
+            variant="secondary"
+            class="flex items-center justify-center"
+          >
           </EnterButton>
         </div>
-        <div class="">
-        <div class="p-4">
-<h3>Местоположение</h3>
-<div class="h-1 w-full bg-gray-400"></div>
-<div><span class="icon-location"></span> <span>{{ product.address.name }}</span></div>
+        <div class="bg-white my-4 rounded-2xl">
+          <div class="p-4">
+            <h3 class="font-inter font-bold text-xl text-black">
+              Местоположение
+            </h3>
+            <div class="h-[1px] w-full bg-gray-400 my-3"></div>
+            <div class="flex gap-2.5">
+              <span
+                class="icon-location text-blue-500 text-3xl font-semibold"
+              ></span>
+              <span class="font-inter font-medium text-sm text-black">{{
+                product.address.name
+              }}</span>
+            </div>
+          </div>
         </div>
-        </div>
-        <EnterButton title="Скачать в галерею" variant="download"></EnterButton>
+        <EnterButton
+          title="Скачать в галерею"
+          variant="download"
+          class="max-w-xs w-full flex items-center justify-center"
+        >
+          <template #suffix>
+            <span class="icon-download text-xl text-blue-500 font-bold"></span>
+          </template>
+        </EnterButton>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import EnterButton from "./Button.vue";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import dayjs from "dayjs";
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -118,8 +224,10 @@ const thumbsSwiper = ref(null);
 
 const product = ref(null);
 const route = useRoute();
-
-onMounted(async () => {
+const formatPublishedTime = (time) => {
+  return dayjs(time).format("D-MMMM, YYYY, HH:mm");
+};
+async function dataFetch() {
   console.log(`${route.params.slug}`);
   try {
     const response = await axios.get(
@@ -131,7 +239,32 @@ onMounted(async () => {
   } catch (error) {
     console.error("Error fetching product:", error);
   }
+}
+onMounted(() => {
+  dataFetch(), formatPublishedTime();
 });
+
+function formatMoneyDecimal(number: any, fix = 0, option = "decimal") {
+  let style: "currency";
+  // if (["USD", "RUB"].includes(option)) {
+  //   style = "currency";
+  // } else {
+  //   style = "";
+  // }
+
+  const newStyle: string = style;
+  const option2 = {
+    newStyle,
+    [newStyle]: option,
+    maximumFractionDigits: fix,
+    minimumFractionDigits: fix,
+    decimal: ".",
+  };
+  return number
+    ? new Intl.NumberFormat("ru-RU", option2).format(number)
+    : "0.00";
+}
+
 // swiper
 
 const setThumbsSwiper = (swiper) => {

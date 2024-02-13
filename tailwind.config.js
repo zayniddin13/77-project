@@ -346,6 +346,9 @@ export default {
         "'Poppins', sans-serif",
         "'Work Sans', sans-serif",
       ],
+      ibmPlex: [
+       " 'IBM Plex Sans', sans-serif"
+      ]
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],

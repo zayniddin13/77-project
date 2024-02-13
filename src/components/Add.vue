@@ -51,6 +51,7 @@ const props = defineProps<{
 let like = ref(false);
 
 onBeforeMount(() => {
+  console.log(props.islike)
   like.value = props.islike;
 });
 
