@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AboutUs from "../components/AboutUs.vue";
-import Main from "../components/Main.vue";
-import UsingRules from "../components/UsingRules.vue";
-import Saved from "../components/Saved.vue";
-import SingleProduct from "../components/SinglePageProduct.vue";
+import AboutUs from "../pages/AboutUs.vue";
+import Main from "../pages/Main.vue";
+import UsingRules from "../pages/UsingRules.vue";
+import Saved from "../pages/Saved.vue";
+import SingleProduct from "../pages/SinglePageProduct.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,7 +28,7 @@ const router = createRouter({
       component: Saved,
     },
     {
-      path:"/products"
+      path: "/products",
     },
     {
       path: "/products/:slug",

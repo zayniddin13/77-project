@@ -55,7 +55,7 @@
   </div>
 </template>
 <script setup>
-import Announce from "./Add.vue";
+import Announce from "../components/Add.vue";
 import dayjs from "dayjs";
 import { ref, onMounted, computed, watch } from "vue";
 const fetchDatas = ref([]);

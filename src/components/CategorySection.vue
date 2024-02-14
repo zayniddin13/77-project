@@ -41,8 +41,8 @@
 </template>
 <script setup>
 import Category from "./Category.vue";
-import MainForm from "./Form.vue";
-import EnterButton from "./Button.vue";
+import MainForm from "../components/ui/Form.vue";
+import EnterButton from "./ui/Button.vue";
 import { computed, onMounted, ref } from "vue";
 const fetchData = ref(null);
 const loading = ref(false);

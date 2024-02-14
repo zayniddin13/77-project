@@ -119,24 +119,28 @@
         <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
           <h3 class="font-inter font-bold text-black text-2xl">Продавец</h3>
           <div class="flex justify-between items-center">
-  <div class="flex items-center gap-3">
-            <img
-              v-if="product.seller.profile_photo"
-              :src="product.seller.profile_photo"
-              class="w-10 h-10 rounded-lg"
-            />
-            <div class="profile_name block">
-              <h1 class="font-semibold text-black font-inter text-base">
-                {{ product.seller.full_name }}
-              </h1>
-              <h3 class="font-inter font-normal text-xs text-gray-500">
-                ID: {{ product.seller.id }}
-              </h3>
+            <div class="flex items-center gap-3">
+              <img
+                v-if="product.seller.profile_photo"
+                :src="product.seller.profile_photo"
+                class="w-10 h-10 rounded-lg"
+              />
+              <div class="profile_name block">
+                <h1 class="font-semibold text-black font-inter text-base">
+                  {{ product.seller.full_name }}
+                </h1>
+                <h3 class="font-inter font-normal text-xs text-gray-500">
+                  ID: {{ product.seller.id }}
+                </h3>
+              </div>
             </div>
+            <a
+              href="tel: +998 71 200 70 07"
+              target="_blank"
+              class="font-inter text-black font-semibold text-base"
+              >+998 71 200 70 07</a
+            >
           </div>
-          <a href="tel: +998 71 200 70 07" target="_blank" class="font-inter text-black font-semibold text-base">+998 71 200 70 07</a>
-          </div>
-        
         </div>
       </div>
 
@@ -201,7 +205,7 @@
 </template>
 
 <script setup lang="ts">
-import EnterButton from "./Button.vue";
+import EnterButton from "../components/ui/Button.vue";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
