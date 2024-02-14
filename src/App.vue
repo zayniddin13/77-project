@@ -1,12 +1,11 @@
 <template>
   <div>
-    <Header />
-    <router-view />
-    <Footer />
+    <Defoult />
   </div>
 </template>
 
 <script setup>
-import Header from "./layouts/Header.vue";
-import Footer from "./layouts/Footer.vue";
+import  Defoult from "./layouts/defoult.vue";
+// import Header from "./layouts/Header.vue";
+// import Footer from "./layouts/Footer.vue";
 </script>

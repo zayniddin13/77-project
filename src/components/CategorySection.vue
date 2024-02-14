@@ -44,23 +44,26 @@ import Category from "./Category.vue";
 import MainForm from "../components/ui/Form.vue";
 import EnterButton from "./ui/Button.vue";
 import { computed, onMounted, ref } from "vue";
-const fetchData = ref(null);
+import { storeInstance } from "../../src/instances/index.js";
+const fetchData = ref([]);
 const loading = ref(false);
-const fetchDataFromApi = computed(async () => {
+async function fetchDataFromApi() {
   loading.value = true;
+  try {
+    loading.value = true;
+    const response = await storeInstance.get(`/category/`);
 
-  await fetch("https://admin.77.uz/api/v1/store/category/")
-    .then((response) => response.json())
-    .then((data) => {
-      fetchData.value = data;
-      console.log(fetchData.value);
-    })
-    .catch((error) => {})
-    .finally(() => {
-      loading.value = false;
-    });
-});
+    fetchData.value = response.data;
+    console.log(response.data);
+
+    return;
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+
+}
 onMounted(() => {
-  fetchDataFromApi.value;
+  fetchDataFromApi();
 });
 </script>

@@ -35,60 +35,62 @@
 <script setup>
 import Add from "./Add.vue";
 import dayjs from "dayjs";
-import {  onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { get } from "@vueuse/core";
+import { storeInstance } from "../../src/instances/index.js";
 const fetchDatas = ref([]);
 const loading = ref(false);
 
 //  let localId = JSON.parse(localStorage.getItem("deviseId"));
 
-const fetchDataFromApi =async () => {
+const fetchDataFromApi = async () => {
   loading.value = true;
 
-
-
-  let deviseId = localStorage.getItem("deviseId")
+  let deviseId = localStorage.getItem("deviseId");
 
   if (deviseId) {
-    await fetch(`https://77-dev.uicgroup.tech/api/v1/store/list/ads/`, {
-    headers: {
-      "Device-Id": localStorage.getItem("deviseId"),
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      fetchDatas.value = data.results;
-      console.log(data);
+    try {
+      loading.value = true;
+      const response = await storeInstance.get(`/list/ads/`, {
+        headers: {
+          "Device-Id": localStorage.getItem("deviseId"),
+        },
+      });
+
+      fetchDatas.value = response.data.results;
+      console.log(response.data.results);
       console.log(fetchDatas.value);
-    })
-      .catch((error) => {
+
+      return;
+    } catch (error) {
       console.log(error);
-    })
-    .finally(() => {
+    } finally {
       loading.value = false;
-    });
+    }
   } else {
-        deviseId = Math.floor(Math.random() * 10000000000000000);
+    deviseId = Math.floor(Math.random() * 10000000000000000);
     localStorage.setItem("deviseId", JSON.stringify(deviseId));
     // localId = JSON.parse(localStorage.getItem("deviseId"));
-    await fetch(`https://77-dev.uicgroup.tech/api/v1/store/list/ads/`, {
-    headers: {
-      "Device-Id": localStorage.getItem("deviseId"),
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      fetchDatas.value = data.results;
+      try {
+      loading.value = true;
+      const response = await storeInstance.get(`/list/ads/`, {
+        headers: {
+          "Device-Id": localStorage.getItem("deviseId"),
+        },
+      });
+
+      fetchDatas.value = response.results;
+      console.log(response);
       console.log(fetchDatas.value);
-    })
-    .catch((error) => {})
-    .finally(() => {
+
+      return;
+    } catch (error) {
+      console.log(error);
+    } finally {
       loading.value = false;
-    });
+    }
   }
-
 };
-
 
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
