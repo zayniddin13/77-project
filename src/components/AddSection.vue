@@ -68,7 +68,7 @@ const fetchDataFromApi =async () => {
       loading.value = false;
     });
   } else {
-        deviseId = Math.floor(Math.random() * 10000000000000000).toString();
+        deviseId = Math.floor(Math.random() * 10000000000000000);
     localStorage.setItem("deviseId", JSON.stringify(deviseId));
     // localId = JSON.parse(localStorage.getItem("deviseId"));
     await fetch(`https://77-dev.uicgroup.tech/api/v1/store/list/ads/`, {
