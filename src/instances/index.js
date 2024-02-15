@@ -7,3 +7,6 @@ export const storeInstance = axios.create({
 export const authInstance = axios.create({
   baseURL: config.SERVER_URL + "/accounts",
 });
+export const usingInstance = axios.create({
+  baseURL: config.SERVER_URL + "/common",
+});

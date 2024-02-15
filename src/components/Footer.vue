@@ -3,10 +3,10 @@
     <div
       class="footer mt-8 pt-14 md:pt-16 pb-3 bg-cover bg-[url('/public/images/circling.svg')] bg-center relative"
     >
-    <div class="absolute top-0 left-[50%] -translate-x-2/4 -translate-y-[45%]"><img src="/public/images/shadowLogo.svg" alt=""></div>
+    <router-link to="/" class="absolute top-0 left-[50%] -translate-x-2/4 -translate-y-[45%]"><img src="/public/images/shadowLogo.svg" alt=""></router-link>
       <div class="container">
         <p
-          class="footer_about text-center font-inter text-base font-normal leading-6 md:mx-44 not-italic mb-8"
+          class="footer_about text-black-1 text-center font-inter text-base font-normal leading-6 md:mx-44 not-italic mb-8"
         >
           77.uz marketplace - это виртуальная платформа в Узбекистане, которая
           облегчает покупки и продажи, связывая продавцов с потенциальными
@@ -15,14 +15,14 @@
         <div class=" block sm:flex items-center justify-center gap-5 md:gap-20">
           <router-link to="/about-us" target="_blank"
             class=" flex items-center justify-center gap-1">
-          <img src="/public/images/footerLogo.svg" alt="" /><span
+          <img src="/public/images/footerLogo.svg" alt="" /><span class="text-black-1 text-xl font-semibold leading-6 hover:text-blue-600"
               >Доска объявлений</span
             >
           </router-link>
           <router-link to="/using-rules"
             target="_blank"
             class=" flex items-center justify-center gap-1"
-            ><img src="/public/images/footerLogo.svg" alt="" /><span
+            ><img src="/public/images/footerLogo.svg" alt="" /><span class="text-black-1 text-xl font-semibold leading-6 hover:text-blue-600"
               >Условия пользования</span
             ></router-link
           >
@@ -30,7 +30,7 @@
             href="tel: +998 88 278 96 96"
             target="_blank"
             class=" flex items-center justify-center gap-1"
-            ><img src="/public/images/footerLogo.svg" alt="" /><span
+            ><img src="/public/images/footerLogo.svg" alt="" /><span class="text-black-1 text-xl font-semibold leading-6 hover:text-blue-600"
               >+998 88 500 50 00</span
             ></a
           >
@@ -38,10 +38,10 @@
         <div
           class="mt-6 mb-2 flex items-center justify-center gap-6"
         >
-          <a href="http://" target="_blank"
+          <a href="https://apps.apple.com/uz/app/77-uz/id6476024229" target="_blank"
             ><img src="/public/images/appStore.svg" alt=""
           /></a>
-          <a href="http://" target="_blank"
+          <a href="https://play.google.com/store/apps/details?id=uz.uz77.uz77app&hl=uz&gl=US&pli=1" target="_blank"
             ><img src="/public/images/googlePlay.svg" alt=""
           /></a>
         </div>
@@ -68,4 +68,6 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+
+</script>

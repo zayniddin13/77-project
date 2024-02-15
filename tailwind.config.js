@@ -5,6 +5,13 @@ export default {
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
+    extend: {
+      colors: {
+        "grey-4": "#EAEDF0",
+        "black-1": "#16191D",
+      },
+    },
+
     accentColor: ({ theme }) => ({
       ...theme("colors"),
       auto: "auto",
@@ -125,6 +132,7 @@ export default {
       little: "0px 4px 16px 0px rgba(23, 24, 26, 0.02)",
       anounce: "box-shadow: 0px 4px 15px 0px rgba(56, 143, 243, 0.12)",
       some: "0px 4px 20px 0px rgba(0, 0, 0, 0.08)",
+      logoShadow: "0 12px 36px 0px #0E11161A]",
     },
     boxShadowColor: ({ theme }) => theme("colors"),
     brightness: {
@@ -170,6 +178,7 @@ export default {
       pink: colors.pink,
       rose: colors.rose,
     }),
+
     columns: {
       auto: "auto",
       1: "1",
@@ -346,9 +355,7 @@ export default {
         "'Poppins', sans-serif",
         "'Work Sans', sans-serif",
       ],
-      ibmPlex: [
-       " 'IBM Plex Sans', sans-serif"
-      ]
+      ibmPlex: [" 'IBM Plex Sans', sans-serif"],
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],

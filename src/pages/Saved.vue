@@ -17,8 +17,9 @@
         >
       </div>
     </div>
-    <div
-      v-if="fetchDatas.length"
+    <div v-if="fetchDatas.length">
+      <div
+      v-show="!loading"
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
     >
       <div
@@ -26,7 +27,7 @@
         :key="index"
         class="cursor-pointer transition-300"
       >
-        <Announce
+        <Product
           :id="item.id"
           :title="item.name"
           :date="formatPublishedTime(item.published_at)"
@@ -38,7 +39,22 @@
         />
       </div>
     </div>
-    <div v-if="!fetchDatas.length" class="saved_body mb-14">
+    <div
+      v-show="loading"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
+    >
+      <div
+        v-for="(item) in fetchDatas.length"
+        :key="item.id"
+        class="cursor-pointer transition-300"
+      >
+        <LoadingStills
+        type="product"
+        />
+      </div>
+    </div>
+    </div>
+    <div  v-if="!fetchDatas.length" class="saved_body mb-14">
       <div class="saved__title block text-dark font-semibold text-3xl my-5">
         Избранные
       </div>
@@ -55,8 +71,10 @@
   </div>
 </template>
 <script setup>
-import Announce from "../components/Add.vue";
+import Product from "../components/Add.vue";
+import LoadingStills from "../components/LoadingStills.vue";
 import dayjs from "dayjs";
+import { storeInstance } from "../../src/instances/index.js";
 import { ref, onMounted, computed, watch } from "vue";
 const fetchDatas = ref([]);
 const loading = ref(false);
@@ -65,29 +83,26 @@ const deviceID = JSON.parse(localStorage.getItem("deviseId"));
 const fetchDataFromApi = async (id) => {
   loading.value = true;
 
-  try {
-    const response = await fetch(
-      `https://77-dev.uicgroup.tech/api/v1/store/my-favourite-product-by-id/`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          "Device-Id": id,
-        },
-      }
-    );
-    if (!response.ok) {
-      console.error(`HTTP xato: ${response.status}`);
-      throw new Error("Serverdan noto'g'ri javob");
-    }
 
-    const data = await response.json();
-    fetchDatas.value = data.results;
-    console.log(fetchDatas.value);
+
+  try {
+     const response = await storeInstance.get(`/my-favourite-product-by-id/`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Device-Id": id,
+      },
+    });
+ 
+
+ console.log(response.data.results);
+    fetchDatas.value = response.data.results;
+   
   } catch (error) {
     console.error("Ma’lumotlarni olishda xatolik yuz berdi:", error);
   } finally {
-    loading.value = false;
+     setTimeout(() => {
+        loading.value = false;
+    }, 500);
   }
 };
 const formatPublishedTime = (time) => {

@@ -36,8 +36,9 @@
     </div>
     <div class="body md:flex gap-10 block">
       <div class="md:w-8/12 w-full">
-        <div v-if="product" class="px-6 py-5 bg-white rounded-2xl">
+        <div v-if="product" :class="product ? 'px-6 py-5 bg-white rounded-2xl' : 'animate-pulse'">
           <swiper
+          
             :style="{
               '--swiper-navigation-color': '#fff',
               '--swiper-pagination-color': '#fff',
@@ -69,9 +70,9 @@
             :freeMode="true"
             :watchSlidesProgress="true"
             :modules="modules"
-            class="mySwiper"
+            class="mySwiper mySwiper2"
           >
-            <swiper-slide v-for="(img, index) in product.photos" :key="index">
+            <swiper-slide class="swiperSlide2" v-for="(img, index) in product.photos" :key="index">
               <img class="rounded-2xl" :src="img" />
             </swiper-slide>
           </swiper>
@@ -100,7 +101,7 @@
             <a href="tel:+998 71 200 70 07" target="_blank">
               <EnterButton
                 title="+998 71 200 70 07"
-                variant="phone"
+                variant="bgBlueTextWhite"
                 class="flex items-center justify-center"
               >
                 <template #prefix>
@@ -192,7 +193,7 @@
         </div>
         <EnterButton
           title="Скачать в галерею"
-          variant="download"
+          variant="bgBlueTextBlue"
           class="max-w-xs w-full flex items-center justify-center"
         >
           <template #suffix>
@@ -206,6 +207,7 @@
 
 <script setup lang="ts">
 import EnterButton from "../components/ui/Button.vue";
+import { storeInstance } from "../../src/instances/index.js";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
@@ -234,8 +236,8 @@ const formatPublishedTime = (time) => {
 async function dataFetch() {
   console.log(`${route.params.slug}`);
   try {
-    const response = await axios.get(
-      `https://77-dev.uicgroup.tech/api/v1/store/ads/${route.params.slug}/`
+    const response = await storeInstance.get(
+      `/ads/${route.params.slug}/`
     );
     console.log(response.data); // Ma'lumotlarni konsolga chop etish
     product.value = response.data;

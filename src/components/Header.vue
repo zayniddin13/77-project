@@ -1,17 +1,17 @@
 <template>
   <header
-    class="navbar flex items-center border-b border-[#EAEDF0] h-[80px] bg-white/90 z-30 sticky top-0 left-0 backdrop-blur-[6px]"
+    class="navbar flex items-center border-b border-grey-4 py-5 bg-white/90 z-30 sticky top-0 left-0 backdrop-blur-[6px]"
   >
     <!-- Logo in the middle -->
-    <div
-      class="logo absolute left-1/2 top-0 -translate-x-1/2 bg-white border border-[#EAEDF0] border-top-0 rounded-b-[20px] px-2 sm:px-4 py-1 sm:py-[14px] shadow-[0_12px_36px_0px_#0E11161A]"
+    <router-link to="/"
+      class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] px-2 sm:px-4 py-1 sm:py-[14px] shadow-[0_12px_36px_0px_#0E11161A]"
     >
       <img
         src="/public/images/logo.svg"
         alt="logo"
         class="max-md:h-12 max-md:w-14"
       />
-    </div>
+    </router-link>
 
     <!-- Main menu -->
     <div class="container flex justify-between items-center">
@@ -22,8 +22,8 @@
           class="cursor-pointer flex items-center"
         >
           <img :src="flag" width="24px" height="24px" alt="lang" />
-          <h2 class="mx-2 text-sm font-medium max-sm:hidden">{{ lang }}</h2>
-          <h2 class="mx-2 text-lg font-medium sm:hidden">{{ shortLung }}</h2>
+          <h2 class="mx-2 text-sm text-black font-medium max-sm:hidden">{{ lang }}</h2>
+          <h2 class="mx-2 text-lg text-black font-medium sm:hidden">{{ shortLung }}</h2>
           <span
             class="icon-to-bottom text-xs"
             :class="show ? 'rotate-180 text-blue-500' : 'rotate-0'"
@@ -43,11 +43,11 @@
               >
                 <img :src="item.image" alt="ruscha" />
                 <span
-                  class="leading-6 py-2 relative hover:text-blue-600 transition-300 max-sm:hidden"
+                  class="leading-6 py-2 relative text-black hover:text-blue-600 transition-300 max-sm:hidden"
                   >{{ item.title }}</span
                 >
                 <span
-                  class="leading-6 py-2 relative hover:text-blue-600 transition-300 sm:hidden"
+                  class="leading-6 py-2 relative text-black hover:text-blue-600 transition-300 sm:hidden"
                   >{{ item.shortTitle }}</span
                 >
               </li>
@@ -63,7 +63,7 @@
             class="icon-phone text-xl leading-5 text-gray-500 group-hover:text-blue-300 transition-colors"
           ></span>
           <span
-            class="font-medium text-sm hover:text-blue-300 transition-colors"
+            class="font-medium text-sm text-black hover:text-blue-300 transition-colors"
             >+998 88 278 96 96</span
           >
         </a>
@@ -76,7 +76,7 @@
           <span
             class="icon-heart text-2xl leading-5 text-blue-600 max-sm:text-center"
           ></span>
-          <span class="max-md:hidden test-sm font-semibold">Избранные</span>
+          <span class="max-md:hidden test-sm font-semibold text-black">Избранные</span>
         </router-link>
         <span class="w-px h-8 bg-gray-300 max-sm:hidden"></span>
         <EnterButton title="Войти" style="max-sm: hidden" variant="secondary">

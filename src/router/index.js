@@ -35,6 +35,9 @@ const router = createRouter({
       name: "SingleProduct",
       component: SingleProduct,
     },
+    {
+      path:"/"
+    }
   ],
 });
 
