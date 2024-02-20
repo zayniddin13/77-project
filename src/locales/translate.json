@@ -1,0 +1,83 @@
+{
+  "uz": {
+    "breadcrump":{
+       "mainPage":"Asosiy sahifa"
+       
+    },
+    "language":{
+     "lang":"o'zbekcha",
+     "shortLang":"o'z",
+     "flag":"/public/images/uzbek.svg"
+    },
+    "navbar": {
+      "star": "Sevimlilar",
+      "login": "Kirish"
+    },
+    "categories": {
+      "title": "Kategoriyalar",
+      "minTitle": "Sizga kerak bo'lgan barcha toifalarni xaridordan topishingiz mumkin",
+      "types": {
+        "menClothes": "Erkaklar kiyimi"
+      }
+    },
+    "search": {
+      "text": "Izlash",
+      "placeholder": "Siz nimani izlayapsiz?"
+    },
+    "products": {
+      "title": "E'lonlar",
+      "minTitle": "Sizga kerak bo'lgan barcha toifalarni xaridordan topishingiz mumkin",
+      "buttonMore": "Ko'proq ko'rsatish"
+    },
+    "footer":{
+      "whatThisApp": "77.uz bozori - bu O'zbekistondagi virtual platforma bo'lib, sotuvchilarni potentsial mijozlar bilan bog'lash orqali sotib olish va sotishni osonlashtiradi.",
+      "aboutUs": "E'lonlar doskasi",
+      "usingRules": "Foydalanish shartlari",
+      "advice": "<p class='text-center text-black text-base not-italic font-normal leading-6' >  Bizning <span class='text-blue-500 font-bold'>mobil ilovamiz</span>ni yuklab oling va platformamizdan <span class='text-blue-500 font-bold'>qulayroq</span> foydalaning </p>",
+      "prevented": " Barcha huquqlar himoyalangan"
+    },
+     "noData":{
+        "noAddsTitle":"Tanlangan reklamalar yo'q",
+          "noAddsTitleAbout":"Вы еще не добавили в избранное ни одну рекламу"
+    }
+    },
+  "ru": {
+    "language":{
+      "lang": "русcкий",
+      "shortLang": "ру",
+      "flag": "/public/images/rusFlag.svg"
+    },
+    "navbar": {
+      "star": "Избранные",
+      "login": "Войти"
+    },
+    "categories": {
+      "title": "Категории",
+      "minTitle": "Вы можете найти все категории, которые вам нужны от покупателя",
+      "types": {
+        "menClothes": "Мужская одежда"
+      }
+    },
+    "search": {
+      "text": "Поиск",
+      "placeholder": "Что вы ищите?"
+    },
+    "products": {
+      "title": "Объявления",
+      "minTitle": "Вы можете найти все категории, которые вам нужны от покупателя",
+      "buttonMore": "Показать больше"
+    },
+    "footer":{
+     "whatThisApp":"77.uz marketplace - это виртуальная платформа в Узбекистане, которая облегчает покупки и продажи, связывая продавцов с потенциальными клиентами.",
+     "aboutUs":"Доска объявлений",
+     "usingRules":"Условия пользования",
+      "advice":" <p class='text-center text-black text-base not-italic font-normal leading-6' >  Загрузите наше  <span class='text-blue-500 font-bold'>приложение</span> и пользуйтесь   с платформой <span class='text-blue-500 font-bold'>ещё удобнее</span>  </p>",
+      "prevented":" Все права защищены"
+    },
+    "noData":{
+        "noAddsTitle":" Нет избранных объявлений",
+        "noAddsTitleAbout":"Вы еще не добавили в избранное ни одну рекламу"
+    }
+}
+}
+

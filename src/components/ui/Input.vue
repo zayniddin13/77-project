@@ -4,7 +4,7 @@
     <input
       :type="variants[type]"
       class="outline-0 border border-transparent w-full mx-auto my-0"
-      :placeholder="variants[placeholder]"
+      :placeholder="placeholder"
     />
     <slot name="suffix"></slot>
   </div>
@@ -13,7 +13,7 @@
 import { defineProps } from "vue";
 
 const props = defineProps<{
-  placeholder?: "main" | "fio" | "product" | "login" | "password";
+  placeholder?: string;
   type?: "number" | "text";
   title?: string;
   backgronud?: "mainBg" | "modal";
@@ -21,12 +21,5 @@ const props = defineProps<{
 const variants = {
   primary: "bg-black text-white",
   secondary: "bg-gray-400 text-black",
-  main: "Что вы ищите?",
-  fio: "Введите вашу Ф.И.О.",
-  product: "Введите название продукта",
-  login: "Введите логин",
-  password: "Введите пароль",
-  mainBg: "bg-white focus-within:border-blue-500",
-  modal: "bg-gray-300",
 };
 </script>

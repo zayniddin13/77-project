@@ -1,7 +1,12 @@
 <template>
   <div class="container">
+    <div class="container md:hidden block py-6">
+      <router-link to="/"
+        ><img src="../../public/images/left.svg" alt="orqaga" />
+      </router-link>
+    </div>
     <div
-      class="py-5 flex items-center gap-1.5 md:overflow-hidden overflow-x-hidden max-md:hidden"
+      class="py-6 flex items-center gap-1.5 md:overflow-hidden overflow-x-hidden max-md:hidden"
     >
       <a
         href="/"
@@ -34,11 +39,17 @@
         >
       </div>
     </div>
-    <div class="body md:flex gap-10 block">
+    <div v-show="!loading" class="body md:flex gap-10 block">
       <div class="md:w-8/12 w-full">
-        <div v-if="product" :class="product ? 'px-6 py-5 bg-white rounded-2xl' : 'animate-pulse'">
+        <div
+          v-if="product"
+          :class="
+            product
+              ? 'min-w-400px:px-6 min-w-400px:py-5 px-2 py-2 bg-white rounded-2xl'
+              : 'animate-pulse'
+          "
+        >
           <swiper
-          
             :style="{
               '--swiper-navigation-color': '#fff',
               '--swiper-pagination-color': '#fff',
@@ -53,7 +64,7 @@
               class="activeImg"
               v-for="(image, index) in product.photos"
               :key="index"
-              style="width:100vw margin-right:0"
+              style="width:100vw margin-right:0 "
             >
               <img
                 class="rounded-2xl object-cover object-center"
@@ -70,13 +81,17 @@
             :freeMode="true"
             :watchSlidesProgress="true"
             :modules="modules"
-            class="mySwiper mySwiper2"
+            class="mySwiper"
           >
-            <swiper-slide class="swiperSlide2" v-for="(img, index) in product.photos" :key="index">
+            <swiper-slide
+              class="swiperSlide2"
+              v-for="(img, index) in product.photos"
+              :key="index"
+            >
               <img class="rounded-2xl" :src="img" />
             </swiper-slide>
           </swiper>
-          <h3 class="my-4 font-inter font-bold text-xl text-black">
+          <h3 class="my-4 font-inter not-italic font-bold text-xl text-black">
             {{ product.name }}
           </h3>
           <div class="flex gap-4 pt-4 pb-6">
@@ -89,7 +104,10 @@
               {{ product.address.district.name }}
             </div>
           </div>
-          <div class="flex justify-between items-center">
+          <div
+            v-if="product"
+            class="min-[400px]:flex justify-between items-center block"
+          >
             <div>
               <span class="font-inter font-bold text-3xl text-black">{{
                 formatMoneyDecimal(product.price)
@@ -98,9 +116,9 @@
                 >UZS</span
               >
             </div>
-            <a href="tel:+998 71 200 70 07" target="_blank">
+            <a v-if="product" href="tel:+998 71 200 70 07" target="_blank">
               <EnterButton
-                title="+998 71 200 70 07"
+                :title="number"
                 variant="bgBlueTextWhite"
                 class="flex items-center justify-center"
               >
@@ -118,8 +136,10 @@
           </div>
         </div>
         <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
-          <h3 class="font-inter font-bold text-black text-2xl">Продавец</h3>
-          <div class="flex justify-between items-center">
+          <h3 class="font-inter not-italic font-bold text-black text-2xl">
+            Продавец
+          </h3>
+          <div class="sm:flex justify-between items-center block">
             <div class="flex items-center gap-3">
               <img
                 v-if="product.seller.profile_photo"
@@ -130,22 +150,26 @@
                 <h1 class="font-semibold text-black font-inter text-base">
                   {{ product.seller.full_name }}
                 </h1>
-                <h3 class="font-inter font-normal text-xs text-gray-500">
+                <h3
+                  class="font-inter not-italic font-normal text-xs text-gray-500"
+                >
                   ID: {{ product.seller.id }}
                 </h3>
               </div>
             </div>
             <a
-              href="tel: +998 71 200 70 07"
+              v-if="product.seller.phone_number"
+              href="tel:  {{ product.seller.phone_number }}"
               target="_blank"
-              class="font-inter text-black font-semibold text-base"
-              >+998 71 200 70 07</a
+              class="font-inter not-itelic text-black font-semibold text-base"
+            >
+              {{ number }}</a
             >
           </div>
         </div>
       </div>
 
-      <div v-if="product" class="img_adress max-w-xs w-full">
+      <div v-if="product" class="img_adress max-w-xs w-full pb-4">
         <div class="product_seller p-4 bg-white rounded-2xl">
           <div class="flex items-center gap-3">
             <img
@@ -162,12 +186,14 @@
               </h3>
             </div>
           </div>
-          <h1
-            v-if="product.seller"
-            class="profile_number font-inter font-semibold text-base mt-3 mb-5"
+          <a
+            href="tel:  {{ product.seller.phone_number }}"
+            target="_blank"
+            v-if="product.seller.phone_number"
+            class="font-inter not-itelic text-black font-semibold text-base"
           >
-            {{ product.seller.phone_number }}
-          </h1>
+            {{ number }}</a
+          >
           <EnterButton
             title="Все объявления"
             variant="secondary"
@@ -194,7 +220,7 @@
         <EnterButton
           title="Скачать в галерею"
           variant="bgBlueTextBlue"
-          class="max-w-xs w-full flex items-center justify-center"
+          class="max-w-xs w-full flex items-center justify-center mb-6"
         >
           <template #suffix>
             <span class="icon-download text-xl text-blue-500 font-bold"></span>
@@ -202,16 +228,30 @@
         </EnterButton>
       </div>
     </div>
+    <div v-show="loading">
+      <LoadingStills type="SingleProduct" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import EnterButton from "../components/ui/Button.vue";
+import LoadingStills from "@/components/LoadingStills.vue";
 import { storeInstance } from "../../src/instances/index.js";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
+
+
+const breadcrumbs = ref([
+  { label: 'home', url: '/' },
+  { label: 'products', url: '/products' },
+  { label: 'electronics', url: '/products/electronics' },
+  { label: 'smartphones', url: '/products/electronics/smartphones' }
+]);
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -227,28 +267,57 @@ import "/public/style.css";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 const thumbsSwiper = ref(null);
-
+const number = ref("");
 const product = ref(null);
 const route = useRoute();
+let loading = ref(false);
+
+
+
+
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY, HH:mm");
 };
 async function dataFetch() {
+  console.log(locale._value)
   console.log(`${route.params.slug}`);
   try {
-    const response = await storeInstance.get(
-      `/ads/${route.params.slug}/`
-    );
+    loading.value = true;
+    const response = await storeInstance.get(`/ads/${route.params.slug}/`, {
+       headers: {
+        "Accept-Language": locale._value
+      },
+    });
     console.log(response.data); // Ma'lumotlarni konsolga chop etish
     product.value = response.data;
     console.log(product.value);
+    number.value = product.value.seller.phone_number.replace(
+      /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
+      "$1 $2 $3 $4 $5"
+    );
   } catch (error) {
     console.error("Error fetching product:", error);
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+      console.log(loading.value);
+    }, 500);
   }
 }
+
 onMounted(() => {
-  dataFetch(), formatPublishedTime();
+  dataFetch();
+  formatPublishedTime();
 });
+watch(
+locale,  async (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+     dataFetch()
+    }
+    console.log(localStorage.getItem("locale"));
+  },
+  { deep: true }
+);
 
 function formatMoneyDecimal(number: any, fix = 0, option = "decimal") {
   let style: "currency";

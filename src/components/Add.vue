@@ -90,11 +90,7 @@ async function productLiked(id: number) {
 
 function formatMoneyDecimal(number: any, fix = 0, option = "decimal") {
   let style: "currency";
-  // if (["USD", "RUB"].includes(option)) {
-  //   style = "currency";
-  // } else {
-  //   style = "";
-  // }
+
 
   const newStyle: string = style;
   const option2 = {

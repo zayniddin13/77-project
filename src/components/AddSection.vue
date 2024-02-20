@@ -4,10 +4,10 @@
       <div
         class="katagory_title text-black font-inter text-3xl font-normal text-center"
       >
-        Объявления
+        {{$t('products.title')}}
       </div>
       <div class="font-inter text-base not-italic font-normal text-center">
-        Вы можете найти все категории, которые вам нужны от покупателя
+    {{$t('products.minTitle')}}
       </div>
       <div
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
@@ -32,7 +32,7 @@
 
         <div v-show="loading" v-for="item in fetchDatas.length" :key="item.id">
           <LoadingStills
-          type="category"
+          type="product"
           v-show="loading"
           />
         </div>
@@ -43,10 +43,12 @@
 <script setup>
 import Add from "./Add.vue";
 import dayjs from "dayjs";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { get } from "@vueuse/core";
 import { storeInstance } from "../../src/instances/index.js";
 import LoadingStills from "../components/LoadingStills.vue";
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
 const fetchDatas = ref([]);
 const loading = ref(false);
 
@@ -54,7 +56,7 @@ const loading = ref(false);
 
 const fetchDataFromApi = async () => {
 
-
+console.log(locale._value);
   let deviseId = localStorage.getItem("deviseId");
 
   if (deviseId) {
@@ -63,12 +65,11 @@ const fetchDataFromApi = async () => {
       const response = await storeInstance.get(`/list/ads/`, {
         headers: {
           "Device-Id": localStorage.getItem("deviseId"),
+          "Accept-Language": locale._value
         },
       });
 
       fetchDatas.value = response.data.results;
-      console.log(response.data.results);
-      console.log(fetchDatas.value);
 
       return;
     } catch (error) {
@@ -87,18 +88,21 @@ const fetchDataFromApi = async () => {
       const response = await storeInstance.get(`/list/ads/`, {
         headers: {
           "Device-Id": localStorage.getItem("deviseId"),
+           "Accept-Language": locale._value
         },
       });
 
       fetchDatas.value = response.results;
-      console.log(response);
-      console.log(fetchDatas.value);
+
 
       return;
     } catch (error) {
       console.log(error);
     } finally {
-      loading.value = false;
+      setTimeout(() => {
+     loading.value = false;
+    console.log(loading.value);
+   }, 500);
     }
   }
 };
@@ -111,4 +115,12 @@ onMounted(() => {
   fetchDataFromApi();
   formatPublishedTime();
 });
+watch(
+locale,  async (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      fetchDataFromApi();
+    }
+  },
+  { deep: true }
+);
 </script>

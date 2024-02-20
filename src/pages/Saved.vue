@@ -54,17 +54,17 @@
       </div>
     </div>
     </div>
-    <div  v-if="!fetchDatas.length" class="saved_body mb-14">
+    <div  v-if="!fetchDatas.length && !loading" class="saved_body mb-14">
       <div class="saved__title block text-dark font-semibold text-3xl my-5">
-        Избранные
+        {{$t('navbar.star') }}
       </div>
       <div class="saved__about flex items-center justify-center flex-col">
         <img src="/public/images/noData.svg" alt="" class="block" />
         <div class="block text-2xl font-bold text-dark leading-6 mt-6 mb-3">
-          Нет избранных объявлений
+         {{$t('noData.noAddsTitle')}}
         </div>
         <div class="text-base font-normal leading-6 text-dark">
-          Вы еще не добавили в избранное ни одну рекламу
+          {{$t('noData.noAddsTitleAbout')}}
         </div>
       </div>
     </div>

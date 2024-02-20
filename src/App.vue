@@ -1,9 +1,7 @@
 <template>
   <div>
-    <Defoult />
+    <router-view></router-view>
   </div>
 </template>
-
 <script setup>
-import  Defoult from "./layouts/defoult.vue";
 </script>

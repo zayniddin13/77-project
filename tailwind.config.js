@@ -9,6 +9,7 @@ export default {
       colors: {
         "grey-4": "#EAEDF0",
         "black-1": "#16191D",
+        "Main-Dark":"#151515"
       },
     },
 

@@ -1,9 +1,9 @@
 <template>
   <div
-    class="container bg-white mt-8 sm:mt-16 pt-8 sm:pt-14 pb-3 sm:pb-9 relative z-0"
+    class="container bg-white mt-8 sm:mt-16 pt-8 sm:!pt-14 pb-3 sm:pb-9 relative z-0"
   >
     <MainInput
-      placeholder="main"
+      :placeholder="$t('search.placeholder')"
       type="text"
       backgronud="mainBg"
       class="flex items-center w-8/12 mx-auto border transition-300 p-2 max-w-[580px] bg-white rounded-lg absolute top-0 -translate-y-1/2 left-1/2 -translate-x-2/4 focus:border-2"
@@ -14,7 +14,7 @@
       <template #suffix>
         <EnterButton
           variant="primary"
-          title="Поиск"
+          :title="t('search.text')"
           class="px-3 py-1 sm:px-7 sm:py-3"
         />
       </template>
@@ -22,10 +22,10 @@
 
     <div class="container">
       <div class="text-black font-inter text-3xl font-normal text-center">
-        Категории
+        {{ t("categories.title") }}
       </div>
       <div class="font-inter text-base not-italic font-normal text-center">
-        Вы можете найти все категории, которые вам нужны от покупателя
+        {{ t("categories.minTitle") }}
       </div>
       <div
         v-show="!loading"
@@ -54,34 +54,53 @@
 import Category from "./Category.vue";
 import MainInput from "../components/ui/Input.vue";
 import EnterButton from "./ui/Button.vue";
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+
 import { storeInstance } from "../../src/instances/index.js";
 import LoadingStills from "../components/LoadingStills.vue";
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
 const fetchData = ref([]);
 const loading = ref(false);
+
+
 async function fetchDataFromApi() {
-  console.log(loading.value);
+  console.log(locale._value);
   loading.value = true;
   try {
     loading.value = true;
-    const response = await storeInstance.get(`/category/`);
+    const response = await storeInstance.get(`/category/`, {
+      headers: {
+        "Accept-Language": locale._value
+      },
+    });
 
     fetchData.value = response.data;
-    console.log(response.data);
+    console.log(response);
 
     console.log(loading.value);
     return;
   } catch (error) {
     console.log(error);
   } finally {
-   setTimeout(() => {
-     loading.value = false;
-    console.log(loading.value);
-   }, 500);
+    setTimeout(() => {
+      loading.value = false;
+      console.log(loading.value);
+    }, 500);
   }
 }
 onMounted(() => {
   loading.value;
   fetchDataFromApi();
 });
+watch(
+locale,  async (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      fetchDataFromApi();
+    }
+    console.log(localStorage.getItem("locale"));
+  },
+  { deep: true }
+);
 </script>
+

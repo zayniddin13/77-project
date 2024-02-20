@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Category />
+    <Category class="!mt-16 sm:mt-0 !pt-8 sm:pt-14" />
     <AddSection />
   </div>
 </template>

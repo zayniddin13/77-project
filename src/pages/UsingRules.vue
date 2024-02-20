@@ -16,15 +16,15 @@
       >
     </div>
   </div>
-    <div v-if="fetchDatas" class=" pt-5 pb-16 md:px-4 max-w-3xl mx-auto">
+    <div v-if="product" class=" pt-5 pb-4 md:px-2 max-w-3xl ">
       <h1
         class="text-2xl md:text-3.5xl font-bold leading-130 text-dark max-md:px-4"
       >
- {{ fetchDatas.title }}
+ {{ product.title }}
       </h1>
       </div>
-       <div v-if="fetchDatas" class="p-4 bg-white mt-2.5 static-text">
-        <div v-html="fetchDatas.content" ref="text"></div>
+       <div v-if="product" class="p-4 bg-white mt-2.5 static-text mb-20">
+        <div class="aboutUs" v-html="product.content" ref="text"></div>
        </div>
    </div>
   
@@ -33,34 +33,30 @@
 import { onMounted, ref, } from "vue";
 import axios from "axios";
 import { usingInstance } from "../instances";
-
-let text = ref('')
-console.dir(text)
-let fetchDatas = ref(null);
-let loading = ref(false);
-
-const dataSlugFromApi = async () => {
+import { useRoute } from "vue-router";
+const route = useRoute();
+const product = ref(null)
+let about=ref(null)
+async function dataFetch() {
+  console.log(`${route.params.slug}`);
   try {
-    loading.value = true;
-    const response = await usingInstance.get("pages/terms-and-conditions-for-sellers/");
-
-    fetchDatas.value = response.data
-    console.log(response.data);
-
-
-    return;
+    const response = await usingInstance.get(
+      `/pages/${route.params.slug}/`
+    );
+    console.log(response.data); // Ma'lumotlarni konsolga chop etish
+    product.value = response.data;
+    console.log(product._value.content);
   } catch (error) {
-    console.log(error);
-  } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 500);
+    console.error("Error fetching product:", error);
   }
-};
-
+ 
+}
 onMounted(() => {
-  dataSlugFromApi();
+  dataFetch()
 });
+
+
+
 
 
 </script>

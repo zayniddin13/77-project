@@ -1,7 +1,7 @@
 <template>
   <div
     :class="variants[variant]"
-    class="px-4 py-2 flex items-center rounded-lg gap-2 font-semibold"
+    class="px-4 py-2 flex items-center rounded-lg gap-2 font-semibold max-[400px]:px-2"
   >
     <slot name="prefix"></slot>
     <button :class="styles">{{ title }}</button>
@@ -10,7 +10,6 @@
 </template>
 <script setup lang="ts">
 import { defineProps } from "vue";
-
 const props = defineProps<{
   title?: string;
   variant?:string;
