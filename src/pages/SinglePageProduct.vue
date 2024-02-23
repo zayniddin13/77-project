@@ -5,7 +5,7 @@
         ><img src="../../public/images/left.svg" alt="orqaga" />
       </router-link>
     </div>
-    <div
+    <!-- <div
       class="py-6 flex items-center gap-1.5 md:overflow-hidden overflow-x-hidden max-md:hidden"
     >
       <a
@@ -38,7 +38,9 @@
           >Vetrovka, kurtka, kuz - bahor ...</a
         >
       </div>
-    </div>
+    </div> -->
+   
+       <BreadCrump v-bind="{ routes }" />
     <div v-show="!loading" class="body md:flex gap-10 block">
       <div class="md:w-8/12 w-full">
         <div
@@ -131,7 +133,7 @@
         </div>
         <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
           <h3 class="font-inter font-bold text-black text-2xl">Описание</h3>
-          <div class="font-ibmPlex font-normal text-base">
+          <div class="font-ibmPlex font-normal text-base !break-words">
             {{ product.description }}
           </div>
         </div>
@@ -238,7 +240,8 @@
 import EnterButton from "../components/ui/Button.vue";
 import LoadingStills from "@/components/LoadingStills.vue";
 import { storeInstance } from "../../src/instances/index.js";
-import { ref, onMounted, watch } from "vue";
+import BreadCrump from "../components/ui/breadCrump.vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -268,10 +271,10 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 const thumbsSwiper = ref(null);
 const number = ref("");
-const product = ref(null);
+let product = ref(null);
 const route = useRoute();
 let loading = ref(false);
-
+let  routes=ref(null)
 
 
 
@@ -288,13 +291,23 @@ async function dataFetch() {
         "Accept-Language": locale._value
       },
     });
-    console.log(response.data); // Ma'lumotlarni konsolga chop etish
+// Ma'lumotlarni konsolga chop etish
     product.value = response.data;
-    console.log(product.value);
+console.log(product.value)
     number.value = product.value.seller.phone_number.replace(
       /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
       "$1 $2 $3 $4 $5"
     );
+
+   routes = computed(() => [
+  {
+    label: t(`${product.value.category.parent_category.name}`),
+    link: "/about",
+     },
+     {
+       label: product.value.name,
+    link:""
+   }])
   } catch (error) {
     console.error("Error fetching product:", error);
   } finally {
@@ -304,6 +317,7 @@ async function dataFetch() {
     }, 500);
   }
 }
+console.log(product.value)
 
 onMounted(() => {
   dataFetch();

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex items-center gap-1.5 md:overflow-hidden">
+    <!-- <div class="flex items-center gap-1.5 md:overflow-hidden">
       <router-link
         to="/"
         class="flex items-center gap-1 text-dark leading-6 text-sm font-medium transition-300 hover:text-blue-600"
@@ -16,7 +16,8 @@
           >Избранные</a
         >
       </div>
-    </div>
+    </div> -->
+    <BreadCrump v-bind="{ routes }" />
     <div v-if="fetchDatas.length">
       <div
       v-show="!loading"
@@ -76,15 +77,20 @@ import LoadingStills from "../components/LoadingStills.vue";
 import dayjs from "dayjs";
 import { storeInstance } from "../../src/instances/index.js";
 import { ref, onMounted, computed, watch } from "vue";
+import BreadCrump from "../components/ui/breadCrump.vue";
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
+const routes = computed(() => [
+  {
+    label: t("about"),
+    link: "/about",
+  },])
 const fetchDatas = ref([]);
 const loading = ref(false);
 const deviceID = JSON.parse(localStorage.getItem("deviseId"));
 
 const fetchDataFromApi = async (id) => {
   loading.value = true;
-
-
-
   try {
      const response = await storeInstance.get(`/my-favourite-product-by-id/`, {
       headers: {
@@ -92,8 +98,6 @@ const fetchDataFromApi = async (id) => {
         "Device-Id": id,
       },
     });
- 
-
  console.log(response.data.results);
     fetchDatas.value = response.data.results;
    

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <div class="container">
+      <!-- <div class="container">
     <div class="flex items-center gap-1.5 md:overflow-hidden">
       <router-link
         to="/"
@@ -15,7 +15,8 @@
         >О сайте 77.uz</router-link
       >
     </div>
-  </div>
+  </div> -->
+     <BreadCrump v-bind="{ routes }" />
     <div v-if="product" class=" pt-5 pb-4 md:px-2 max-w-3xl ">
       <h1
         class="text-2xl md:text-3.5xl font-bold leading-130 text-dark max-md:px-4"
@@ -30,11 +31,16 @@
   
 </template>
 <script setup >
-import { onMounted, ref, } from "vue";
+import BreadCrump from "../components/ui/breadCrump.vue";
+import { onMounted, ref, computed} from "vue";
 import axios from "axios";
 import { usingInstance } from "../instances";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+import { useI18n } from "vue-i18n";
+const router = useRouter()
+const { t, locale } = useI18n();
+let routes
 const product = ref(null)
 let about=ref(null)
 async function dataFetch() {
@@ -45,9 +51,15 @@ async function dataFetch() {
     );
     console.log(response.data); // Ma'lumotlarni konsolga chop etish
     product.value = response.data;
+     routes = computed(() => [
+  {
+    label: product.value.title,
+    link: "/about",
+  },])
     console.log(product._value.content);
   } catch (error) {
     console.error("Error fetching product:", error);
+    router.push({name:'NotFoundComponent'})
   }
  
 }

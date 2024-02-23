@@ -4,6 +4,7 @@ import SiteDirection from "../pages/UsingRules.vue";
 import Saved from "../pages/Saved.vue";
 import SingleProduct from "../pages/SinglePageProduct.vue";
 import NotFoundComponent from "../pages/NotFoundComponent.vue";
+import MoreAddSection from "../pages/MoreAddSection.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -34,6 +35,11 @@ const router = createRouter({
           path: "/pages/:slug",
           name: "siteDirection",
           component: SiteDirection,
+        },
+        {
+          path: "/more-product",
+          name: "MoreAddSection",
+          component: MoreAddSection,
         },
       ],
     },

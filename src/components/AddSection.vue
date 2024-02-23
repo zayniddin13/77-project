@@ -4,16 +4,16 @@
       <div
         class="katagory_title text-black font-inter text-3xl font-normal text-center"
       >
-        {{$t('products.title')}}
+        {{ $t("products.title") }}
       </div>
       <div class="font-inter text-base not-italic font-normal text-center">
-    {{$t('products.minTitle')}}
+        {{ $t("products.minTitle") }}
       </div>
       <div
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
       >
         <div
-        v-show="!loading"
+          v-show="!loading"
           v-for="(item, index) in fetchDatas"
           :key="index"
           class="cursor-pointer transition-300"
@@ -31,11 +31,20 @@
         </div>
 
         <div v-show="loading" v-for="item in fetchDatas.length" :key="item.id">
-          <LoadingStills
-          type="product"
-          v-show="loading"
-          />
+          <LoadingStills type="product" v-show="loading" />
         </div>
+      </div>
+      <div v-show="!loading" class="w-full flex justify-center">
+        <router-link to="/more-product">
+          <Button
+            :title="$t('button.more')"
+            styles="flex justify-center items-center gap-2 bg-gray-400 border-1 border-br-grey-4 rounded-[100px] py-3 px-7 max-w-[200px]"
+          >
+            <template #suffix
+              ><img src="../../public/images/twoBottom.svg"
+            /></template>
+          </Button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -45,6 +54,7 @@ import Add from "./Add.vue";
 import dayjs from "dayjs";
 import { onMounted, ref, watch } from "vue";
 import { get } from "@vueuse/core";
+import Button from "../components/ui/Button.vue";
 import { storeInstance } from "../../src/instances/index.js";
 import LoadingStills from "../components/LoadingStills.vue";
 import { useI18n } from "vue-i18n";
@@ -55,17 +65,16 @@ const loading = ref(false);
 //  let localId = JSON.parse(localStorage.getItem("deviseId"));
 
 const fetchDataFromApi = async () => {
-
-console.log(locale._value);
+  console.log(locale._value);
   let deviseId = localStorage.getItem("deviseId");
 
   if (deviseId) {
     try {
       loading.value = true;
-      const response = await storeInstance.get(`/list/ads/`, {
+      const response = await storeInstance.get(`/list/ads/?page_size=8`, {
         headers: {
           "Device-Id": localStorage.getItem("deviseId"),
-          "Accept-Language": locale._value
+          "Accept-Language": locale._value,
         },
       });
 
@@ -75,34 +84,33 @@ console.log(locale._value);
     } catch (error) {
       console.log(error);
     } finally {
-    setTimeout(() => {
+      setTimeout(() => {
         loading.value = false;
-    }, 500);
+      }, 500);
     }
   } else {
     deviseId = Math.floor(Math.random() * 10000000000000000);
     localStorage.setItem("deviseId", JSON.stringify(deviseId));
     // localId = JSON.parse(localStorage.getItem("deviseId"));
-      try {
+    try {
       loading.value = true;
       const response = await storeInstance.get(`/list/ads/`, {
         headers: {
           "Device-Id": localStorage.getItem("deviseId"),
-           "Accept-Language": locale._value
+          "Accept-Language": locale._value,
         },
       });
 
       fetchDatas.value = response.results;
-
 
       return;
     } catch (error) {
       console.log(error);
     } finally {
       setTimeout(() => {
-     loading.value = false;
-    console.log(loading.value);
-   }, 500);
+        loading.value = false;
+        console.log(loading.value);
+      }, 500);
     }
   }
 };
@@ -116,7 +124,8 @@ onMounted(() => {
   formatPublishedTime();
 });
 watch(
-locale,  async (newValue, oldValue) => {
+  locale,
+  async (newValue, oldValue) => {
     if (newValue !== oldValue) {
       fetchDataFromApi();
     }

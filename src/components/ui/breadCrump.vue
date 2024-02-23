@@ -1,33 +1,28 @@
 <template>
-  <div class="flex items-center text-sm py-5 font-bold">
-    <router-link to="/" class="flex items-center"
-      ><i class="icon-house-medical text-base text-white mr-1"></i>
-      Home</router-link
+  <div class="flex items-center text-sm py-5 font-bold gap-1">
+    <router-link to="/" class="ml-0"
+      ><i class="icon-house-medical text-base text-white mr-1"></i> {{ $t('breadcrump.mainPage') }}</router-link
     >
-    <span v-if="routes.length > 0" class="mx-1"></span>
-    <template v-for="(breadcrumbItem, index) in routes">
+
+    <template v-for="(item, index) in routes">
+      <i class="w-1 h-1 rounded-full bg-gray-400 shrink-0"></i>
       <span v-if="index !== routes.length - 1">
-        <router-link :to="breadcrumbItem.link">{{
-          breadcrumbItem.label
-        }}</router-link>
+        <router-link :to="item.link">{{ item.label }}</router-link>
       </span>
-      <span v-else class="text-gray-500 line-clamp-1">{{
-        breadcrumbItem.label
-      }}</span>
-      <span v-if="index !== routes.length - 1" class="mx-1"></span>
+      <span v-else class="text-gray-500 line-clamp-1">{{ item.label }}</span>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-
-
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
 const props = defineProps<{
   title?: string;
-  variant?:string;
-    styles?: string;
-   routes: {
+  variant?: string;
+  styles?: string;
+  routes: {
     label: string;
     link: string;
   }[];
