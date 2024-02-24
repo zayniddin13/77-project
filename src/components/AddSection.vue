@@ -12,25 +12,27 @@
       <div
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
       >
-        <div
-          v-show="!loading"
-          v-for="(item, index) in fetchDatas"
-          :key="index"
-          class="cursor-pointer transition-300"
-        >
-          <Add
-            :id="item.id"
-            :title="item.name"
-            :date="formatPublishedTime(item.published_at)"
-            number="+998 88 278 96 96"
-            :price="item.price"
-            :image="item.photo"
-            :slug="item.slug"
-            :islike="item.is_liked"
-          />
-        </div>
+        <template v-if="fetchDatas">
+          <div
+            v-show="!loading"
+            v-for="(item, index) in fetchDatas"
+            :key="index"
+            class="cursor-pointer transition-300"
+          >
+            <Add
+              :id="item.id"
+              :title="item.name"
+              :date="formatPublishedTime(item.published_at)"
+              number="+998 88 278 96 96"
+              :price="item.price"
+              :image="item.photo"
+              :slug="item.slug"
+              :islike="item.is_liked"
+            />
+          </div>
+        </template>
 
-        <div v-show="loading" v-for="item in fetchDatas.length" :key="item.id">
+        <div v-show="loading" v-for="item in fetchDatas" :key="item.id">
           <LoadingStills type="product" v-show="loading" />
         </div>
       </div>
@@ -66,52 +68,29 @@ const loading = ref(false);
 
 const fetchDataFromApi = async () => {
   console.log(locale._value);
-  let deviseId = localStorage.getItem("deviseId");
+  let deviceId = localStorage.getItem("deviseId");
+  if (!deviceId) {
+    deviceId = Math.floor(Math.random() * 10000000000000000);
+    localStorage.setItem("deviseId", deviceId);
+  }
+  try {
+    loading.value = true;
+    const response = await storeInstance.get(`/list/ads/?page_size=8`, {
+      headers: {
+        "Device-Id": deviceId,
+        "Accept-Language": locale._value,
+      },
+    });
 
-  if (deviseId) {
-    try {
-      loading.value = true;
-      const response = await storeInstance.get(`/list/ads/?page_size=8`, {
-        headers: {
-          "Device-Id": localStorage.getItem("deviseId"),
-          "Accept-Language": locale._value,
-        },
-      });
-
-      fetchDatas.value = response.data.results;
-
-      return;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(() => {
-        loading.value = false;
-      }, 500);
-    }
-  } else {
-    deviseId = Math.floor(Math.random() * 10000000000000000);
-    localStorage.setItem("deviseId", JSON.stringify(deviseId));
-    // localId = JSON.parse(localStorage.getItem("deviseId"));
-    try {
-      loading.value = true;
-      const response = await storeInstance.get(`/list/ads/`, {
-        headers: {
-          "Device-Id": localStorage.getItem("deviseId"),
-          "Accept-Language": locale._value,
-        },
-      });
-
-      fetchDatas.value = response.results;
-
-      return;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(() => {
-        loading.value = false;
-        console.log(loading.value);
-      }, 500);
-    }
+    fetchDatas.value = response.data.results
+    console.log(fetchDatas.value);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+      console.log(loading.value);
+    }, 500);
   }
 };
 

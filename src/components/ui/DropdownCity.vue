@@ -9,11 +9,11 @@
     >
       <slot name="prefix"></slot>
       <input class="text-sm leading-5 truncate text-primary" :placeholder="title" :value="provinValue" />
-    <template :class="acceptFunc ? 'text-gray-600' : 'text-gray-400'">
+
  <div  :class="open ? 'rotate-90' : 'rotate-0'">
         <slot name="suffix"></slot>
       </div>
-    </template>
+
    
     </div>
     <div

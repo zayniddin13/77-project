@@ -8,7 +8,7 @@
       @click="toggleDrop"
     >
       <slot name="prefix"></slot>
-      <input class="text-sm leading-5 truncate text-primary" :placeholder="title" :value="provinValue" />
+      <input class="text-sm leading-5 truncate text-primary" :placeholder="title"  :value="provinValue"  @input="$emit('update:modelValue', $event.target.value)"/>
       <div class="!text-gray-600" :class="open ? 'rotate-90' : 'rotate-0'">
         <slot  name="suffix"></slot>
       </div>
@@ -33,24 +33,28 @@
   </div>
 </template>
 <script setup>
-import { ref,  defineProps } from "vue";
+import { ref,  defineProps, defineEmits } from "vue";
 import { storeInstance, usingInstance } from "@/instances";
 import { useI18n } from "vue-i18n";
 // const { t, locale } = useI18n();
- const provinValue = ref('');
+
 
 
 let props = defineProps({
   title: String,
   labelTitle: String,
   options: Array,
+  val: String
 });
-
+const emit = defineEmits(['updateProvince'])
+let provinValue = ref('')
 function updateProvince(item) {
+  emit('updateProvince', item)
   console.log(item);
 provinValue.value=item
 console.log(props.title );
   open.value = false;
+  return provinValue.value
 }
 function updateCities(params) {
   
@@ -63,4 +67,6 @@ function toggleDrop() {
 }
 
 
+</script>
+<script>
 </script>

@@ -11,26 +11,29 @@
         <form class="flex flex-col gap-5">
           <div @click="getProvince" class="flex flex-col gap-2">
             <DropdownProvince
-             
+              @updateProvince="(e) => updateProvince(e)"
+              v-model="inputVal"
               id="city"
               :labelTitle="$t('sitebarMoreProduct.province')"
               :title="$t('sitebarMoreProduct.provincePlaceHolder')"
               :options="dataOptions1"
             >
               <template #suffix>
-                <span  class="icon-to-bottom text-xs "></span>
+                <span class="icon-to-bottom text-xs"></span>
               </template>
             </DropdownProvince>
           </div>
           <div @click="getCity" class="flex flex-col gap-2">
             <DropdownCity
-              
               :title="$t('sitebarMoreProduct.cityPlaceHolder')"
               :labelTitle="$t('sitebarMoreProduct.provinOrCity')"
               :options="dataOptions2"
             >
               <template #suffix>
-                <span  class="icon-to-bottom text-xs text-gray-400"></span>
+                <span
+                  :class="provinceVal ? 'text-gray-600' : 'text-gray-400'"
+                  class="icon-to-bottom text-xs"
+                ></span>
               </template>
             </DropdownCity>
           </div>
@@ -116,33 +119,28 @@
                       >
                     </div>
                   </div>
-                  <div class="w-full">
-                    <div class="w-full border-b border-gray-400">
-                      <div class="flex items-center w-full gap-2 group">
-                        <div
-                          class="group flex items-center gap-2 relative select-none min-h-[20px] cursor-pointer border-b-0 py-2.5"
-                        >
-                          <span
-                            class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border border-gray-400 group-hover:border-blue-300 !border-white/20 !bg-blue-400"
-                            ><span
-                              class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
-                            ></span
-                          ></span>
-                        </div>
-                        <div
-                          class="flex items-center justify-between flex-grow cursor-pointer"
-                        >
-                          <p
-                            class="text-sm font-medium leading-130 text-black transition-300 group-hover:text-blue-400"
-                          >
-                            {{ $t("sitebarMoreProduct.menClose") }}
-                          </p>
-                          <div
-                            class="text-[9px] font-bold leading-5 -rotate-90 icon-down transition-300 text-gray-300"
-                          ></div>
-                        </div>
+                  <div
+                    class="w-full"
+                    v-for="(item, index) in category"
+                    :key="index"
+                  >
+                    <DropdownCateg
+                      :title="item.name"
+                      @click="openMenu(item.name)"
+                    >
+                      <template #suffix>
+                        <span class="icon-to-bottom text-xs"></span>
+                      </template>
+                    </DropdownCateg>
+                    <transition name="fade" mode="ease">
+                      <div :key="open">
+                        <template v-for="(el, index) in item.childs">
+                          <div v-if="item.name === open" :key="index">
+                            <DropdownCateg :title="el.name"></DropdownCateg>
+                          </div>
+                        </template>
                       </div>
-                    </div>
+                    </transition>
                   </div>
                 </div>
               </div>
@@ -225,9 +223,7 @@
           <div class="w-full" v-if="loading">
             <div
               class="grid grid-cols-2 gap-6 py-8 my-6 sm:grid-cols-2 lg:grid-cols-3 md:my-10 products"
-            >
-              <SkeletonLoading v-for="i in 6" :key="i" type="product" />
-            </div>
+            ></div>
           </div>
         </div>
       </main>
@@ -236,10 +232,11 @@
 </template>
 <script setup>
 import { storeInstance, usingInstance } from "@/instances";
-import { onMounted, ref, computed, watch } from "vue";
+import { onMounted, onUpdated, ref, computed, watch } from "vue";
 import { defineAsyncComponent } from "vue";
 import DropdownProvince from "../components/ui/DropdownProvince.vue";
 import DropdownCity from "../components/ui/DropdownCity.vue";
+import DropdownCateg from "../components/ui/DropdownCateg.vue";
 import BreadCrump from "../components/ui/breadCrump.vue";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
@@ -254,7 +251,7 @@ const routes = computed(() => [
     link: "/about",
   },
 ]);
-
+const val2 = ref("");
 import dayjs from "dayjs";
 
 // const like = ref(false);
@@ -262,6 +259,11 @@ const loading = ref(false);
 // const products = ref([]);
 const count = ref(0);
 const product = ref(null);
+const inputVal = ref("");
+const provinceVal = ref(null);
+function updateProvince(e) {
+  provinceVal.value = e;
+}
 const page = ref(0);
 let deviceId = localStorage.getItem("deviceId");
 let grid = ref(true);
@@ -275,10 +277,6 @@ function doBlock() {
   block.value = true;
 }
 async function loadProducts() {
-  if (!deviceId) {
-    deviceId = Math.floor(Math.random() * 10000000000 + 1) + "";
-    localStorage.setItem("deviceId", deviceId);
-  }
   try {
     loading.value = true;
     const response = await storeInstance.get(`/list/ads/`, {
@@ -289,7 +287,7 @@ async function loadProducts() {
 
     page.value++;
     product.value = response.data.results;
-
+console.log(product.value);
     count.value += response.data.count;
 
     return;
@@ -305,16 +303,22 @@ async function loadProducts() {
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
 };
+let open = ref();
+// function toggleOpen() {
+
+// }
 onMounted(async () => {
   await loadProducts();
+  getCtategory();
   formatPublishedTime();
 });
-const provinOpen = ref(false)
-const cityOpen=ref(false)
+
+const provinOpen = ref(false);
+const cityOpen = ref(false);
 const dataOptions1 = ref([]);
 const dataOptions2 = ref([]);
 async function getProvince() {
-provinOpen.value=true
+  provinOpen.value = true;
   try {
     const response = await usingInstance.get(`/regions-with-districts/`, {
       headers: {
@@ -341,43 +345,60 @@ provinOpen.value=true
   );
 }
 async function getCity() {
-  
-    const province=document.querySelector("#city input");
+  const province = document.querySelector("#city input");
   if (province.value) {
-    cityOpen.value=true
+    cityOpen.value = true;
     try {
-    const response = await usingInstance.get(`/regions-with-districts/`, {
+      const response = await usingInstance.get(`/regions-with-districts/`, {
+        headers: {
+          "Accept-Language": locale._value,
+          "Content-Language": locale._value,
+        },
+      });
+
+      response.data.forEach((el) => {
+        if (province.value == el.name) {
+          el.districts.forEach((elem) => {
+            dataOptions2.value.push(elem.name);
+          });
+        }
+      });
+      return;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+watch(
+  locale,
+  async (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      getProvince();
+      getCtategory();
+    }
+  },
+  { deep: true }
+);
+function openMenu(menu) {
+  if (menu === open.value) {
+    open.value = "";
+  } else open.value = menu;
+}
+let category = ref([]);
+async function getCtategory() {
+  cityOpen.value = true;
+  try {
+    const response = await storeInstance.get(`/categories-with-childs/`, {
       headers: {
         "Accept-Language": locale._value,
         "Content-Language": locale._value,
       },
     });
-
-    
-
-    response.data.forEach((el) => {
-      if (province.value == el.name) {
-        el.districts.forEach(elem => {
-          dataOptions2.value.push(elem.name)
-        });
-        
-      } 
-    });
+    console.log(response.data);
+    category.value = response.data;
     return;
   } catch (error) {
     console.error(error);
   }
-  watch(
-    locale,
-    async (newValue, oldValue) => {
-      if (newValue !== oldValue) {
-        getProvince();
-      }
-    },
-    { deep: true }
-  );
 }
-    
-}
-
 </script>
