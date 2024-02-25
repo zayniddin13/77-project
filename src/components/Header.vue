@@ -122,13 +122,13 @@ const lang = ref("Русский");
 const shortLung = ref("ru");
 const langs = [
   {
-    image: "/public/images/rusFlag.svg",
+    image: "../../public/images/rusFlag.svg",
     title: "Русский",
     shortTitle: "ru",
     id: 1,
   },
   {
-    image: "/public/images/uzbek.svg",
+    image: "../..//public/images/uzbek.svg",
     title: "O’zbekcha",
     shortTitle: "uz",
     id: 2,
