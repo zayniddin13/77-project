@@ -281,7 +281,7 @@ async function loadProducts() {
     loading.value = true;
     const response = await storeInstance.get(`/list/ads/`, {
       headers: {
-        "Device-id": localStorage.getItem("deviceId"),
+        "Device-Id": localStorage.getItem("deviseId"),
       },
     });
 
@@ -323,7 +323,6 @@ async function getProvince() {
     const response = await usingInstance.get(`/regions-with-districts/`, {
       headers: {
         "Accept-Language": locale._value,
-        "Content-Language": locale._value,
       },
     });
 
