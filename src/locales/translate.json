@@ -6,7 +6,7 @@
     "language": {
       "lang": "o'zbekcha",
       "shortLang": "o'z",
-      "flag": "../../public/images/uzbek.svg"
+      "flag": "../../src/assets/flagImages/uzbek.svg"
     },
     "navbar": {
       "star": "Sevimlilar",
@@ -65,7 +65,7 @@
     "language": {
       "lang": "русcкий",
       "shortLang": "ру",
-      "flag": "../../public/images/rusFlag.svg"
+      "flag": "../../src/assets/flagImages/rusFlag.svg"
     },
     "navbar": {
       "star": "Избранные",
