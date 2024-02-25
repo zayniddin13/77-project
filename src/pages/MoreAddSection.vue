@@ -128,15 +128,37 @@
                       :title="item.name"
                       @click="openMenu(item.name)"
                     >
+                    <template #preffix> 
+                         <span
+            :class="check ? '!bg-blue-400 !border-blue-400' : '!bg-white'"
+            class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
+            ><span
+              class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
+            ></span
+          ></span>
+                    </template>
                       <template #suffix>
-                        <span class="icon-to-bottom text-xs"></span>
+                        <span
+                        :class="open==item.name ? 'rotate-90' : 'rotate-0' "
+                          class="icon-to-bottom text-xs"
+                        ></span>
                       </template>
                     </DropdownCateg>
                     <transition name="fade" mode="ease">
                       <div :key="open">
                         <template v-for="(el, index) in item.childs">
                           <div v-if="item.name === open" :key="index">
-                            <DropdownCateg :title="el.name"></DropdownCateg>
+                            <DropdownCateg :title="el.name">
+                               <template #preffix> 
+                         <span
+            :class="check ? '!bg-blue-400 !border-blue-400' : '!bg-white'"
+            class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
+            ><span
+              class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
+            ></span
+          ></span>
+                    </template>
+                            </DropdownCateg>
                           </div>
                         </template>
                       </div>
@@ -287,7 +309,6 @@ async function loadProducts() {
 
     page.value++;
     product.value = response.data.results;
-console.log(product.value);
     count.value += response.data.count;
 
     return;
@@ -303,10 +324,6 @@ console.log(product.value);
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
 };
-let open = ref();
-// function toggleOpen() {
-
-// }
 onMounted(async () => {
   await loadProducts();
   getCtategory();
@@ -378,6 +395,7 @@ watch(
   },
   { deep: true }
 );
+let open = ref();
 function openMenu(menu) {
   if (menu === open.value) {
     open.value = "";
@@ -395,6 +413,11 @@ async function getCtategory() {
     });
     console.log(response.data);
     category.value = response.data;
+    category.value.forEach((el) => {
+      el.checked = false;
+      el.childs.map((item) => (item.checked = false));
+    });
+    console.log(category.value);
     return;
   } catch (error) {
     console.error(error);

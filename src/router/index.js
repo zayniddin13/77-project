@@ -21,7 +21,7 @@ const router = createRouter({
       path: "/saved",
       name: "saved",
       meta: {
-        layout: "empty",
+        layout: "default",
       },
       component: Saved,
     },
@@ -31,11 +31,17 @@ const router = createRouter({
     {
       path: "/products/:slug",
       name: "SingleProduct",
+      meta: {
+        layout: "default",
+      },
       component: SingleProduct,
     },
     {
       path: "/pages/:slug",
       name: "siteDirection",
+      meta: {
+        layout: "default",
+      },
       component: SiteDirection,
     },
     {
