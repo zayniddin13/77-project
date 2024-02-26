@@ -117,18 +117,18 @@ const { t, locale } = useI18n();
 
 const show = ref(false);
 const target = ref(null);
-const flag = ref("../public/images/rusFlag.svg");
+const flag = ref("../../public/images/rusFlag.svg");
 const lang = ref("Русский");
 const shortLung = ref("ru");
 const langs = [
   {
-    image: "../../src/assets/rusFlag.svg",
+    image: "../../public/images/rusFlag.svg",
     title: "Русский",
     shortTitle: "ru",
     id: 1,
   },
   {
-    image: "../../src/assets/uzbekFlag.svg",
+    image: "../../public/images/uzbek.svg",
     title: "O’zbekcha",
     shortTitle: "uz",
     id: 2,

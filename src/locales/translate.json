@@ -6,7 +6,7 @@
     "language": {
       "lang": "o'zbekcha",
       "shortLang": "o'z",
-      "flag": "../../src/assets/flagImages/uzbek.svg"
+      "flag": "../../public/images/uzbek.svg"
     },
     "navbar": {
       "star": "Sevimlilar",
@@ -41,7 +41,8 @@
       "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу"
     },
     "button": {
-      "more": "Ko'proq yuklang"
+      "more": "Ko'proq yuklang",
+       "filterButton":"Filtrni qo'llash"
     },
     "sitebarMoreProduct": {
 "filtr":" Filtr",
@@ -65,7 +66,7 @@
     "language": {
       "lang": "русcкий",
       "shortLang": "ру",
-      "flag": "../../src/assets/flagImages/rusFlag.svg"
+      "flag": "../../public/images/rusFlag.svg"
     },
     "navbar": {
       "star": "Избранные",
@@ -100,7 +101,8 @@
       "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу"
     },
     "button": {
-      "more": "Загрузить больше"
+      "more": "Загрузить больше",
+      "filterButton": "Применить фильтр"
     },
     "sitebarMoreProduct": {
       "filtr": "Фильтр",

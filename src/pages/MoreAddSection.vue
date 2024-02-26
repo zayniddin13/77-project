@@ -128,18 +128,22 @@
                       :title="item.name"
                       @click="openMenu(item.name)"
                     >
-                    <template #preffix> 
-                         <span
-            :class="check ? '!bg-blue-400 !border-blue-400' : '!bg-white'"
-            class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
-            ><span
-              class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
-            ></span
-          ></span>
-                    </template>
+                      <template #preffix>
+                        <span
+                          :class="
+                            check
+                              ? '!bg-blue-400 !border-blue-400'
+                              : '!bg-white'
+                          "
+                          class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
+                          ><span
+                            class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
+                          ></span
+                        ></span>
+                      </template>
                       <template #suffix>
                         <span
-                        :class="open==item.name ? 'rotate-90' : 'rotate-0' "
+                          :class="open == item.name ? 'rotate-90' : 'rotate-0'"
                           class="icon-to-bottom text-xs"
                         ></span>
                       </template>
@@ -149,15 +153,19 @@
                         <template v-for="(el, index) in item.childs">
                           <div v-if="item.name === open" :key="index">
                             <DropdownCateg :title="el.name">
-                               <template #preffix> 
-                         <span
-            :class="check ? '!bg-blue-400 !border-blue-400' : '!bg-white'"
-            class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
-            ><span
-              class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
-            ></span
-          ></span>
-                    </template>
+                              <template #preffix>
+                                <span
+                                  :class="
+                                    check
+                                      ? '!bg-blue-400 !border-blue-400'
+                                      : '!bg-white'
+                                  "
+                                  class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
+                                  ><span
+                                    class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
+                                  ></span
+                                ></span>
+                              </template>
                             </DropdownCateg>
                           </div>
                         </template>
@@ -168,6 +176,8 @@
               </div>
             </div>
           </div>
+  
+          <Button :title="$t('button.filterButton')" variant="bgBlueTextWhite" styles="!flex !justify-center"/>
         </form>
       </aside>
       <main class="col-span-12 md:col-span-8 lg:col-span-9 products-list-side">
@@ -260,6 +270,7 @@ import DropdownProvince from "../components/ui/DropdownProvince.vue";
 import DropdownCity from "../components/ui/DropdownCity.vue";
 import DropdownCateg from "../components/ui/DropdownCateg.vue";
 import BreadCrump from "../components/ui/breadCrump.vue";
+import Button from "../components/ui/Button.vue"
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 
