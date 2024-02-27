@@ -8,45 +8,45 @@
         <h2 class="mb-4 text-xl font-semibold leading-130 text-primary title">
           {{ $t("sitebarMoreProduct.filtr") }}
         </h2>
-        <form class="flex flex-col gap-5">
-          <div @click="getProvince" class="flex flex-col gap-2">
-            <DropdownProvince
-              @updateProvince="(e) => updateProvince(e)"
-              v-model="inputVal"
-              id="city"
-              :labelTitle="$t('sitebarMoreProduct.province')"
-              :title="$t('sitebarMoreProduct.provincePlaceHolder')"
-              :options="dataOptions1"
+        <form class="flex flex-col gap-5" @submit="filterData">
+          <div class="flex flex-col gap-2">
+            <label for="" class="text-sm font-medium leading-5 text-gray"
+              >Регион</label
             >
-              <template #suffix>
-                <span class="icon-to-bottom text-xs"></span>
-              </template>
-            </DropdownProvince>
+            <Dropdown
+              @value="updateRegionValue"
+              title="Выберите регион"
+              :options="regions"
+            />
           </div>
-          <div @click="getCity" class="flex flex-col gap-2">
-            <DropdownCity
-              :title="$t('sitebarMoreProduct.cityPlaceHolder')"
-              :labelTitle="$t('sitebarMoreProduct.provinOrCity')"
-              :options="dataOptions2"
+          <!-- <div @click="getCity" class="flex flex-col gap-2"> -->
+          <div class="flex flex-col gap-2">
+            <label for="" class="text-sm font-medium leading-5 text-gray"
+              >Район/город</label
             >
-              <template #suffix>
-                <span
-                  :class="provinceVal ? 'text-gray-600' : 'text-gray-400'"
-                  class="icon-to-bottom text-xs"
-                ></span>
-              </template>
-            </DropdownCity>
+            <Dropdown
+              @value="updateDistrictValue"
+              :disabled="!regionValue"
+              title="Выберите район/город"
+              :options="districts"
+            />
           </div>
+          <!-- </div> -->
 
           <div class="flex flex-col gap-2">
             <label for="" class="text-sm font-medium leading-5 text-gray">{{
               $t("sitebarMoreProduct.sort")
             }}</label>
-            <div class="flex flex-col">
+            <div
+              v-for="(item, index) in sorts"
+              :key="index"
+              class="flex flex-col"
+            >
               <label
                 class="transition group inline-flex items-center relative select-none min-h-[20px] cursor-pointer"
                 style="min-height: 20px"
                 ><input
+                  @click="sortData(item.price)"
                   type="radio"
                   class="absolute invisible w-0 h-0 opacity-0 peer"
                   name="k-radio-591"
@@ -57,39 +57,7 @@
                 ></span
                 ><span
                   class="w-full py-3 text-sm font-medium border-b leading-130 md:group-hover:text-blue-400 transition-300 border-gray-400 group-last:border-b-0 text-black"
-                  >{{ $t("sitebarMoreProduct.cheap") }}</span
-                ></label
-              ><label
-                class="transition group inline-flex items-center relative select-none min-h-[20px] cursor-pointer"
-                style="min-height: 20px"
-                ><input
-                  type="radio"
-                  class="absolute invisible w-0 h-0 opacity-0 peer"
-                  name="k-radio-591"
-                  value="-price"
-                /><span
-                  class="before:w-2 before:h-2 shrink-0 duration-200 ease-in-out bg-white peer-checked:before:opacity-100 mr-2 before:opacity-0 relative border rounded-full box-border before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition-all before:duration-200 border-gray-400 peer-disabled:before:bg-gray-100 before:bg-blue-300 group-hover:border-blue-200 peer-checked:border-white/20 peer-checked:bg-blue-400 peer-checked:before:!bg-white"
-                  style="width: 20px; height: 20px"
-                ></span
-                ><span
-                  class="w-full py-3 text-sm font-medium border-b leading-130 md:group-hover:text-blue-400 transition-300 border-gray-400 group-last:border-b-0 text-black"
-                  >{{ $t("sitebarMoreProduct.friends") }}</span
-                ></label
-              ><label
-                class="transition group inline-flex items-center relative select-none min-h-[20px] cursor-pointer"
-                style="min-height: 20px"
-                ><input
-                  type="radio"
-                  class="absolute invisible w-0 h-0 opacity-0 peer"
-                  name="k-radio-591"
-                  value="published_at"
-                /><span
-                  class="before:w-2 before:h-2 shrink-0 duration-200 ease-in-out bg-white peer-checked:before:opacity-100 mr-2 before:opacity-0 relative border rounded-full box-border before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition-all before:duration-200 border-gray-400 peer-disabled:before:bg-gray-100 before:bg-blue-300 group-hover:border-blue-200 peer-checked:border-white/20 peer-checked:bg-blue-400 peer-checked:before:!bg-white"
-                  style="width: 20px; height: 20px"
-                ></span
-                ><span
-                  class="w-full py-3 text-sm font-medium border-b leading-130 md:group-hover:text-blue-400 transition-300 border-gray-400 group-last:border-b-0 text-black"
-                  >{{ $t("sitebarMoreProduct.news") }}</span
+                  >{{ $t(item.name) }}</span
                 ></label
               >
             </div>
@@ -101,15 +69,22 @@
             }}</label>
             <div>
               <div class="flex flex-col gap-4">
-                <div class="flex flex-col items-center justify-between">
+                <div class="block">
                   <div
                     class="group w-full flex items-center gap-2 relative select-none min-h-[20px] cursor-pointer border-b border-gray-300 py-2.5"
                   >
                     <span
-                      class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border border-gray-400 group-hover:border-blue-300 !border-white/20 !bg-blue-400"
+                      @click="allCheck"
+                      :class="
+                        allAccordionCheck
+                          ? '!bg-blue-400 border-blue-400'
+                          : '!border-gray-300'
+                      "
+                      class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border group-hover:border-blue-300"
                     >
                       <span
-                        class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
+                        :class="allAccordionCheck ? 'icon-checkmark' : ''"
+                        class="text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
                       ></span>
                     </span>
                     <div class="">
@@ -119,65 +94,24 @@
                       >
                     </div>
                   </div>
-                  <div
-                    class="w-full"
-                    v-for="(item, index) in category"
-                    :key="index"
-                  >
-                    <DropdownCateg
-                      :title="item.name"
-                      @click="openMenu(item.name)"
-                    >
-                      <template #preffix>
-                        <span
-                          :class="
-                            check
-                              ? '!bg-blue-400 !border-blue-400'
-                              : '!bg-white'
-                          "
-                          class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
-                          ><span
-                            class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
-                          ></span
-                        ></span>
-                      </template>
-                      <template #suffix>
-                        <span
-                          :class="open == item.name ? 'rotate-90' : 'rotate-0'"
-                          class="icon-to-bottom text-xs"
-                        ></span>
-                      </template>
-                    </DropdownCateg>
-                    <transition name="fade" mode="ease">
-                      <div :key="open">
-                        <template v-for="(el, index) in item.childs">
-                          <div v-if="item.name === open" :key="index">
-                            <DropdownCateg :title="el.name">
-                              <template #preffix>
-                                <span
-                                  :class="
-                                    check
-                                      ? '!bg-blue-400 !border-blue-400'
-                                      : '!bg-white'
-                                  "
-                                  class="duration-300 ease-in-out relative shrink-0 inline-block h-5 w-5 rounded-md border !border-gray-500 group-hover:border-blue-300"
-                                  ><span
-                                    class="icon-checkmark text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
-                                  ></span
-                                ></span>
-                              </template>
-                            </DropdownCateg>
-                          </div>
-                        </template>
-                      </div>
-                    </transition>
-                  </div>
+                  <Accordion
+                    v-for="(category, key) in categories"
+                    :key="key"
+                    :title="category.name"
+                    :options="category.children"
+                    :element="category"
+                    :allChecked="allAccordionCheck"
+                  />
                 </div>
               </div>
             </div>
           </div>
-  
-          <Button :title="$t('button.filterButton')" variant="bgBlueTextWhite" styles="!flex !justify-center"/>
+
+          <Button
+            :title="$t('button.filterButton')"
+            variant="bgBlueTextWhite"
+            styles="!flex !justify-center"
+          />
         </form>
       </aside>
       <main class="col-span-12 md:col-span-8 lg:col-span-9 products-list-side">
@@ -266,11 +200,10 @@
 import { storeInstance, usingInstance } from "@/instances";
 import { onMounted, onUpdated, ref, computed, watch } from "vue";
 import { defineAsyncComponent } from "vue";
-import DropdownProvince from "../components/ui/DropdownProvince.vue";
-import DropdownCity from "../components/ui/DropdownCity.vue";
-import DropdownCateg from "../components/ui/DropdownCateg.vue";
+import Dropdown from "../../src/components/ui/Dropdown.vue";
+import Accordion from "../../src/components/ui/Accordion.vue";
 import BreadCrump from "../components/ui/breadCrump.vue";
-import Button from "../components/ui/Button.vue"
+import Button from "../components/ui/Button.vue";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 
@@ -284,18 +217,27 @@ const routes = computed(() => [
     link: "/about",
   },
 ]);
-const val2 = ref("");
 import dayjs from "dayjs";
-
-// const like = ref(false);
+const sorted = ref("");
+const region = ref(null);
+const district = ref(null);
+const categories = ref([]);
+const categoriesWithId = ref([]);
 const loading = ref(false);
 // const products = ref([]);
 const count = ref(0);
 const product = ref(null);
-const inputVal = ref("");
+
+// const like = ref(false);
+
 const provinceVal = ref(null);
-function updateProvince(e) {
-  provinceVal.value = e;
+const sorts = [
+  { name: "sitebarMoreProduct.cheap", price: "-price" },
+  { name: "sitebarMoreProduct.friends", price: "price" },
+  { name: "sitebarMoreProduct.news", price: "published_at" },
+];
+function sortData(item) {
+  sorted.value = item;
 }
 const page = ref(0);
 let deviceId = localStorage.getItem("deviceId");
@@ -337,16 +279,81 @@ const formatPublishedTime = (time) => {
 };
 onMounted(async () => {
   await loadProducts();
-  getCtategory();
   formatPublishedTime();
+  await getData();
+  await getCategoryWithChildren();
 });
 
-const provinOpen = ref(false);
-const cityOpen = ref(false);
-const dataOptions1 = ref([]);
-const dataOptions2 = ref([]);
-async function getProvince() {
-  provinOpen.value = true;
+// dropdownlar
+
+const data = ref([]);
+const regions = ref([]);
+const districts = ref([]);
+
+const regionValue = ref(null);
+const districtValue = ref(null);
+const sortValue = ref(null);
+const subCategoryValue = ref(null);
+const allAccordionCheck = ref(false);
+
+function allCheck() {
+  allAccordionCheck.value = !allAccordionCheck.value;
+  categories.value.map((el) => {
+    el.checked = !el.checked;
+    if (el.children.length) {
+      el.children.map((item) => {
+        item.checked = !item.checked;
+      });
+    }
+  });
+  console.log(categories.value);
+}
+
+const updateRegionValue = (value) => {
+  region.value = value[1];
+  for (let i = 0; i < data.value.length; i++) {
+    if (data.value[i].name == value[0]) {
+      data.value[i].districts.map((item) => {
+        districts.value.push(item);
+      });
+
+      break;
+    }
+  }
+  regionValue.value = data;
+};
+async function getCategoryWithChildren() {
+  try {
+    const response = await storeInstance.get(`/categories-with-childs/`, {
+      headers: {
+        "Accept-Language": locale._value,
+      },
+    });
+    categories.value = response.data.map((el) => {
+      el.checked = false;
+      let children = el.childs.map((item) => {
+        return {
+          name: item.name,
+          id: item.id,
+          checked: false,
+        };
+      });
+      return {
+        name: el.name,
+        id: el.id,
+        children,
+        checked: false,
+      };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+const updateDistrictValue = (value) => {
+  district.value = value[1];
+  districtValue.value = value;
+};
+async function getData() {
   try {
     const response = await usingInstance.get(`/regions-with-districts/`, {
       headers: {
@@ -354,84 +361,74 @@ async function getProvince() {
       },
     });
 
-    response.data.forEach((el) => {
-      dataOptions1.value.push(el.name);
-    });
-    return;
+    data.value = response.data;
   } catch (error) {
     console.error(error);
   }
-  watch(
-    locale,
-    async (newValue, oldValue) => {
-      if (newValue !== oldValue) {
-        getProvince();
-      }
-    },
-    { deep: true }
-  );
 }
-async function getCity() {
-  const province = document.querySelector("#city input");
-  if (province.value) {
-    cityOpen.value = true;
-    try {
-      const response = await usingInstance.get(`/regions-with-districts/`, {
-        headers: {
-          "Accept-Language": locale._value,
-          "Content-Language": locale._value,
-        },
-      });
+watch(data, () => {
+  if (data && Array.isArray(data.value)) {
+    data.value.map((item) => {
+      console.log(item.name);
+      regions.value.push(item);
+    });
+    console.log(regions.value);
+  }
+});
+async function filterData(a) {
+  a.preventDefault();
+  product.value = null;
+  console.log(
+    product.value,
+    sorted.value,
+    region.value,
+    district.value,
+    categories.value
+  );
+  try {
+    loading.value = true;
+    const response = await storeInstance.get(`/list/ads/`, {
+      headers: {
+        "Device-Id": localStorage.getItem("deviseId"),
+      },
+      params: {
+        district_id: district.value,
+        region_id: region.value,
+        ordering: sorted.value,
+      },
+    });
 
-      response.data.forEach((el) => {
-        if (province.value == el.name) {
-          el.districts.forEach((elem) => {
-            dataOptions2.value.push(elem.name);
-          });
-        }
-      });
-      return;
-    } catch (error) {
-      console.error(error);
-    }
+    page.value++;
+    product.value = response.data.results;
+    count.value += response.data.count;
+    return;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
   }
 }
 watch(
-  locale,
-  async (newValue, oldValue) => {
+  categories,
+  (newValue, oldValue) => {
     if (newValue !== oldValue) {
-      getProvince();
-      getCtategory();
+      categoriesWithId.value = [];
+      categories.value.forEach((el) => {
+        if (el.checked) {
+          categoriesWithId.value.push(el.id);
+        }
+        el.children.forEach((item) => {
+          if (item.checked) {
+            categoriesWithId.value.push(item.id);
+          }
+        });
+      });
     }
+    console.log("Data", categoriesWithId.value);
   },
-  { deep: true }
+  { deep: true },
+  {immedietly: true}
 );
-let open = ref();
-function openMenu(menu) {
-  if (menu === open.value) {
-    open.value = "";
-  } else open.value = menu;
-}
-let category = ref([]);
-async function getCtategory() {
-  cityOpen.value = true;
-  try {
-    const response = await storeInstance.get(`/categories-with-childs/`, {
-      headers: {
-        "Accept-Language": locale._value,
-        "Content-Language": locale._value,
-      },
-    });
-    console.log(response.data);
-    category.value = response.data;
-    category.value.forEach((el) => {
-      el.checked = false;
-      el.childs.map((item) => (item.checked = false));
-    });
-    console.log(category.value);
-    return;
-  } catch (error) {
-    console.error(error);
-  }
-}
 </script>

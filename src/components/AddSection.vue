@@ -59,12 +59,12 @@ import { get } from "@vueuse/core";
 import Button from "../components/ui/Button.vue";
 import { storeInstance } from "../../src/instances/index.js";
 import LoadingStills from "../components/LoadingStills.vue";
+// import fetchAdds from "../composables/fetchAdds.js";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const fetchDatas = ref([]);
 const loading = ref(false);
-
-//  let localId = JSON.parse(localStorage.getItem("deviseId"));
+ let localId = JSON.parse(localStorage.getItem("deviseId"));
 
 const fetchDataFromApi = async () => {
   console.log(locale._value);
@@ -93,6 +93,8 @@ const fetchDataFromApi = async () => {
     }, 500);
   }
 };
+// const { data } = fetchAdds(storeInstance)
+// fetchDatas.value=data
 
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
