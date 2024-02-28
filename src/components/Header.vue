@@ -3,13 +3,14 @@
     class="navbar sticky flex items-center border-b border-grey-4 py-5 max-[400px]:py-3 bg-white/90 z-30 top-0 left-0 backdrop-blur-[6px]"
   >
     <!-- Logo in the middle -->
-    <router-link to="/"
-      class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] p-3  md:px-4 md:py-[14px] max-[400px]:px-2 max-[400px]:py-[10px] shadow-[0_12px_36px_0px_#0E11161A]"
+    <router-link
+      to="/"
+      class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] p-3 md:px-4 md:py-[14px] max-[400px]:px-2 max-[400px]:py-[10px] shadow-[0_12px_36px_0px_#0E11161A]"
     >
       <img
         src="/public/images/logo.svg"
         alt="logo"
-      class="max-md:h-12 max-md:w-[80px]"
+        class="max-md:h-12 max-md:w-[80px]"
       />
     </router-link>
 
@@ -21,9 +22,18 @@
           ref="target"
           class="cursor-pointer flex items-center"
         >
-          <img :src="t('language.flag')" width="24px" height="24px" alt="lang" />
-          <h2 class="mx-2 text-sm text-black font-medium max-sm:hidden">{{ t('language.lang') }}</h2>
-          <h2 class="mx-2 text-lg text-black font-medium sm:hidden">{{ t('language.shortLang') }}</h2>
+          <img
+            :src="t('language.flag')"
+            width="24px"
+            height="24px"
+            alt="lang"
+          />
+          <h2 class="mx-2 text-sm text-black font-medium max-sm:hidden">
+            {{ t("language.lang") }}
+          </h2>
+          <h2 class="mx-2 text-lg text-black font-medium sm:hidden">
+            {{ t("language.shortLang") }}
+          </h2>
           <span
             class="icon-to-bottom text-xs"
             :class="show ? 'rotate-180 text-blue-500' : 'rotate-0'"
@@ -76,14 +86,24 @@
           <span
             class="icon-heart text-2xl max-sm:text-xl leading-5 !text-blue-600 max-sm:text-center"
           ></span>
-          <span class="max-md:hidden test-sm font-semibold text-black">{{t("navbar.star")}}</span>
+          <span class="max-md:hidden test-sm font-semibold text-black">{{
+            t("navbar.star")
+          }}</span>
         </router-link>
         <span class="w-px h-8 bg-gray-300 max-sm:hidden"></span>
-        <EnterButton title="Войти" styles="max-sm: hidden" variant="secondary">
+        <EnterButton
+          @click="openLoginModal"
+          title="Войти"
+          resHidden="hidden md:block"
+          variant="secondary"
+        >
           <template #suffix>
             <span class="icon-logenter text-2xl max-[400px]:text-base"></span>
           </template>
         </EnterButton>
+        <transition name="fade" mode="out-in">
+          <LoginModal @close:modal="closeLoginModal" v-if="toggleLoginModal" />
+        </transition>
       </div>
     </div>
   </header>
@@ -93,11 +113,10 @@ import { useI18n } from "vue-i18n";
 import EnterButton from "../components/ui/Button.vue";
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
-
+import LoginModal from "../components/modal/LoginModal.vue";
 
 const toggleLanguages = ref(false);
 const toggleLoginModal = ref(false);
-
 
 const currentLocale = ref(localStorage.getItem("locale"));
 
@@ -105,13 +124,7 @@ const changeLocale = (l) => {
   localStorage.setItem("locale", l);
   currentLocale.value = l;
   locale.value = l;
-
 };
-
-
-
-
-
 
 const { t, locale } = useI18n();
 
@@ -144,4 +157,17 @@ function selected(idx) {
   shortLung.value = langs[idx].shortTitle;
 }
 
+// modalka
+
+
+
+const openLoginModal = () => {
+  toggleLoginModal.value = true;
+  document.body.classList.add("overflow-hidden");
+};
+
+const closeLoginModal = () => {
+  toggleLoginModal.value = false;
+  document.body.classList.remove("overflow-hidden");
+};
 </script>

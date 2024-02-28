@@ -1,50 +1,17 @@
 <template>
   <div class="container">
-    <div class="container md:hidden block py-6">
+    <div     v-if="product" class="container md:hidden block py-6">
       <router-link to="/"
         ><img src="../../public/images/left.svg" alt="orqaga" />
       </router-link>
     </div>
-    <!-- <div
-      class="py-6 flex items-center gap-1.5 md:overflow-hidden overflow-x-hidden max-md:hidden"
-    >
-      <a
-        href="/"
-        class="flex-y-center gap-1 text-dark leading-130 text-sm font-medium transition-300 hover:text-blue-400 group"
-        >Asosiy sahifa</a
-      >
-      <div class="flex items-center gap-1.5 overflow-hidden group shrink-0">
-        <i class="w-1 h-1 rounded-full bg-gray-3 shrink-0"></i
-        ><a
-          href="/product/?category_ids=120"
-          class="transition-300 max-w-full flex-y-center cursor-pointer min-w-max group-last:min-w-[100px] sm:group-last:min-w-[200px] breadcrumb-menu line-clamp-1 whitespace-nowrap text-black leading-130 text-sm font-medium transition-300 hover:text-blue-400"
-          >Erkaklar kiyimi</a
-        >
-      </div>
-      <div class="flex items-center gap-1.5 overflow-hidden group shrink-0">
-        <i class="w-1 h-1 rounded-full bg-gray-3 shrink-0"></i
-        ><a
-          href="/product/?category_ids=137"
-          class="transition-300 max-w-full flex-y-center cursor-pointer min-w-max group-last:min-w-[100px] sm:group-last:min-w-[200px] breadcrumb-menu line-clamp-1 whitespace-nowrap text-blue leading-130 text-sm font-medium transition-300 hover:text-blue-400"
-          >Ustki kiyimlar</a
-        >
-      </div>
-      <div class="flex items-center gap-1.5 overflow-hidden group shrink-0">
-        <i class="w-1 h-1 rounded-full bg-gray-400 shrink-0"></i
-        ><a
-          aria-current="page"
-          href="/product/vetrovka-dlia-muzhchin-dozhdevik-kurtka"
-          class="router-link-active router-link-exact-active pointer-events-none !text-gray-300 transition-300 max-w-full flex-y-center cursor-pointer min-w-max group-last:min-w-[100px] sm:group-last:min-w-[200px] breadcrumb-menu line-clamp-1 whitespace-nowrap leading-130 text-sm font-medium transition-300 hover:text-blue-400"
-          >Vetrovka, kurtka, kuz - bahor ...</a
-        >
-      </div>
-    </div> -->
+
    
        <BreadCrump v-bind="{ routes }" />
     <div v-show="!loading" class="body md:flex gap-10 block">
-      <div class="md:w-8/12 w-full">
+      <div v-if="product" class="md:w-8/12 w-full">
         <div
-          v-if="product"
+      
           :class="
             product
               ? 'min-w-400px:px-6 min-w-400px:py-5 px-2 py-2 bg-white rounded-2xl'
@@ -301,7 +268,7 @@ console.log(product.value)
 
    routes = computed(() => [
   {
-    label: t(`${product.value.category.parent_category.name}`),
+    label: t(`${product.value.category}`) === null ? t(`${product.value.category.parent_category.name}`) : '',
     link: "/about",
      },
      {

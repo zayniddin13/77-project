@@ -4,7 +4,7 @@
     class="px-4 py-2 flex items-center justify-center rounded-lg gap-2 font-semibold max-[400px]:px-2"
   >
     <slot name="prefix"></slot>
-    <p class="hidden md:block">{{ title }}</p>
+    <p :class="resHidden">{{ title }}</p>
     <slot name="suffix"></slot>
   </button>
 </template>
@@ -14,6 +14,7 @@ const props = defineProps<{
   title?: string;
   variant?: string;
   styles?: string;
+  resHidden:String
 }>();
 const variants = {
   primary: "bg-black text-white active:scale-95 hover:bg-zinc-700",

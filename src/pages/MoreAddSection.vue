@@ -1,13 +1,25 @@
 <template>
-  <div class="container product-list-page">
+  <div
+    class="container product-list-page"
+  >
     <BreadCrump v-bind="{ routes }" />
-    <div class="grid items-start grid-cols-12 gap-6 pt-5 pb-7 content">
-      <aside
-        class="col-span-4 p-4 bg-white md:rounded-xl max-md:hidden lg:col-span-3 filter-side"
+    <div
+      v-if="show"
+      class="fixed flex items-center justify-center w-full min-h-screen bg-black/50 z-40 top-0 left-0 transition-all duration-300 p-3 !overflow-hidden"
+    ></div>
+    <div
+      class="grid items-start grid-cols-12 gap-6 pt-5 pb-7 content"
+    >
+      <div
+        :class="show ? '' : 'max-sm:hidden'"
+        class="rounded-2xl max-sm:scroll-style left-[12%] overflow-y-auto overflow-x-hidden max-sm:max-h-[85vh] col-span-4 p-4 bg-white md:rounded-xl lg:col-span-3 max-sm:absolute max-sm:w-9/12 max-sm:z-50 max-sm:mx-auto -top-4"
       >
-        <h2 class="mb-4 text-xl font-semibold leading-130 text-primary title">
+        <div class="flex justify-between items-center">
+          <h2 class="mb-4 text-xl font-semibold leading-130 text-primary title">
           {{ $t("sitebarMoreProduct.filtr") }}
         </h2>
+        <button @click="showSiteBar"><span class="icon-close font-normal text-gray-400"></span></button>
+        </div>
         <form class="flex flex-col gap-5" @submit="filterData">
           <div class="flex flex-col gap-2">
             <label for="" class="text-sm font-medium leading-5 text-gray"
@@ -113,7 +125,8 @@
             styles="!flex !justify-center"
           />
         </form>
-      </aside>
+      </div>
+
       <main class="col-span-12 md:col-span-8 lg:col-span-9 products-list-side">
         <div>
           <div class="w-full">
@@ -127,7 +140,12 @@
               <p class="text-lg font-medium text-gray-400 leading-130 count">
                 {{ count }} {{ $t("products.title") }}
               </p>
-              <div class="flex items-center gap-1">
+              <div class="flex items-center gap-2">
+                <button
+                  @click="showSiteBar"
+                  :class="show ? 'text-blue-400' : 'text-gray-400'"
+                  class="sm:hidden block text-2xl leading-7 hover:text-blue-400/90 icon-burger transition-300"
+                ></button>
                 <button
                   @click="doBlock"
                   :class="block ? 'text-blue-400' : 'text-gray-400'"
@@ -227,7 +245,11 @@ const loading = ref(false);
 // const products = ref([]);
 const count = ref(0);
 const product = ref(null);
-
+let show = ref(false);
+function showSiteBar() {
+  show.value = !show.value;
+  document.body.classList.toggle("overflow-hidden");
+}
 // const like = ref(false);
 
 const provinceVal = ref(null);
@@ -377,14 +399,21 @@ watch(data, () => {
 });
 async function filterData(a) {
   a.preventDefault();
+  show.value = false
+   document.body.classList.remove("overflow-hidden");
   product.value = null;
-  console.log(
-    product.value,
-    sorted.value,
-    region.value,
-    district.value,
-    categories.value
-  );
+  categoriesWithId.value = [];
+  categories.value.forEach((el) => {
+    if (el.checked) {
+      categoriesWithId.value.push(el.id);
+    }
+    el.children.forEach((item) => {
+      if (item.checked) {
+        categoriesWithId.value.push(item.id);
+      }
+    });
+  });
+
   try {
     loading.value = true;
     const response = await storeInstance.get(`/list/ads/`, {
@@ -395,6 +424,7 @@ async function filterData(a) {
         district_id: district.value,
         region_id: region.value,
         ordering: sorted.value,
+        category_ids: categoriesWithId.value,
       },
     });
 
@@ -410,25 +440,4 @@ async function filterData(a) {
     }, 500);
   }
 }
-watch(
-  categories,
-  (newValue, oldValue) => {
-    if (newValue !== oldValue) {
-      categoriesWithId.value = [];
-      categories.value.forEach((el) => {
-        if (el.checked) {
-          categoriesWithId.value.push(el.id);
-        }
-        el.children.forEach((item) => {
-          if (item.checked) {
-            categoriesWithId.value.push(item.id);
-          }
-        });
-      });
-    }
-    console.log("Data", categoriesWithId.value);
-  },
-  { deep: true },
-  {immedietly: true}
-);
 </script>

@@ -42,21 +42,32 @@
     },
     "button": {
       "more": "Ko'proq yuklang",
-       "filterButton":"Filtrni qo'llash"
+      "filterButton": "Filtrni qo'llash",
+      "apply": " Hozir murojaat qiling"
     },
     "sitebarMoreProduct": {
-"filtr":" Filtr",
-"province":"Viloyat",
-"provinOrCity":"Shahar/Tuman",
-"provincePlaceHolder":"Viloyatni tanlang",
-"cityPlaceHolder":"Tuman yoki viloyatni tanlang",
-"sort":"Saralash",
-"cheap":"Avvaliga arzon",
-"friends":"Avvalo azizlar",
-"news":"Birinchi navbatda yangilari",
-"subcategories":"Pastki toifalar",
-"allSection":"Barcha bo'limlar",
-"menClose":"Erkaklar kiyimi"
+      "filtr": " Filtr",
+      "province": "Viloyat",
+      "provinOrCity": "Shahar/Tuman",
+      "provincePlaceHolder": "Viloyatni tanlang",
+      "cityPlaceHolder": "Tuman yoki viloyatni tanlang",
+      "sort": "Saralash",
+      "cheap": "Avvaliga arzon",
+      "friends": "Avvalo azizlar",
+      "news": "Birinchi navbatda yangilari",
+      "subcategories": "Pastki toifalar",
+      "allSection": "Barcha bo'limlar",
+      "menClose": "Erkaklar kiyimi"
+    },
+    "modal": {
+      "title": "Xush kelibsiz!",
+      "minTitle": "Tizimda savdo qilish uchun tizimga kiring",
+      "loginLabel": "Login",
+      "passwordLabel": "Parol",
+      "loginInput": "Loginni kiriting",
+      "passwordInput": "Parolni kiriting",
+      "newPassword": "Parolni unutdingizmi?",
+      "wantSeller": "Sotuvchilik faoliyatini boshlamoqchimisiz"
     }
   },
   "ru": {
@@ -87,7 +98,7 @@
       "title": "Объявления",
       "minTitle": "Вы можете найти все категории, которые вам нужны от покупателя",
       "buttonMore": "Показать больше",
-      "product":"Продукты"
+      "product": "Продукты"
     },
     "footer": {
       "whatThisApp": "77.uz marketplace - это виртуальная платформа в Узбекистане, которая облегчает покупки и продажи, связывая продавцов с потенциальными клиентами.",
@@ -102,7 +113,8 @@
     },
     "button": {
       "more": "Загрузить больше",
-      "filterButton": "Применить фильтр"
+      "filterButton": "Применить фильтр",
+      "apply": "Подать заявку"
     },
     "sitebarMoreProduct": {
       "filtr": "Фильтр",
@@ -117,6 +129,16 @@
       "subcategories": "Подкатегории",
       "allSection": "Все разделы",
       "menClose": " Мужская одежда"
+    },
+    "modal": {
+      "title": "Добро пожаловать!",
+      "minTitle": "Войти в систему чтобы торговать в системе",
+      "loginLabel": "Логин",
+      "passwordLabel": "Пароль",
+      "loginInput": "Введите логин",
+      "passwordInput": "Введите пароль",
+      "newPassword": "Забыли пароль?",
+      "wantSeller": "Хотите стать продавцом?"
     }
   }
 }
