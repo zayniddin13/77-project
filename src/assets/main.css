@@ -109,3 +109,16 @@ body {
     position: relative;
   }
 }
+::-webkit-scrollbar {
+  width: 0;
+  height: 15px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  background-color: #ffff;
+}

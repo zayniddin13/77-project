@@ -43,7 +43,8 @@
     "button": {
       "more": "Ko'proq yuklang",
       "filterButton": "Filtrni qo'llash",
-      "apply": " Hozir murojaat qiling"
+      "apply": " Hozir murojaat qiling",
+      "continue":"Davom etish"
     },
     "sitebarMoreProduct": {
       "filtr": " Filtr",
@@ -68,6 +69,18 @@
       "passwordInput": "Parolni kiriting",
       "newPassword": "Parolni unutdingizmi?",
       "wantSeller": "Sotuvchilik faoliyatini boshlamoqchimisiz"
+    },
+    "signupModal": {
+      "title": "Hozir murojaat qiling",
+      "minTitle": "Tizimda savdo qilish uchun tizimga kiring",
+      "loginLabel": "F.I.Sh.",
+      "loginInput": "O'zingizni kiriting F.I.Sh.",
+      "productLabel": "Mahsulotni nomi",
+      "productPlaseholder": "Mahsulotni nomini kiriting",
+      "categoryLabel": "Kategoriya",
+      "categoryPlaceholder": "Kategoriyani tanlang",
+      "numberLabel": "Telefon nomer",
+      "applyAddmin":"Parolni unutdingizmi? Parolingizni tiklash uchun administratoringizga murojaat qiling."
     }
   },
   "ru": {
@@ -114,7 +127,8 @@
     "button": {
       "more": "Загрузить больше",
       "filterButton": "Применить фильтр",
-      "apply": "Подать заявку"
+      "apply": "Подать заявку",
+      "continue": "Продолжить"
     },
     "sitebarMoreProduct": {
       "filtr": "Фильтр",
@@ -139,6 +153,18 @@
       "passwordInput": "Введите пароль",
       "newPassword": "Забыли пароль?",
       "wantSeller": "Хотите стать продавцом?"
+    },
+    "signupModal": {
+      "title": "Подать заявку",
+      "minTitle": "Войти в систему чтобы торговать в системе",
+      "loginLabel": "Ф.И.О.",
+      "loginInput": "Введите вашу Ф.И.О.",
+      "productLabel": "Название продукта",
+      "productPlaseholder": "Введите название продукта",
+      "categoryLabel": "Категория",
+      "categoryPlaceholder": "Выберите категорию",
+      "numberLabel": "Телефон номер",
+      "applyAddmin": "Забыли пароль? Для восстановления пароля обратитесь администратору"
     }
   }
 }

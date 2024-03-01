@@ -101,7 +101,7 @@
             <span class="icon-logenter text-2xl max-[400px]:text-base"></span>
           </template>
         </EnterButton>
-        <transition name="fade" mode="out-in">
+        <transition name="fade" mode="ease">
           <LoginModal @close:modal="closeLoginModal" v-if="toggleLoginModal" />
         </transition>
       </div>
@@ -114,7 +114,8 @@ import EnterButton from "../components/ui/Button.vue";
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import LoginModal from "../components/modal/LoginModal.vue";
-
+import MapModal from "../components/modal/LoginModal.vue";
+import ApplyModal from "../components/modal/LoginModal.vue";
 const toggleLanguages = ref(false);
 const toggleLoginModal = ref(false);
 

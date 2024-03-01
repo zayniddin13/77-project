@@ -2,14 +2,22 @@
   <div
     class="container bg-white mt-8 sm:mt-16 pt-8 sm:!pt-14 pb-3 sm:pb-9 relative z-0"
   >
+    <div
+      @click="closeSearchInputModel"
+      class="top-0 left-0 w-full fixed h-full bg-black/40 z-50"
+      :class="openSearchModal ? 'block' : 'hidden'"
+    />
     <MainInput
+      :class="openSearchModal ? 'z-[60]' : ''"
+      v-model="searchInputVal"
+      @click="openSearchInputModel"
       :placeholder="$t('search.placeholder')"
       type="text"
       backgronud="mainBg"
-      class="flex items-center w-8/12 mx-auto border transition-300 p-2 max-w-[580px] bg-white rounded-lg absolute top-0 -translate-y-1/2 left-1/2 -translate-x-2/4 focus:border-2"
+      class="flex items-center w-8/12 mx-auto border transition-300 !py-7 max-w-[580px] bg-white rounded-lg absolute top-0 -translate-y-1/2 left-1/2 -translate-x-2/4 focus:border-2"
     >
       <template #prefix>
-        <span class="icon-search text-gray-400"></span>
+        <span class="ml-2 icon-search text-gray-400"></span>
       </template>
       <template #suffix>
         <EnterButton
@@ -62,7 +70,15 @@ import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const fetchData = ref([]);
 const loading = ref(false);
+const openSearchModal = ref(false);
 
+const openSearchInputModel = () => {
+  openSearchModal.value = true;
+};
+const closeSearchInputModel = () => {
+  openSearchModal.value = false;
+};
+const searchInputVal = ref("");
 
 async function fetchDataFromApi() {
   console.log(locale._value);
@@ -71,7 +87,7 @@ async function fetchDataFromApi() {
     loading.value = true;
     const response = await storeInstance.get(`/category/`, {
       headers: {
-        "Accept-Language": locale._value
+        "Accept-Language": locale._value,
       },
     });
 
@@ -94,7 +110,8 @@ onMounted(() => {
   fetchDataFromApi();
 });
 watch(
-locale,  async (newValue, oldValue) => {
+  locale,
+  async (newValue, oldValue) => {
     if (newValue !== oldValue) {
       fetchDataFromApi();
     }
@@ -102,5 +119,12 @@ locale,  async (newValue, oldValue) => {
   },
   { deep: true }
 );
+watch(openSearchModal, () => {
+  document.body.classList.toggle("overflow-hidden", openSearchModal.value);
+});
+watch(searchInputVal, () => {
+  filterCategory.value = categories.value.filter((category) =>
+    category.name.toLowerCase().includes(searchInputVal.value.toLowerCase())
+  );
+});
 </script>
-

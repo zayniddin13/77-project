@@ -4,6 +4,7 @@
     class="relative select-none"
   >
     <div
+    :class="{ '!border-red-600': error }"
       class="rounded-lg pl-3 p-2.5 cursor-pointer flex items-center justify-between border border-[#EAEDF0]"
       @click="toggleDrop"
       v-click-outside="closeDrop"
@@ -45,6 +46,8 @@ let props = defineProps({
   title: String,
   options: Array,
   disabled: Boolean,
+  dropBorder: String,
+  error:Boolean
 });
 const emit = defineEmits(["value"]);
 const open = ref(false);

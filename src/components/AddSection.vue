@@ -59,6 +59,7 @@ import { get } from "@vueuse/core";
 import Button from "../components/ui/Button.vue";
 import { storeInstance } from "../../src/instances/index.js";
 import LoadingStills from "../components/LoadingStills.vue";
+import Vuelidate from "../components/vuelidate.vue";
 // import fetchAdds from "../composables/fetchAdds.js";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
