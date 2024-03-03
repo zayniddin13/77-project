@@ -8,14 +8,11 @@ body {
 }
 
 body {
-  background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   margin: 0;
   padding: 0;
 }
-
-
 
 .swiper-slide {
   text-align: center;
@@ -34,8 +31,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-
 
 .swiper {
   width: 100%;
@@ -66,7 +61,6 @@ body {
   opacity: 0.4;
 }
 
-
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
   border: 4.14px rgba(56, 143, 243, 1) solid;
@@ -87,47 +81,45 @@ body {
 }
 
 .swiper-button-next:after {
-    font-family: swiper-icons;
-    font-size: 20px;
-    font-weight: 700;
-    text-transform: none !important;
-    letter-spacing: 0;
-    font-variant: initial;
-    line-height: 1;
+  font-family: swiper-icons;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: none !important;
+  letter-spacing: 0;
+  font-variant: initial;
+  line-height: 1;
 }
-.swiper-button-prev:after{
-     font-size: 20px;
-    font-weight: 700;
+.swiper-button-prev:after {
+  font-size: 20px;
+  font-weight: 700;
 }
-.swiper-button-next:hover{
- background: rgba(56, 143, 243, 1);
+.swiper-button-next:hover {
+  background: rgba(56, 143, 243, 1);
   color: #fff;
 }
-.swiper-button-prev:hover{
- background: rgba(56, 143, 243, 1);
+.swiper-button-prev:hover {
+  background: rgba(56, 143, 243, 1);
   color: #fff;
 }
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-    right: var(--swiper-navigation-sides-offset, 10px);
-    left: auto;
-    padding: 20px 21px;
-    background-color: #eee;
-    color: rgba(99, 103, 108, 1);
-    border-radius: 50%;
-
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: var(--swiper-navigation-sides-offset, 10px);
+  left: auto;
+  padding: 20px 21px;
+  background-color: #eee;
+  color: rgba(99, 103, 108, 1);
+  border-radius: 50%;
 }
 .swiper-button-prev {
-
-    padding: 20px 21px;
-    background-color: #eee;
-    color: rgba(99, 103, 108, 1);
-    border-radius: 50%;
-
+  padding: 20px 21px;
+  background-color: #eee;
+  color: rgba(99, 103, 108, 1);
+  border-radius: 50%;
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width: 400px) {
   .mySwiper2 {
-  height: 20rem;
-  width: 100%;
-}
+    height: 20rem;
+    width: 100%;
+  }
 }

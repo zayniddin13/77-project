@@ -25,7 +25,7 @@
               :date="formatPublishedTime(item.published_at)"
               number="+998 88 278 96 96"
               :price="item.price"
-              :image="item.photo"
+              :image="item.photo || '../../public/images/77-default-img.svg'"
               :slug="item.slug"
               :islike="item.is_liked"
             />
@@ -40,10 +40,10 @@
         <router-link to="/more-product">
           <Button
             :title="$t('button.more')"
-            styles="flex justify-center items-center gap-2 bg-gray-400 border-1 border-br-grey-4 rounded-[100px] py-3 px-7 max-w-[200px]"
+            styles="flex justify-center items-center gap-2 bg-grey-4 border-2 font-semibold text-base border-grey-border text-black-1 rounded-[200px] py-3 px-7 hover:bg-gray-300"
           >
             <template #suffix
-              ><img src="../../public/images/twoBottom.svg"
+              ><img class="" src="../../public/images/twoBottom.svg"
             /></template>
           </Button>
         </router-link>
@@ -65,7 +65,7 @@ import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const fetchDatas = ref([]);
 const loading = ref(false);
- let localId = JSON.parse(localStorage.getItem("deviseId"));
+let localId = JSON.parse(localStorage.getItem("deviseId"));
 
 const fetchDataFromApi = async () => {
   console.log(locale._value);
@@ -83,7 +83,7 @@ const fetchDataFromApi = async () => {
       },
     });
 
-    fetchDatas.value = response.data.results
+    fetchDatas.value = response.data.results;
     console.log(fetchDatas.value);
   } catch (error) {
     console.log(error);

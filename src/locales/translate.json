@@ -43,8 +43,10 @@
     "button": {
       "more": "Ko'proq yuklang",
       "filterButton": "Filtrni qo'llash",
-      "apply": " Hozir murojaat qiling",
-      "continue":"Davom etish"
+      "apply": " Hozir murojat qiling",
+      "continue": "Davom etish",
+      "allAdds": "barcha e'lonlar",
+      "savedToGallery": "Galereyaga yuklab olish"
     },
     "sitebarMoreProduct": {
       "filtr": " Filtr",
@@ -54,7 +56,7 @@
       "cityPlaceHolder": "Tuman yoki viloyatni tanlang",
       "sort": "Saralash",
       "cheap": "Avvaliga arzon",
-      "friends": "Avvalo azizlar",
+      "friends": "Avvalo qimmatlar",
       "news": "Birinchi navbatda yangilari",
       "subcategories": "Pastki toifalar",
       "allSection": "Barcha bo'limlar",
@@ -80,7 +82,7 @@
       "categoryLabel": "Kategoriya",
       "categoryPlaceholder": "Kategoriyani tanlang",
       "numberLabel": "Telefon nomer",
-      "applyAddmin":"Parolni unutdingizmi? Parolingizni tiklash uchun administratoringizga murojaat qiling."
+      "applyAddmin": "Parolni unutdingizmi? Parolingizni tiklash uchun administratoringizga murojaat qiling."
     }
   },
   "ru": {
@@ -128,7 +130,9 @@
       "more": "Загрузить больше",
       "filterButton": "Применить фильтр",
       "apply": "Подать заявку",
-      "continue": "Продолжить"
+      "continue": "Продолжить",
+      "allAdds": "Все объявления",
+      "savedToGallery": "Скачать в галерею"
     },
     "sitebarMoreProduct": {
       "filtr": "Фильтр",

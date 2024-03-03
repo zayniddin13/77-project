@@ -1,45 +1,45 @@
 <template>
-  <div
-    class="container product-list-page"
-  >
+  <div class="container product-list-page">
     <BreadCrump v-bind="{ routes }" />
     <div
       v-if="show"
       class="fixed flex items-center justify-center w-full min-h-screen bg-black/50 z-40 top-0 left-0 transition-all duration-300 p-3 !overflow-hidden"
     ></div>
-    <div
-      class="grid items-start grid-cols-12 gap-6 pt-5 pb-7 content"
-    >
+    <div class="grid items-start grid-cols-12 gap-6 pt-5 pb-7 content">
       <div
-        :class="show ? '' : 'max-sm:hidden'"
-        class="rounded-2xl max-sm:scroll-style left-[12%] overflow-y-auto overflow-x-hidden max-sm:max-h-[85vh] col-span-4 p-4 bg-white md:rounded-xl lg:col-span-3 max-sm:absolute max-sm:w-9/12 max-sm:z-50 max-sm:mx-auto -top-4"
+        :class="show ? '' : 'max-md:hidden'"
+        class="rounded-2xl max-sm:scroll-style left-[12%] overflow-y-auto overflow-x-hidden max-md:max-h-[85vh] col-span-4 p-4 bg-white md:rounded-xl lg:col-span-3 max-md:absolute max-md:w-9/12 max-md:z-50 max-md:mx-auto -top-4"
       >
         <div class="flex justify-between items-center">
           <h2 class="mb-4 text-xl font-semibold leading-130 text-primary title">
-          {{ $t("sitebarMoreProduct.filtr") }}
-        </h2>
-        <button @click="showSiteBar"><span class="icon-close font-normal text-gray-400"></span></button>
+            {{ $t("sitebarMoreProduct.filtr") }}
+          </h2>
+          <button @click="showSiteBar">
+            <span
+              class="md:hidden icon-close text-xl font-normal text-gray-400"
+            ></span>
+          </button>
         </div>
         <form class="flex flex-col gap-5" @submit="filterData">
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray"
-              >Регион</label
-            >
+            <label for="" class="text-sm font-medium leading-5 text-gray">{{
+              $t("sitebarMoreProduct.province")
+            }}</label>
             <Dropdown
               @value="updateRegionValue"
-              title="Выберите регион"
+              :title="$t('sitebarMoreProduct.provincePlaceHolder')"
               :options="regions"
             />
           </div>
           <!-- <div @click="getCity" class="flex flex-col gap-2"> -->
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray"
-              >Район/город</label
-            >
+            <label for="" class="text-sm font-medium leading-5 text-gray">{{
+              $t("sitebarMoreProduct.provinOrCity")
+            }}</label>
             <Dropdown
               @value="updateDistrictValue"
               :disabled="!regionValue"
-              title="Выберите район/город"
+              :title="$t('sitebarMoreProduct.cityPlaceHolder')"
               :options="districts"
             />
           </div>
@@ -144,7 +144,7 @@
                 <button
                   @click="showSiteBar"
                   :class="show ? 'text-blue-400' : 'text-gray-400'"
-                  class="sm:hidden block text-2xl leading-7 hover:text-blue-400/90 icon-burger transition-300"
+                  class="md:hidden block text-2xl leading-7 hover:text-blue-400/90 icon-burger transition-300"
                 ></button>
                 <button
                   @click="doBlock"
@@ -161,7 +161,7 @@
           </div>
 
           <div
-            v-if="grid"
+            v-if="grid && product"
             class="grid grid-cols-2 gap-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
           >
             <div
@@ -176,14 +176,14 @@
                 :date="formatPublishedTime(item.published_at)"
                 number="+998 88 278 96 96"
                 :price="item.price"
-                :image="item.photo"
+                :image="item.photo || '../../public/images/77-default-img.svg'"
                 :slug="item.slug"
                 :islike="item.is_liked"
               />
             </div>
           </div>
           <div
-            v-if="block"
+            v-if="block && product"
             class="block gap-y-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
           >
             <div
@@ -198,7 +198,7 @@
                 :date="formatPublishedTime(item.published_at)"
                 number="+998 88 278 96 96"
                 :price="item.price"
-                :image="item.photo"
+                :image="item.photo || '../../public/images/77-default-img.svg'"
                 :slug="item.slug"
                 :islike="item.is_liked"
               />
@@ -208,6 +208,19 @@
             <div
               class="grid grid-cols-2 gap-6 py-8 my-6 sm:grid-cols-2 lg:grid-cols-3 md:my-10 products"
             ></div>
+          </div>
+          <div v-if="!product?.length && !loading" class="saved_body mb-14">
+            <div class="saved__about flex items-center justify-center flex-col">
+              <img src="../../public/images/noData.svg" alt="" class="block" />
+              <div
+                class="block text-2xl font-bold text-dark leading-6 mt-6 mb-3"
+              >
+                {{ $t("noData.noAddsTitle") }}
+              </div>
+              <div class="text-base font-normal leading-6 text-dark">
+                {{ $t("noData.noAddsTitleAbout") }}
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -399,8 +412,8 @@ watch(data, () => {
 });
 async function filterData(a) {
   a.preventDefault();
-  show.value = false
-   document.body.classList.remove("overflow-hidden");
+  show.value = false;
+  document.body.classList.remove("overflow-hidden");
   product.value = null;
   categoriesWithId.value = [];
   categories.value.forEach((el) => {
@@ -430,7 +443,7 @@ async function filterData(a) {
 
     page.value++;
     product.value = response.data.results;
-    count.value += response.data.count;
+    count.value += product?.value?.count || 0;
     return;
   } catch (error) {
     console.error(error);

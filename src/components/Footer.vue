@@ -12,7 +12,7 @@
         <p
           class="footer_about text-black-1 text-center font-inter text-base font-normal leading-6 md:mx-44 not-italic mb-8"
         >
-       {{ $t('footer.whatThisApp') }}
+          {{ $t("footer.whatThisApp") }}
         </p>
         <div class="flex flex-wrap items-center justify-center gap-5 md:gap-20">
           <router-link
@@ -25,7 +25,7 @@
           >
             <img src="/public/images/footerLogo.svg" alt="" /><span
               class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
-              >{{ $t('footer.aboutUs') }}</span
+              >{{ $t("footer.aboutUs") }}</span
             >
           </router-link>
           <router-link
@@ -37,7 +37,7 @@
             class="flex items-center justify-center gap-1"
             ><img src="/public/images/footerLogo.svg" alt="" /><span
               class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
-              >{{ $t('footer.aboutUs') }}</span
+              >{{ $t("footer.aboutUs") }}</span
             ></router-link
           >
           <a
@@ -62,25 +62,30 @@
             ><img src="/public/images/googlePlay.svg" alt=""
           /></a>
         </div>
-       <div v-html="$t('footer.advice')"></div>
+        <div v-html="$t('footer.advice')"></div>
       </div>
     </div>
     <div class="bg-white py-4">
       <div class="container flex items-center justify-between">
         <div class="max-sm:block flex items-center gap-2">
           <span class="text-black font-medium text-sm">© 77.uz</span>
-          <span class="text-black font-normal text-sm"> {{ thisYear }}. {{ $t('footer.prevented') }}</span>
+          <span class="text-black font-normal text-sm">
+            {{ thisYear }}. {{ $t("footer.prevented") }}</span
+          >
         </div>
+        <transition mode="ease-in-out">
+          <a
+            href="https://uic.group/"
+            target="_blank"
+            @mouseover="mouseOver"
+            @mouseout="mouseOut"
+            class="flex items-center justify-between"
+          >
+            <img src="/public/images/uicLogo.svg" alt="" />
 
-        <a href="https://uic.group/" target="_blank"  @mouseover="mouseOver" @mouseout="mouseOut" class="flex items-center justify-between">
-           
-          <img src="/public/images/uicLogo.svg" alt="" />
-          <transition  name="fade">
             <img v-if="show" src="/public/images/uicName.svg" alt="" />
-          </transition>
-
-
-        </a>
+          </a>
+        </transition>
       </div>
     </div>
   </div>
@@ -91,7 +96,7 @@ import axios from "axios";
 import { usingInstance } from "../instances";
 let fetchDatas = ref(null);
 let loading = ref(false);
-let thisYear = new Date().getFullYear()
+let thisYear = new Date().getFullYear();
 console.log(thisYear);
 
 const dataSlugFromApi = async () => {
@@ -110,14 +115,17 @@ const dataSlugFromApi = async () => {
     }, 500);
   }
 };
-const number=ref('')
-const dataNumberFromApi = async()=> {
+const number = ref("");
+const dataNumberFromApi = async () => {
   try {
     loading.value = true;
     const result = await usingInstance.get("/setting/");
 
-    number.value = result.data.phone
-    number.value = number.value.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5");
+    number.value = result.data.phone;
+    number.value = number.value.replace(
+      /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
+      "$1 $2 $3 $4 $5"
+    );
     return;
   } catch (error) {
     console.log(error);
@@ -126,38 +134,20 @@ const dataNumberFromApi = async()=> {
       loading.value = false;
     }, 500);
   }
-}
+};
 
 onMounted(() => {
-  dataSlugFromApi(),
-    dataNumberFromApi()
-
-
+  dataSlugFromApi(), dataNumberFromApi();
 });
-let show=ref(false)
-
+let show = ref(false);
 
 function mouseOver() {
-  show.value = true
-   console.log(show.value)
+  show.value = true;
+  console.log(show.value);
 }
 
 function mouseOut() {
-  show.value = false
-   console.log(show.value)
+  show.value = false;
+  console.log(show.value);
 }
-
-
 </script>
-<style>
-.nested-enter-active,
-.nested-leave-active {
-  transition: all 0.5s  cubic-bezier(.4,0,.2,1);
-}
-
-.nested-enter-from 
-.nested-leave-to {
-  transition: cubic-bezier(.4,0,.2,1);
-  transform: translateX(30px);
-}
-</style>

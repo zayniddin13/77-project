@@ -28,7 +28,7 @@ body {
   line-height: 20px;
   text-align: left !important;
   display: inline;
-   word-spacing: 5px;
+  word-spacing: 5px;
 }
 .aboutUs p strong {
   color: #16191d;
@@ -91,10 +91,10 @@ body {
 .aboutUs ul li u s {
   text-decoration: none !important;
 }
-.aboutUs ul li h1{
+.aboutUs ul li h1 {
   font-size: 24px;
-   color: #16191d;
-   font-weight: 700;
+  color: #16191d;
+  font-weight: 700;
   font-family: "Inter", sans-serif;
 }
 @media screen and (max-width: 640px) {

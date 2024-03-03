@@ -1,71 +1,52 @@
 <template>
   <div class="container">
-    <!-- <div class="flex items-center gap-1.5 md:overflow-hidden">
-      <router-link
-        to="/"
-        class="flex items-center gap-1 text-dark leading-6 text-sm font-medium transition-300 hover:text-blue-600"
-      >
-        Главная
-      </router-link>
-      <div class="flex items-center gap-1.5 overflow-hidden group shrink-0">
-        <i class="w-1 h-1 rounded-full bg-gray-300 shrink-0"></i
-        ><a
-          aria-current="page"
-          href="/favourites"
-          class="router-link-active router-link-exact-active pointer-events-none !text-gray-300 transition-300 flex items-center cursor-pointer whitespace-nowrap text-dark leading-130 text-sm font-medium transition-300 hover:text-blue"
-          >Избранные</a
-        >
-      </div>
-    </div> -->
     <BreadCrump v-bind="{ routes }" />
     <div v-if="fetchDatas.length">
       <div
-      v-show="!loading"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
-    >
-      <div
-        v-for="(item, index) in fetchDatas"
-        :key="index"
-        class="cursor-pointer transition-300"
+        v-show="!loading"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
       >
-        <Product
-          :id="item.id"
-          :title="item.name"
-          :date="formatPublishedTime(item.published_at)"
-          number="+998 88 278 96 96"
-          :price="item.price"
-          :image="item.photo"
-          :slug="item.slug"
-          :islike="item.is_liked"
-        />
+        <div
+          v-for="(item, index) in fetchDatas"
+          :key="index"
+          class="cursor-pointer transition-300"
+        >
+          <Product
+            :id="item.id"
+            :title="item.name"
+            :date="formatPublishedTime(item.published_at)"
+            number="+998 88 278 96 96"
+            :price="item.price"
+            :image="item.photo"
+            :slug="item.slug"
+            :islike="item.is_liked"
+          />
+        </div>
+      </div>
+      <div
+        v-show="loading"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
+      >
+        <div
+          v-for="item in fetchDatas.length"
+          :key="item.id"
+          class="cursor-pointer transition-300"
+        >
+          <LoadingStills type="product" />
+        </div>
       </div>
     </div>
-    <div
-      v-show="loading"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
-    >
-      <div
-        v-for="(item) in fetchDatas.length"
-        :key="item.id"
-        class="cursor-pointer transition-300"
-      >
-        <LoadingStills
-        type="product"
-        />
-      </div>
-    </div>
-    </div>
-    <div  v-if="!fetchDatas.length && !loading" class="saved_body mb-14">
+    <div v-if="!fetchDatas.length && !loading" class="saved_body mb-14">
       <div class="saved__title block text-dark font-semibold text-3xl my-5">
-        {{$t('navbar.star') }}
+        {{ $t("navbar.star") }}
       </div>
       <div class="saved__about flex items-center justify-center flex-col">
         <img src="/public/images/noData.svg" alt="" class="block" />
         <div class="block text-2xl font-bold text-dark leading-6 mt-6 mb-3">
-         {{$t('noData.noAddsTitle')}}
+          {{ $t("noData.noAddsTitle") }}
         </div>
         <div class="text-base font-normal leading-6 text-dark">
-          {{$t('noData.noAddsTitleAbout')}}
+          {{ $t("noData.noAddsTitleAbout") }}
         </div>
       </div>
     </div>
@@ -84,7 +65,8 @@ const routes = computed(() => [
   {
     label: t("about"),
     link: "/about",
-  },])
+  },
+]);
 const fetchDatas = ref([]);
 const loading = ref(false);
 const deviceID = JSON.parse(localStorage.getItem("deviseId"));
@@ -92,20 +74,19 @@ const deviceID = JSON.parse(localStorage.getItem("deviseId"));
 const fetchDataFromApi = async (id) => {
   loading.value = true;
   try {
-     const response = await storeInstance.get(`/my-favourite-product-by-id/`, {
+    const response = await storeInstance.get(`/my-favourite-product-by-id/`, {
       headers: {
         "Content-Type": "application/json",
         "Device-Id": id,
       },
     });
- console.log(response.data.results);
+    console.log(response.data.results);
     fetchDatas.value = response.data.results;
-   
   } catch (error) {
     console.error("Ma’lumotlarni olishda xatolik yuz berdi:", error);
   } finally {
-     setTimeout(() => {
-        loading.value = false;
+    setTimeout(() => {
+      loading.value = false;
     }, 500);
   }
 };

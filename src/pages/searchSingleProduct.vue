@@ -6,7 +6,7 @@
       </router-link>
     </div>
 
-    <BreadCrump v-bind="{ routes }" />
+    <BreadCrump v-bind="{ routes }" class="max-md:hidden" />
     <div v-show="!loading" class="body md:flex gap-10 block">
       <div v-if="product" class="md:w-8/12 w-full">
         <div
@@ -103,45 +103,10 @@
             {{ product.description }}
           </div>
         </div>
-        <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
-          <h3 class="font-inter not-italic font-bold text-black text-2xl">
-            Продавец
-          </h3>
-          <div
-            v-if="product.seller"
-            class="sm:flex justify-between items-center block"
-          >
-            <div class="flex items-center gap-3">
-              <img
-                v-if="product.seller.profile_photo"
-                :src="product.seller.profile_photo"
-                class="w-10 h-10 rounded-lg"
-              />
-              <div class="profile_name block">
-                <h1 class="font-semibold text-black font-inter text-base">
-                  {{ product.seller.full_name }}
-                </h1>
-                <h3
-                  class="font-inter not-italic font-normal text-xs text-gray-500"
-                >
-                  ID: {{ product.seller.id }}
-                </h3>
-              </div>
-            </div>
-            <a
-              v-if="product.seller.phone_number"
-              href="tel:  {{ product.seller.phone_number }}"
-              target="_blank"
-              class="font-inter not-itelic text-black font-semibold text-base"
-            >
-              {{ number }}</a
-            >
-          </div>
-        </div>
       </div>
 
       <div v-if="product" class="img_adress max-w-xs w-full pb-4">
-        <div class="product_seller p-4 bg-white rounded-2xl">
+        <div class="product_seller p-4 bg-white rounded-2xl mb-2">
           <div v-if="product.seller" class="flex items-center gap-3">
             <img
               v-if="product.seller.profile_photo"
@@ -165,12 +130,14 @@
           >
             {{ number }}</a
           >
-          <EnterButton
-            title="Все объявления"
-            variant="secondary"
-            class="flex items-center justify-center"
-          >
-          </EnterButton>
+          <router-link to="/more-product">
+            <EnterButton
+              :title="$t('button.allAdds')"
+              variant="secondary"
+              class="flex items-center justify-center mt-3"
+            >
+            </EnterButton>
+          </router-link>
         </div>
         <div v-if="product.address" class="bg-white my-4 rounded-2xl">
           <div class="p-4">
@@ -189,7 +156,7 @@
           </div>
         </div>
         <EnterButton
-          title="Скачать в галерею"
+          :title="$t('button.savedToGallery')"
           variant="bgBlueTextBlue"
           class="max-w-xs w-full flex items-center justify-center mb-6"
         >

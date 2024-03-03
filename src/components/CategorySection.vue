@@ -107,7 +107,7 @@
           <Category
             :title="item.name"
             :adds="item.product_count"
-            :image="item.icon"
+            :image="item.icon || '../../public/images/77-default-img.svg'"
           />
         </div>
       </div>

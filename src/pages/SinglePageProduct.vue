@@ -1,17 +1,15 @@
 <template>
   <div class="container">
-    <div     v-if="product" class="container md:hidden block py-6">
+    <div v-if="product" class="container md:hidden block py-6">
       <router-link to="/"
         ><img src="../../public/images/left.svg" alt="orqaga" />
       </router-link>
     </div>
 
-   
-       <BreadCrump v-bind="{ routes }" />
+    <BreadCrump v-bind="{ routes }" class="max-md:hidden" />
     <div v-show="!loading" class="body md:flex gap-10 block">
       <div v-if="product" class="md:w-8/12 w-full">
         <div
-      
           :class="
             product
               ? 'min-w-400px:px-6 min-w-400px:py-5 px-2 py-2 bg-white rounded-2xl'
@@ -215,12 +213,11 @@ import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 
-
 const breadcrumbs = ref([
-  { label: 'home', url: '/' },
-  { label: 'products', url: '/products' },
-  { label: 'electronics', url: '/products/electronics' },
-  { label: 'smartphones', url: '/products/electronics/smartphones' }
+  { label: "home", url: "/" },
+  { label: "products", url: "/products" },
+  { label: "electronics", url: "/products/electronics" },
+  { label: "smartphones", url: "/products/electronics/smartphones" },
 ]);
 
 // Import Swiper Vue.js components
@@ -241,40 +238,42 @@ const number = ref("");
 let product = ref(null);
 const route = useRoute();
 let loading = ref(false);
-let  routes=ref(null)
-
-
+let routes = ref(null);
 
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY, HH:mm");
 };
 async function dataFetch() {
-  console.log(locale._value)
+  console.log(locale._value);
   console.log(`${route.params.slug}`);
   try {
     loading.value = true;
     const response = await storeInstance.get(`/ads/${route.params.slug}/`, {
-       headers: {
-        "Accept-Language": locale._value
+      headers: {
+        "Accept-Language": locale._value,
       },
     });
-// Ma'lumotlarni konsolga chop etish
+    // Ma'lumotlarni konsolga chop etish
     product.value = response.data;
-console.log(product.value)
+    console.log(product.value);
     number.value = product.value.seller.phone_number.replace(
       /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
       "$1 $2 $3 $4 $5"
     );
 
-   routes = computed(() => [
-  {
-    label: t(`${product.value.category}`) === null ? t(`${product.value.category.parent_category.name}`) : '',
-    link: "/about",
-     },
-     {
-       label: product.value.name,
-    link:""
-   }])
+    routes = computed(() => [
+      {
+        label:
+          t(`${product.value.category}`) === null
+            ? t(`${product.value.category.parent_category.name}`)
+            : "",
+        link: "/about",
+      },
+      {
+        label: product.value.name,
+        link: "",
+      },
+    ]);
   } catch (error) {
     console.error("Error fetching product:", error);
   } finally {
@@ -284,16 +283,17 @@ console.log(product.value)
     }, 500);
   }
 }
-console.log(product.value)
+console.log(product.value);
 
 onMounted(() => {
   dataFetch();
   formatPublishedTime();
 });
 watch(
-locale,  async (newValue, oldValue) => {
+  locale,
+  async (newValue, oldValue) => {
     if (newValue !== oldValue) {
-     dataFetch()
+      dataFetch();
     }
     console.log(localStorage.getItem("locale"));
   },
