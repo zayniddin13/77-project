@@ -8,6 +8,7 @@ import "leaflet/dist/leaflet.css";
 import Button from "../ui/Button.vue";
 const props = defineProps({
   userDetailsSignUp: Object,
+  signUpForm: Object,
 });
 const emit = defineEmits([
   "close:modal",
@@ -97,6 +98,8 @@ function change() {
 async function moveMarkerToThePlace(c) {
   map.value.setView([c.lat, c.lng], 17);
   marker.value.setLatLng([c.lat, c.lng]);
+  console.log(searchPlacesResults.value);
+  searchTerm.value = searchPlaces.name;
   searchPlacesResults.value = [];
 }
 
@@ -115,7 +118,7 @@ async function signUp() {
   props.userDetailsSignUp.address.long = searchPlacesResults.value[0].lon;
   let toSplit = props.userDetailsSignUp.phone_number.split(" ").join("");
   props.userDetailsSignUp.phone_number = toSplit;
-  console.log("bu", props.userDetailsSignUp.phone_number);
+  console.log("bu", props.userDetailsSignUp);
 
   try {
     console.log("salom");
@@ -142,7 +145,7 @@ async function signUp() {
 
 <template>
   <div
-    class="relative overflow-x-hidden scroll-style p-4 bg-white w-full lg:max-w-sm shadow-xl overflow-y-auto rounded-2xl map-box h-[400px] min-h-[650px]"
+    class="relative overflow-x-hidden scroll-style p-4 bg-white w-full max-w-sm shadow-xl overflow-y-auto rounded-2xl map-box h-[400px] min-h-[650px]"
   >
     <div class="flex titles">
       <div class="flex items-center gap-3 left">

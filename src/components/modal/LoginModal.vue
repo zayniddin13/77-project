@@ -29,21 +29,27 @@ function showHidePassword() {
 const switchTypeModal = (type) => {
   typeModal.value = type;
 };
-
-const userDetailsSignUp = reactive({
+const signUpForm = reactive({
   full_name: "",
   project_name: "",
-  category: "default",
+  category: "",
   phone_number: "",
+});
+const userDetailsSignUp = reactive({
+  full_name: signUpForm.full_name,
+  project_name: signUpForm.project_name,
+  category: signUpForm.category,
+  phone_number: signUpForm.phone_number,
   address: {
     name: "",
     lat: 0,
     long: 0,
   },
 });
+
 const updateCategoryValue = (value) => {
   console.log(value[1]);
-  userDetailsSignUp.category = value[1];
+  signUpForm.category = value[1];
 };
 const loginVal = ref("");
 const paswordVal = ref("");
@@ -79,25 +85,11 @@ const rules = computed(() => {
     password: { required },
   };
 });
-const signUpForm = reactive({
-  full_name: "",
-  project_name: "",
-  category: "",
-  phone_number: "",
-});
-const SignUpRules = computed(() => {
-  return {
-    full_name: { required },
-    project_name: { required },
-    category: { required },
-    phone_number: { required },
-  };
-});
 const submitForm = async () => {
   v$.value.$touch();
   console.log(v$?.login?.$error);
   // Use optional chaining to avoid errors
-  if (!signUpForm.value?.$invalid) {
+  if (!form.value?.$invalid) {
     try {
       const response = await authInstance.post("/login/", {
         ...userDetailsLogin.value,
@@ -111,13 +103,35 @@ const submitForm = async () => {
 };
 let v$ = useVuelidate(rules, form);
 
-async function openMap() {
+const SignUpRules = computed(() => {
+  return {
+    full_name: { required },
+    project_name: { required },
+    category: { required },
+    phone_number: { required },
+  };
+});
+
+async function openMap(e) {
   sign$.value.$touch();
-  console.log(sign$?.category?.$error);
-  // Use optional chaining to avoid errors
-  if (form.value?.$invalid) return;
+  console.log("Form invalid:", userDetailsSignUp);
+  userDetailsSignUp.full_name = signUpForm.full_name;
+  userDetailsSignUp.project_name = signUpForm.project_name;
+  userDetailsSignUp.category = signUpForm.category;
+  userDetailsSignUp.phone_number = signUpForm.phone_number;
+  console.log("Form invalid:", signUpForm);
+  if (
+    sign$.value.full_name?.$error ||
+    sign$.value.project_name?.$error ||
+    sign$.value.category?.$error ||
+    sign$.value.phone_number?.$error
+  ) {
+    console.log("Form is valid. Moving to next modal...");
+    return;
+  }
   typeModal.value = "map";
 }
+
 let sign$ = useVuelidate(SignUpRules, signUpForm);
 onMounted(async () => {
   await fetchCategories();
@@ -131,7 +145,7 @@ onMounted(async () => {
   >
     <div
       v-if="typeModal === 'login'"
-      class="overflow-x-hidden scroll-style p-5 bg-white w-full lg:max-w-sm shadow-xl relative max-h-[85vh] overflow-y-auto rounded-2xl modal-box-user"
+      class="overflow-x-hidden scroll-style p-5 bg-white w-full max-w-sm shadow-xl relative max-h-[85vh] overflow-y-auto rounded-2xl modal-box-user"
     >
       <div class="flex items-center justify-between titles">
         <div class="left">
@@ -225,7 +239,7 @@ onMounted(async () => {
     </div>
     <div
       v-if="typeModal === 'signup'"
-      class="relative overflow-x-hidden scroll-style p-5 bg-white w-full lg:max-w-sm shadow-xl max-h-[85vh] overflow-y-auto rounded-2xl modal-box-seller"
+      class="relative overflow-x-hidden scroll-style p-5 bg-white w-full max-w-sm shadow-xl max-h-[85vh] overflow-y-auto rounded-2xl modal-box-seller"
     >
       <div class="flex titles">
         <div class="left">
@@ -243,91 +257,88 @@ onMounted(async () => {
           <span class="icon-close text-xl font-thin"></span>
         </button>
       </div>
-      <form class="form">
-        <div class="flex flex-col items-start gap-2 form-box">
-          <label for="fio" class="text-sm font-medium leading-5 text-gray-1">
-            {{ t("signupModal.loginLabel") }}
-          </label>
-          <Input
-            v-model.trim="userDetailsSignUp.full_name"
-            :error="sign$?.full_name?.$error"
-            class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
-            :placeholder="t('signupModal.loginInput')"
+
+      <div class="flex flex-col items-start gap-2 form-box">
+        <label for="fio" class="text-sm font-medium leading-5 text-gray-1">
+          {{ t("signupModal.loginLabel") }}
+        </label>
+        <Input
+          v-model.trim="signUpForm.full_name"
+          :error="sign$?.full_name?.$error"
+          class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
+          :placeholder="t('signupModal.loginInput')"
+          type="text"
+        />
+      </div>
+      <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
+        <label
+          for="product-name"
+          class="text-sm font-medium leading-5 text-gray-1"
+          >{{ $t("signupModal.productLabel") }}</label
+        >
+        <Input
+          v-model.trim="signUpForm.project_name"
+          :error="sign$?.project_name?.$error"
+          type="text"
+          class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
+          :placeholder="$t('signupModal.productPlaseholder')"
+        />
+      </div>
+      <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
+        <label
+          for="product-category"
+          class="text-sm font-medium leading-5 text-gray-1"
+          >{{ $t("signupModal.categoryLabel") }}</label
+        >
+        <Dropdown
+          @value="updateCategoryValue"
+          :error="sign$?.category?.$error"
+          :title="$t('signupModal.categoryPlaceholder')"
+          :options="categories"
+        />
+      </div>
+      <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
+        <label for="phone" class="text-sm font-medium leading-5 text-gray-1">{{
+          $t("signupModal.numberLabel")
+        }}</label>
+        <div class="relative">
+          <InputMask
+            v-model="signUpForm.phone_number"
+            :error="sign$?.phone_number?.$error"
+            :class="!sign$?.phone_number?.$error ? '' : 'border-red-500 '"
+            mask="+999 99 999 99 99"
+            class="w-full px-4 py-3 text-base leading-5 transition duration-300 border rounded-lg focus-within:border-blue-400 outline-none ps-10 focus-within:border-blue pe-10 sm:text-sm text-dark bg-gray-2"
+            placeholder="+___ (__) ___-__-__"
             type="text"
-          />
-        </div>
-        <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
-          <label
-            for="product-name"
-            class="text-sm font-medium leading-5 text-gray-1"
-            >{{ $t("signupModal.productLabel") }}</label
+            name="phone"
+            id="phone"
           >
-          <Input
-            v-model.trim="userDetailsSignUp.project_name"
-            :error="sign$?.project_name?.$error"
-            type="text"
-            class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
-            :placeholder="$t('signupModal.productPlaseholder')"
-          />
+          </InputMask>
         </div>
-        <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
-          <label
-            for="product-category"
-            class="text-sm font-medium leading-5 text-gray-1"
-            >{{ $t("signupModal.categoryLabel") }}</label
+      </div>
+      <div class="flex flex-col gap-3 mt-16 buttons">
+        <EnterButton
+          type="button"
+          @click="openMap('map')"
+          variant="bgBlueTextWhite"
+          :title="$t('button.continue')"
+        >
+        </EnterButton>
+        <div class="flex items-center gap-2">
+          <hr class="w-full h-px border-none bg-secondaryGray" />
+          <span class="text-xs whitespace-nowrap text-gray-1 leading-130"
+            >Хотите стать продавцом?</span
           >
-          <Dropdown
-            @value="updateCategoryValue"
-            :error="sign$?.category?.$error"
-            :title="$t('signupModal.categoryPlaceholder')"
-            :options="categories"
-          />
+          <hr class="w-full h-px border-none bg-secondaryGray" />
         </div>
-        <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
-          <label
-            for="phone"
-            class="text-sm font-medium leading-5 text-gray-1"
-            >{{ $t("signupModal.numberLabel") }}</label
-          >
-          <div class="relative">
-            <InputMask
-              v-model="userDetailsSignUp.phone_number"
-              :error="sign$?.phone_number?.$error"
-              :class="!sign$?.phone_number?.$error ? '' : 'border-red-500 '"
-              mask="+999 99 999 99 99"
-              class="w-full px-4 py-3 text-base leading-5 transition duration-300 border rounded-lg focus-within:border-blue-400 outline-none ps-10 focus-within:border-blue pe-10 sm:text-sm text-dark bg-gray-2"
-              placeholder="+___ (__) ___-__-__"
-              type="text"
-              name="phone"
-              id="phone"
-            >
-            </InputMask>
-          </div>
-        </div>
-        <div class="flex flex-col gap-3 mt-16 buttons">
-          <EnterButton
-            type="button"
-            @click="openMap('map')"
-            variant="bgBlueTextWhite"
-            :title="$t('button.continue')"
-          >
-          </EnterButton>
-          <div class="flex items-center gap-2">
-            <hr class="w-full h-px border-none bg-secondaryGray" />
-            <span class="text-xs whitespace-nowrap text-gray-1 leading-130"
-              >Хотите стать продавцом?</span
-            >
-            <hr class="w-full h-px border-none bg-secondaryGray" />
-          </div>
-          <button
-            @click="switchTypeModal('login')"
-            class="border border-blue text-blue hover:bg-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-gray-2 w-full switcher"
-            type="button"
-          >
-            Войти
-          </button>
-        </div>
-      </form>
+        <button
+          @click="switchTypeModal('login')"
+          class="border border-blue text-blue hover:bg-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-gray-2 w-full switcher"
+          type="button"
+        >
+          Войти
+        </button>
+      </div>
     </div>
     <ApplyAdminModal
       v-if="typeModal === 'applyToAdmin'"

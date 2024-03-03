@@ -8,9 +8,13 @@ export default {
     extend: {
       colors: {
         "grey-4": "#EAEDF0",
+        "br-grey-4": "rgba(214, 214, 214, 0.50)",
+        "greys-1": "#8E9297",
+        "greys-2": "#B8BBBD",
+        orange: "#FAAC36",
+        "main-blue": "#388FF3",
         "black-1": "#16191D",
         "Main-Dark": "#151515",
-        "br-grey-4": "rgba(214, 214, 214, 0.50)",
       },
     },
 
@@ -1099,4 +1103,3 @@ export default {
   },
   plugins: [],
 };
-

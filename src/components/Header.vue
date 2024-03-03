@@ -81,14 +81,17 @@
       <div class="navbar_right flex items-center gap-3">
         <router-link
           to="/saved"
-          class="navbar__seved flex items-center gap-2 text-black hover:text-blue-400 transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer transition:300"
+          class="group navbar__seved flex items-center gap-2 text-black-1 hover:!text-blue-400 transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer transition:300"
         >
           <span
-            class="icon-heart text-2xl max-sm:text-xl leading-5 !text-blue-600 max-sm:text-center"
+            class="group icon-blue-heart text-2xl max-sm:text-xl leading-5 max-sm:text-center"
           ></span>
-          <span class="max-md:hidden test-sm font-semibold text-black">{{
-            t("navbar.star")
-          }}</span>
+          <transition mode="ease"
+            ><span
+              class="group-hover:text-main-blue max-md:hidden test-sm font-semibold text-black"
+              >{{ t("navbar.star") }}</span
+            ></transition
+          >
         </router-link>
         <span class="w-px h-8 bg-gray-300 max-sm:hidden"></span>
         <EnterButton
@@ -159,8 +162,6 @@ function selected(idx) {
 }
 
 // modalka
-
-
 
 const openLoginModal = () => {
   toggleLoginModal.value = true;

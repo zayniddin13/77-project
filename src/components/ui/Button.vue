@@ -14,7 +14,8 @@ const props = defineProps<{
   title?: string;
   variant?: string;
   styles?: string;
-  resHidden:String
+  resHidden: String;
+  type: String;
 }>();
 const variants = {
   primary: "bg-black text-white active:scale-95 hover:bg-zinc-700",

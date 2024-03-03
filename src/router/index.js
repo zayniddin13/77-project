@@ -5,7 +5,7 @@ import Saved from "../pages/Saved.vue";
 import SingleProduct from "../pages/SinglePageProduct.vue";
 import NotFoundComponent from "../pages/NotFoundComponent.vue";
 import MoreAddSection from "../pages/MoreAddSection.vue";
-
+import searchSingleProduct from "../pages/searchSingleProduct.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,7 +26,12 @@ const router = createRouter({
       component: Saved,
     },
     {
-      path: "/products",
+      path: "/search-products/:slug",
+      name: "searchSingleProduct",
+      meta: {
+        layout: "default",
+      },
+      component: searchSingleProduct,
     },
     {
       path: "/products/:slug",
