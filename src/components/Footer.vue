@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="footer mt-8 pt-14 md:pt-16 pb-3 bg-cover bg-[url('/public/images/circling.svg')] bg-center relative"
+      class="footer mt-8 pt-14 md:pt-16 pb-3 bg-light bg-cover bg-[url('/public/images/circling.svg')] bg-center relative bg-[#F6F6F6]"
     >
       <router-link
         to="/"
@@ -10,45 +10,51 @@
       /></router-link>
       <div class="container">
         <p
-          class="footer_about text-black-1 text-center font-inter text-base font-normal leading-6 md:mx-44 not-italic mb-8"
+          class="footer_about text-black-1 text-center text-base font-normal leading-6 md:mx-44 not-italic mb-8"
         >
           {{ $t("footer.whatThisApp") }}
         </p>
         <div class="flex flex-wrap items-center justify-center gap-5 md:gap-20">
-          <router-link
-            :to="
-              '/pages/' +
-              (fetchDatas && fetchDatas[1] ? fetchDatas[1].slug : '')
-            "
-            target="_blank"
-            class="flex items-center justify-center gap-1"
-          >
-            <img src="/public/images/footerLogo.svg" alt="" /><span
-              class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
-              >{{ $t("footer.aboutUs") }}</span
+          <transition mode="out-in">
+            <router-link
+              :to="
+                '/pages/' +
+                (fetchDatas && fetchDatas[1] ? fetchDatas[1].slug : '')
+              "
+              target="_blank"
+              class="flex items-center justify-center gap-1"
             >
-          </router-link>
-          <router-link
-            :to="
-              '/pages/' +
-              (fetchDatas && fetchDatas[0] ? fetchDatas[0].slug : '')
-            "
-            target="_blank"
-            class="flex items-center justify-center gap-1"
-            ><img src="/public/images/footerLogo.svg" alt="" /><span
-              class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
-              >{{ $t("footer.aboutUs") }}</span
-            ></router-link
-          >
-          <a
-            href="tel: +998 88 278 96 96"
-            target="_blank"
-            class="flex items-center justify-center gap-1"
-            ><img src="/public/images/footerLogo.svg" alt="" /><span
-              class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
-              >{{ number }}</span
-            ></a
-          >
+              <img src="/public/images/footerLogo.svg" alt="" /><span
+                class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-blue-600"
+                >{{ $t("footer.aboutUs") }}</span
+              >
+            </router-link>
+          </transition>
+          <transition mode="out-in">
+            <router-link
+              :to="
+                '/pages/' +
+                (fetchDatas && fetchDatas[0] ? fetchDatas[0].slug : '')
+              "
+              target="_blank"
+              class="flex items-center justify-center gap-1"
+              ><img src="/public/images/footerLogo.svg" alt="" /><span
+                class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-main-blue"
+                >{{ $t("footer.aboutUs") }}</span
+              ></router-link
+            >
+          </transition>
+          <transition mode="out-in">
+            <a
+              href="tel: +998 88 278 96 96"
+              target="_blank"
+              class="flex items-center justify-center gap-1"
+              ><img src="/public/images/footerLogo.svg" alt="" /><span
+                class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-main-blue"
+                >{{ number }}</span
+              ></a
+            >
+          </transition>
         </div>
         <div class="mt-6 mb-2 flex items-center justify-center gap-6">
           <a
@@ -67,25 +73,27 @@
     </div>
     <div class="bg-white py-4">
       <div class="container flex items-center justify-between">
-        <div class="max-sm:block flex items-center gap-2">
-          <span class="text-black font-medium text-sm">© 77.uz</span>
-          <span class="text-black font-normal text-sm">
+        <div class="flex items-center gap-2">
+          <span class="text-black-1 font-medium text-sm">© 77.uz</span>
+          <span class="text-black-1 font-normal text-sm">
             {{ thisYear }}. {{ $t("footer.prevented") }}</span
           >
         </div>
-        <transition mode="ease-in-out">
-          <a
-            href="https://uic.group/"
-            target="_blank"
-            @mouseover="mouseOver"
-            @mouseout="mouseOut"
-            class="flex items-center justify-between"
-          >
-            <img src="/public/images/uicLogo.svg" alt="" />
 
-            <img v-if="show" src="/public/images/uicName.svg" alt="" />
-          </a>
-        </transition>
+        <a
+          href="https://uic.group/"
+          target="_blank"
+          class="group flex items-center justify-between"
+        >
+          <img src="/public/images/uicLogo.svg" alt="" />
+          <transition class="max-sm:hidden" name="fade" mode="out-in">
+            <img
+              class="group-hover:w-full w-0"
+              src="/public/images/uicName.svg"
+              alt=""
+            />
+          </transition>
+        </a>
       </div>
     </div>
   </div>
@@ -151,3 +159,27 @@ function mouseOut() {
   console.log(show.value);
 }
 </script>
+<style>
+.fade-enter-active {
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.fade-leave-active {
+  width: 100px;
+  height: 100px;
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.fade-enter-from {
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.fade-enter-to {
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.fade-leave-to {
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+</style>

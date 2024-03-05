@@ -96,20 +96,19 @@ function change() {
   error.value = false;
 }
 async function moveMarkerToThePlace(c) {
-  map.value.setView([c.lat, c.lng], 17);
-  marker.value.setLatLng([c.lat, c.lng]);
-  console.log(searchPlacesResults.value);
-  searchTerm.value = searchPlaces.name;
+  map.value.setView([c.lat, c.lon], 17);
+  marker.value.setLatLng([c.lat, c.lon]);
+  searchTerm.value = c.name;
   searchPlacesResults.value = [];
 }
 
 async function signUp() {
+  console.log(searchTerm.value);
   try {
     const response = await reverseGeocodingInstance.get(
       `/search?q=${searchTerm.value}&addressdetails=1&format=json`
     );
     searchPlacesResults.value = response.data;
-    console.log(searchPlacesResults.value);
   } catch (error) {
     console.log(error);
   }
@@ -118,10 +117,7 @@ async function signUp() {
   props.userDetailsSignUp.address.long = searchPlacesResults.value[0].lon;
   let toSplit = props.userDetailsSignUp.phone_number.split(" ").join("");
   props.userDetailsSignUp.phone_number = toSplit;
-  console.log("bu", props.userDetailsSignUp);
-
   try {
-    console.log("salom");
     const response = await authInstance.post(
       "/seller/registration/",
       props.userDetailsSignUp
@@ -153,7 +149,9 @@ async function signUp() {
           @click="emit('update:goBack')"
           class="text-[10px] rotate-90 icon-to-bottom back"
         ></button>
-        <h1 class="text-2xl font-bold title">Введите адресс</h1>
+        <h1 class="text-2xl font-bold title">
+          {{ $t("modal.mapPlaceholder") }}
+        </h1>
       </div>
       <button
         @click="emit('close:modal')"
@@ -168,7 +166,7 @@ async function signUp() {
         v-model="searchTerm"
         @input="debounce(async () => await searchPlaces(), 1000)"
         type="text"
-        placeholder="Введите адрес"
+        :placeholder="$t('modal.mapPlaceholder')"
         class="w-full px-4 py-3 mb-4 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 bg-gray-200"
       />
       <div
@@ -179,7 +177,7 @@ async function signUp() {
           v-for="place in searchPlacesResults"
           :key="place.place_id"
           class="text-left font-semibold transition text-ellipsis whitespace-nowrap overflow-hidden hover:text-blue result bg-white px-4 py-2 z-[99] w-full border-t"
-          @click="moveMarkerToThePlace({ lat: +place.lat, lng: +place.lon })"
+          @click="moveMarkerToThePlace(place)"
         >
           {{ place.display_name }}
         </button>

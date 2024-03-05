@@ -326,9 +326,9 @@ onMounted(async () => {
         </EnterButton>
         <div class="flex items-center gap-2">
           <hr class="w-full h-px border-none bg-secondaryGray" />
-          <span class="text-xs whitespace-nowrap text-gray-1 leading-130"
-            >Хотите стать продавцом?</span
-          >
+          <span class="text-xs whitespace-nowrap text-gray-1 leading-130">{{
+            $t("modal.wantSeller")
+          }}</span>
           <hr class="w-full h-px border-none bg-secondaryGray" />
         </div>
         <button
@@ -370,14 +370,16 @@ onMounted(async () => {
           src="../../../public/images/success.svg"
           alt="Register success illustration"
         />
-        <h2 class="text-lg font-semibold leading-130">Ваша заявка принята!</h2>
+        <h2 class="text-lg font-semibold leading-130">
+          {{ $t("finellyModal.title") }}
+        </h2>
         <p class="text-sm leading-140 text-gray-1 mt-2 mb-14">
-          Наши сотрудники свяжутся с вами в ближайшее время
+          {{ $t("finellyModal.subTitle") }}
         </p>
         <EnterButton
           @click="emit('close:modal')"
           variant="bgBlueTextWhite"
-          title="rahmat"
+          :title="$t('finellyModal.thanks')"
         />
       </div>
     </div>

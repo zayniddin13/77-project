@@ -1,16 +1,14 @@
 <template>
-  <div class="mt-4 sm:mt-16 pt-3 sm:pt-14 pb-2 sm:pb-9 relative">
+  <div class="pt-3 sm:pt-14 pb-5 sm:pb-9 relative">
     <div class="container">
-      <div
-        class="katagory_title text-black font-inter text-3xl font-normal text-center"
-      >
+      <div class="katagory_title text-black-1 text-3xl font-normal text-center">
         {{ $t("products.title") }}
       </div>
-      <div class="font-inter text-base not-italic font-normal text-center">
+      <div class="text-base text-greys-1 font-normal text-center">
         {{ $t("products.minTitle") }}
       </div>
       <div
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 my-9"
       >
         <template v-if="fetchDatas">
           <div
@@ -40,10 +38,12 @@
         <router-link to="/more-product">
           <Button
             :title="$t('button.more')"
-            styles="flex justify-center items-center gap-2 bg-grey-4 border-2 font-semibold text-base border-grey-border text-black-1 rounded-[200px] py-3 px-7 hover:bg-gray-300"
+            styles="flex group justify-center items-center gap-2 transition duration-300 ease-in-out  bg-grey-4 border-2 font-semibold text-base border-grey-border text-black-1 !rounded-[200px] py-3 px-7 hover:bg-gray-300"
           >
             <template #suffix
-              ><img class="" src="../../public/images/twoBottom.svg"
+              ><img
+                class="group-hover:-rotate-90"
+                src="../../public/images/twoBottom.svg"
             /></template>
           </Button>
         </router-link>

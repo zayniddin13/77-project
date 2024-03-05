@@ -4,7 +4,7 @@
     <div v-if="fetchDatas.length">
       <div
         v-show="!loading"
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9 mb-11"
       >
         <div
           v-for="(item, index) in fetchDatas"
@@ -27,13 +27,9 @@
         v-show="loading"
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 xs:gap-y-4 sm:gap-y-5 gap-x-3 xs:gap-x-6 sm:gap-x-12 my-9"
       >
-        <div
-          v-for="item in fetchDatas.length"
-          :key="item.id"
-          class="cursor-pointer transition-300"
-        >
-          <LoadingStills type="product" />
-        </div>
+        <LoadingStills type="product" />
+        <LoadingStills type="product" />
+        <LoadingStills type="product" />
       </div>
     </div>
     <div v-if="!fetchDatas.length && !loading" class="saved_body mb-14">
@@ -93,6 +89,7 @@ const fetchDataFromApi = async (id) => {
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
 };
+
 onMounted(() => {
   if (deviceID) {
     fetchDataFromApi(deviceID);

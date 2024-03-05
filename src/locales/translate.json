@@ -21,7 +21,8 @@
     },
     "search": {
       "text": "Izlash",
-      "placeholder": "Siz nimani izlayapsiz?"
+      "placeholder": "Siz nimani izlayapsiz?",
+      "history": "Qidiruv tarixi"
     },
     "products": {
       "title": "E'lonlar",
@@ -38,7 +39,9 @@
     },
     "noData": {
       "noAddsTitle": "Tanlangan reklamalar yo'q",
-      "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу"
+      "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу",
+      "didntFind": "Hech narsa topilmadi",
+      "didntFindAbout": "Voy! So‘rovingiz bo‘yicha hech qanday mos natija topilmadi"
     },
     "button": {
       "more": "Ko'proq yuklang",
@@ -69,8 +72,14 @@
       "passwordLabel": "Parol",
       "loginInput": "Loginni kiriting",
       "passwordInput": "Parolni kiriting",
+      "mapPlaceholder": "Manzilingizni kiriting",
       "newPassword": "Parolni unutdingizmi?",
       "wantSeller": "Sotuvchilik faoliyatini boshlamoqchimisiz"
+    },
+    "finellyModal": {
+      "title": "Sizning arizangiz qabul qilindi!",
+      "subTitle": "Xodimlarimiz tez orada siz bilan bog'lanadi",
+      "thanks": "Rahmat"
     },
     "signupModal": {
       "title": "Hozir murojaat qiling",
@@ -107,7 +116,8 @@
     },
     "search": {
       "text": "Поиск",
-      "placeholder": "Что вы ищите?"
+      "placeholder": "Что вы ищите?",
+      "history": "История поиска"
     },
     "products": {
       "title": "Объявления",
@@ -124,7 +134,8 @@
     },
     "noData": {
       "noAddsTitle": " Нет избранных объявлений",
-      "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу"
+      "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу",
+      "didntFind": "Ничего не найдено"
     },
     "button": {
       "more": "Загрузить больше",
@@ -156,7 +167,13 @@
       "loginInput": "Введите логин",
       "passwordInput": "Введите пароль",
       "newPassword": "Забыли пароль?",
-      "wantSeller": "Хотите стать продавцом?"
+      "wantSeller": "Хотите стать продавцом?",
+      "mapPlaceholder": "Введите свой адрес"
+    },
+    "finellyModal": {
+      "title": "Ваша заявка принята!",
+      "subTitle": "Наши сотрудники свяжутся с вами в ближайшее время",
+      "thanks": "Спасибо"
     },
     "signupModal": {
       "title": "Подать заявку",

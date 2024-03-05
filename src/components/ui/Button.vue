@@ -18,12 +18,12 @@ const props = defineProps<{
   type: String;
 }>();
 const variants = {
-  primary: "bg-black text-white active:scale-95 hover:bg-zinc-700",
+  primary: "bg-black-1 text-white active:scale-95 hover:bg-zinc-700",
   secondary:
-    " bg-[#EAEDF0] text-black active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400",
+    " bg-grey-4 font-semibold text-black-1 active:scale-95 hover:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400",
   bgBlueTextBlue:
-    "bg-blue-300 text-blue-500 hover:bg-blue-400 hover:cursor-pointer active:scale-95",
+    "bg-blue-1 text-main-blue hover:bg-blue-300 hover:cursor-pointer active:scale-95",
   bgBlueTextWhite:
-    "bg-blue-500 text-white hover:bg-blue-400 hover:cursor-pointer active:scale-95 !text-center !px-auto",
+    "bg-blue-1 text-white hover:bg-blue-300 hover:cursor-pointer active:scale-95 !text-center !px-auto",
 };
 </script>

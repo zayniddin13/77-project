@@ -1,16 +1,16 @@
 <template>
   <header
-    class="navbar sticky flex items-center border-b border-grey-4 py-5 max-[400px]:py-3 bg-white/90 z-30 top-0 left-0 backdrop-blur-[6px]"
+    class="navbar sticky flex items-center border-b border-grey-4 py-5 bg-white/90 z-30 top-0 left-0 backdrop-blur-[6px]"
   >
     <!-- Logo in the middle -->
     <router-link
       to="/"
-      class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] p-3 md:px-4 md:py-[14px] max-[400px]:px-2 max-[400px]:py-[10px] shadow-[0_12px_36px_0px_#0E11161A]"
+      class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] p-3 md:px-4 md:py-[14px] max-[400px]:px-3 max-[400px]:py-[15px] shadow-[0_12px_36px_0px_#0E11161A]"
     >
       <img
         src="/public/images/logo.svg"
         alt="logo"
-        class="max-md:h-12 max-md:w-[80px]"
+        class="max-md:h-16 max-md:w-[90px]"
       />
     </router-link>
 
@@ -35,7 +35,7 @@
             {{ t("language.shortLang") }}
           </h2>
           <span
-            class="icon-to-bottom text-xs"
+            class="icon-to-bottom text-xs text-Blacks"
             :class="show ? 'rotate-180 text-blue-500' : 'rotate-0'"
           ></span>
         </div>
@@ -53,11 +53,11 @@
               >
                 <img :src="item.image" alt="ruscha" />
                 <span
-                  class="leading-6 py-2 relative text-black hover:text-blue-600 transition-300 max-sm:hidden"
+                  class="leading-6 py-2 relative text-black hover:text-main-blue transition-300 max-sm:hidden"
                   >{{ item.title }}</span
                 >
                 <span
-                  class="leading-6 py-2 relative text-black hover:text-blue-600 transition-300 sm:hidden"
+                  class="leading-6 py-2 relative text-black hover:text-main-blue transition-300 sm:hidden"
                   >{{ item.shortTitle }}</span
                 >
               </li>
@@ -70,10 +70,10 @@
           class="group flex items-center gap-1 max-lg:hidden"
         >
           <span
-            class="icon-phone text-xl leading-5 text-gray-500 group-hover:text-blue-300 transition-colors"
+            class="icon-phone text-xl leading-5 text-greys-2 group-hover:text-main-blue transition-colors"
           ></span>
           <span
-            class="font-medium text-sm text-black hover:text-blue-300 transition-colors"
+            class="font-medium text-sm text-black-1 hover:text-main-blue transition-colors"
             >+998 88 278 96 96</span
           >
         </a>
@@ -81,10 +81,10 @@
       <div class="navbar_right flex items-center gap-3">
         <router-link
           to="/saved"
-          class="group navbar__seved flex items-center gap-2 text-black-1 hover:!text-blue-400 transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer transition:300"
+          class="group navbar__seved flex items-center gap-2 text-black-1 hover:!text-main-blue transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer transition:300"
         >
           <span
-            class="group icon-blue-heart text-2xl max-sm:text-xl leading-5 max-sm:text-center"
+            class="group icon-blue-heart text-xl max-sm:text-xl leading-5 max-sm:text-center"
           ></span>
           <transition mode="ease"
             ><span
