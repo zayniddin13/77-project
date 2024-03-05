@@ -108,7 +108,7 @@
             <Category
               :title="item.name"
               :adds="item.product_count"
-              :image="item.icon || '../../public/images/defaultImg.svg'"
+              :image="item.icon || '/images/defaultImg.svg'"
             >
               <template v-if="item.product_count" #suffix>
                 <span
@@ -138,7 +138,7 @@ import MainInput from "../components/ui/Input.vue";
 import EnterButton from "./ui/Button.vue";
 import ToolTip from "../../src/components/ui/tooltip.vue";
 import { onMounted, ref, watch } from "vue";
-import WordHighlighter from "vue-word-highlighter";
+
 import {
   storeInstance,
   searchInstance,
@@ -227,10 +227,14 @@ async function filterCategory(item) {
         q: item,
       },
     });
-    filterValues.value = result.data.product.map((product) => ({
-      ...product,
-      name: WordHighlighter(product.name, item, { background: "yellow" }), // Fon rangini o'zgartirish
-    }));
+    const highlightedText = result.data.product.map((product) => {
+      const highlightedName = product.name.replace(
+        new RegExp(item, "gi"),
+        (match) => `<span style="background-color: red;">${match}</span>`
+      );
+      return { ...product, highlightedName };
+    });
+    filterValues.value = highlightedText;
     return;
   } catch (error) {
     console.error(error);

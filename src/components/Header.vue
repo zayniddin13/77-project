@@ -8,7 +8,7 @@
       class="logo absolute cursor-pointer left-1/2 top-0 -translate-x-1/2 bg-white border border-grey-4 border-top-0 rounded-b-[20px] p-3 md:px-4 md:py-[14px] max-[400px]:px-3 max-[400px]:py-[15px] shadow-[0_12px_36px_0px_#0E11161A]"
     >
       <img
-        src="/public/images/logo.svg"
+        src="/images/logo.svg"
         alt="logo"
         class="max-md:h-16 max-md:w-[90px]"
       />
@@ -134,18 +134,18 @@ const { t, locale } = useI18n();
 
 const show = ref(false);
 const target = ref(null);
-const flag = ref("../../public/images/rusFlag.svg");
+const flag = ref("/images/rusFlag.svg");
 const lang = ref("Русский");
 const shortLung = ref("ru");
 const langs = [
   {
-    image: "../../public/images/rusFlag.svg",
+    image: "/images/rusFlag.svg",
     title: "Русский",
     shortTitle: "ru",
     id: 1,
   },
   {
-    image: "../../public/images/uzbek.svg",
+    image: "/images/uzbek.svg",
     title: "O’zbekcha",
     shortTitle: "uz",
     id: 2,

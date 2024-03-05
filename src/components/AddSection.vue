@@ -23,7 +23,7 @@
               :date="formatPublishedTime(item.published_at)"
               number="+998 88 278 96 96"
               :price="item.price"
-              :image="item.photo || '../../public/images/defaultImg.svg'"
+              :image="item.photo || '/images/defaultImg.svg'"
               :slug="item.slug"
               :islike="item.is_liked"
             />
