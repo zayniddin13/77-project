@@ -102,29 +102,44 @@
         </div>
         <div
           v-show="!loading"
-          class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 gap-x-10 my-9"
+          class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 gap-x-10 my-9 relative"
         >
           <div v-for="item in fetchData" :key="item.id">
-            <Category
-              :title="item.name"
-              :adds="item.product_count"
-              :image="item.icon || '/images/defaultImg.svg'"
+            <router-link
+              :to="
+                item.childs.length
+                  ? ''
+                  : `/more-product?categoty_id=+${item.id}`
+              "
             >
-              <template v-if="item.product_count" #suffix>
-                <span
-                  @click="showToolTip(item)"
-                  class="icon-to-bottom -rotate-90 text-greys-2 text-[8px] group-hover:text-blue-500"
-                ></span>
-              </template>
-            </Category>
-            <ToolTip v-if="item.name == tooltipName" :productCont="tooltip" />
+              <Category
+                :title="item.name"
+                ref="target"
+                :adds="item.ads_count"
+                :image="item.icon || '/images/defaultImg.svg'"
+              >
+                <template v-if="item.childs.length" #suffix>
+                  <span
+                    @click="showToolTip(item)"
+                    :class="item.name == tooltipName ? '' : '-rotate-90'"
+                    class="icon-to-bottom text-greys-2 text-[8px] p-2 group-hover:text-blue-500 group-hover:translate-x-1.5 duration-500"
+                  ></span>
+                </template>
+              </Category>
+            </router-link>
+
+            <ToolTip
+              v-if="item.name == tooltipName"
+              :categoryChilds="categoryChilds"
+              :positionForX="position"
+            />
           </div>
         </div>
         <div
           v-show="loading"
           class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 gap-x-12 my-9"
         >
-          <div v-for="item in fetchData.length" :key="item.id">
+          <div v-for="item in fetchData" :key="item.id">
             <LoadingStills type="category" />
           </div>
         </div>
@@ -148,10 +163,12 @@ import LoadingStills from "../components/LoadingStills.vue";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const fetchData = ref([]);
+const fetchdataWithCilds = ref([]);
 const loading = ref(false);
 const openSearchModal = ref(false);
 const filterValues = ref([]);
 const localInputVal = ref([]);
+import { onClickOutside } from "@vueuse/core";
 const openSearchInputModel = async () => {
   openSearchModal.value = true;
   try {
@@ -182,13 +199,18 @@ async function fetchDataFromApi() {
   loading.value = true;
   try {
     loading.value = true;
-    const response = await storeInstance.get(`/category/`, {
-      headers: {
-        "Accept-Language": locale._value,
-      },
-    });
+    const responseWithChid = await storeInstance.get(
+      `/categories-with-childs/`,
+      {
+        headers: {
+          "Accept-Language": locale._value,
+        },
+      }
+    );
+    console.log(responseWithChid.data);
+    fetchData.value = responseWithChid.data;
+    console.log(fetchData.value);
 
-    fetchData.value = response.data;
     return;
   } catch (error) {
     console.log(error);
@@ -257,8 +279,20 @@ async function selectItem(item) {
 }
 let tooltip = ref(false);
 let tooltipName = ref("");
+let position = ref("");
+let categoryChilds = ref([]);
 function showToolTip(item) {
+  let categ = document.getElementById(`${item.name}`);
+  const rect = categ.getBoundingClientRect();
+
+  position.value = rect.left;
   tooltipName.value = item.name;
   tooltip.value = !tooltip.value;
+  categoryChilds.value = item.childs;
+  console.log(position.value);
+  let categTool = document.getElementsByClassName("arrow");
+  console.log(categTool);
 }
+const target = ref(null);
+onClickOutside(target, (event) => (tooltipName.value = ""));
 </script>

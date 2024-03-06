@@ -57,7 +57,14 @@ const router = createRouter({
       },
       component: MoreAddSection,
     },
-
+    {
+      path: "/more-product-categoty_id/:id",
+      name: "MoreAddSectionCateg",
+      meta: {
+        layout: "default",
+      },
+      component: MoreAddSection,
+    },
     {
       path: "/:path(.*)",
       name: "NotFoundComponent",

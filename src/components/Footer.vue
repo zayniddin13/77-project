@@ -79,27 +79,14 @@
             {{ thisYear }}. {{ $t("footer.prevented") }}</span
           >
         </div>
-
-        <a
-          href="https://uic.group/"
-          target="_blank"
-          class="group flex items-center justify-between"
-        >
-          <img src="/public/images/uicLogo.svg" alt="" />
-          <transition class="max-sm:hidden" name="fade" mode="out-in">
-            <img
-              class="group-hover:w-full w-0"
-              src="/public/images/uicName.svg"
-              alt=""
-            />
-          </transition>
-        </a>
+        <uicLogo />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import uicLogo from "../../src/components/ui/uicLogo.vue";
 import axios from "axios";
 import { usingInstance } from "../instances";
 let fetchDatas = ref(null);
@@ -161,24 +148,52 @@ function mouseOut() {
 </script>
 <style>
 .fade-enter-active {
+  transform: scale(0.5);
   transition-delay: 0.5s;
   transition: transform 0.5s;
 }
 .fade-leave-active {
-  width: 100px;
-  height: 100px;
+  transform: scale(1.5);
   transition-delay: 0.5s;
   transition: transform 0.5s;
 }
 .fade-enter-from {
+  transform: scale(1.5);
   transition-delay: 0.5s;
   transition: transform 0.5s;
 }
 .fade-enter-to {
+  transform: scale(1);
   transition-delay: 0.5s;
   transition: transform 0.5s;
 }
 .fade-leave-to {
+  transform: scale(0.5);
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.img-enter-active {
+  transform: translateX(-2);
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.img-leave-active {
+  transform: translateX(-4);
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.img-enter-from {
+  transform: translateX(-4);
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.fade-enter-to {
+  transform: translateX(-2);
+  transition-delay: 0.5s;
+  transition: transform 0.5s;
+}
+.img-leave-to {
+  transform: translateX(-1);
   transition-delay: 0.5s;
   transition: transform 0.5s;
 }

@@ -24,6 +24,6 @@ const variants = {
   bgBlueTextBlue:
     "bg-blue-1 text-main-blue hover:bg-blue-300 hover:cursor-pointer active:scale-95",
   bgBlueTextWhite:
-    "bg-blue-1 text-white hover:bg-blue-300 hover:cursor-pointer active:scale-95 !text-center !px-auto",
+    "bg-main-blue text-white hover:bg-blue-300 hover:cursor-pointer active:scale-95 !text-center !px-auto",
 };
 </script>

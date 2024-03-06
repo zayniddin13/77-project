@@ -236,6 +236,8 @@ import Accordion from "../../src/components/ui/Accordion.vue";
 import BreadCrump from "../components/ui/breadCrump.vue";
 import Button from "../components/ui/Button.vue";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
+const route = useRoute();
 const { t, locale } = useI18n();
 
 const ProductCard = defineAsyncComponent(() => import("../components/Add.vue"));
@@ -286,37 +288,14 @@ function doBlock() {
   grid.value = false;
   block.value = true;
 }
-async function loadProducts() {
-  try {
-    loading.value = true;
-    const response = await storeInstance.get(`/list/ads/`, {
-      headers: {
-        "Device-Id": localStorage.getItem("deviseId"),
-      },
-    });
-
-    page.value++;
-    product.value = response.data.results;
-    count.value += response.data.count;
-
-    return;
-  } catch (error) {
-    console.error(error);
-  } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 500);
-  }
-}
-
 const formatPublishedTime = (time) => {
   return dayjs(time).format("D-MMMM, YYYY");
 };
 onMounted(async () => {
-  await loadProducts();
+  await getCategoryWithChildren();
+  await filterData();
   formatPublishedTime();
   await getData();
-  await getCategoryWithChildren();
 });
 
 // dropdownlar
@@ -341,7 +320,6 @@ function allCheck() {
       });
     }
   });
-  console.log(categories.value);
 }
 
 const updateRegionValue = (value) => {
@@ -404,16 +382,29 @@ async function getData() {
 watch(data, () => {
   if (data && Array.isArray(data.value)) {
     data.value.map((item) => {
-      console.log(item.name);
       regions.value.push(item);
     });
-    console.log(regions.value);
   }
 });
+const regex = /^[a-zA-Z0-9]+$/;
 async function filterData(a) {
-  a.preventDefault();
-  show.value = false;
-  document.body.classList.remove("overflow-hidden");
+  let routId = route.query.categoty_id.split(" ").join("");
+  if (a) {
+    a.preventDefault();
+  } else if (routId) {
+    categories.value.forEach((el) => {
+      console.log(el.id);
+      if (routId == el.id) {
+        el.checked = true;
+      }
+      el.children.forEach((item) => {
+        if (routId == item.id) {
+          item.checked = true;
+        }
+      });
+    });
+  }
+  console.log(categories.value);
   product.value = null;
   categoriesWithId.value = [];
   categories.value.forEach((el) => {
@@ -427,6 +418,9 @@ async function filterData(a) {
     });
   });
 
+  show.value = false;
+  document.body.classList.remove("overflow-hidden");
+
   try {
     loading.value = true;
     const response = await storeInstance.get(`/list/ads/`, {
@@ -437,7 +431,7 @@ async function filterData(a) {
         district_id: district.value,
         region_id: region.value,
         ordering: sorted.value,
-        category_ids: categoriesWithId.value,
+        category_ids: `${categoriesWithId.value}`,
       },
     });
 

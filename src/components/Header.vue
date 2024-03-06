@@ -39,10 +39,10 @@
             :class="show ? 'rotate-180 text-blue-500' : 'rotate-0'"
           ></span>
         </div>
-        <transition name="fade" mode="in-out">
+        <transition name="fade" mode="out-in">
           <div
             v-show="show"
-            class="lang_modal absolute left-0 translate-y-full translate-x-3 rounde-lg overflow-hidden z-30 -bottom-1 shadow-grey bg-white"
+            class="lang_modal absolute left-0 translate-y-full translate-x-3 rounde-lg overflow-hidden z-40 -bottom-1 shadow-grey bg-white pr-3.5"
           >
             <ul>
               <li

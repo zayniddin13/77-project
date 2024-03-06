@@ -1,8 +1,9 @@
 <template>
   <div
-    class="flex items-center rounded-xl shadow-little border border-gray-300 relative pl-3 py-3 group hover:border-blue-500 hover:cursor-pointer transition-300"
+    class="flex items-center rounded-xl shadow-little border border-gray-300 px-3 py-3 group hover:border-blue-500 hover:cursor-pointer transition-300"
   >
     <div
+      :id="title"
       class="p-4 ml-0 -translate-x-1/2 my-auto mr-6 bg-white border border-gray-300 shadow-some rounded-md group-hover:border-blue-500"
     >
       <img
