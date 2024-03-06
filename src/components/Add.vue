@@ -1,39 +1,41 @@
 <template>
-  <div
-    class="rounded-xl group border border-white hover:shadow-anounce bg-white flex flex-col gap-2 leading-6 relative"
-  >
-    <button @click="productLiked(id)" class="absolute top-3 left-3">
-      <span :class="like ? 'icon-red-heart' : 'icon-heart'"></span>
-    </button>
-    <img
-      :src="image"
-      alt="good pruduct"
-      class="w-full h-60 max-sm:h-44 max-xs:h-30 rounded-t-xl object-cover"
-    />
-    <router-link :to="'/products/' + slug">
-      <div class="sm:p-5 p-2">
-        <div
-          class="truncate text-black-1 group-hover:text-main-blue whitespace-nowrap max-sm:text-base text-lg font-semibold"
-        >
-          {{ title }}
-        </div>
-        <div class="text-greys-1 max-sm:text-sm text-base font-normal">
-          {{ date }}
-        </div>
-        <div
-          class="truncate text-greys-1 max-sm:text-sm text-base font-semibold"
-        >
-          {{ number }}
-        </div>
-        <div class="text-black-1 text-2xl max-sm:text-base font-bold">
-          {{ formatMoneyDecimal(price) }}
-          <span class="text-main-blue text-base font-medium leading-7"
-            >UZS</span
+  <transition name="fade" mode="out-in">
+    <div
+      class="rounded-xl group border border-white transition-500 hover:shadow-anounce bg-white flex flex-col gap-2 leading-6 relative"
+    >
+      <button @click="productLiked(id)" class="absolute top-3 left-3">
+        <span :class="like ? 'icon-red-heart' : 'icon-heart'"></span>
+      </button>
+      <img
+        :src="image"
+        alt="good pruduct"
+        class="w-full h-60 max-sm:h-44 max-xs:h-30 rounded-t-xl object-cover"
+      />
+      <router-link :to="'/products/' + slug">
+        <div class="sm:p-5 p-2">
+          <div
+            class="truncate text-black-1 group-hover:text-main-blue whitespace-nowrap max-sm:text-base text-lg font-semibold"
           >
+            {{ title }}
+          </div>
+          <div class="text-greys-1 max-sm:text-sm text-base font-normal">
+            {{ date }}
+          </div>
+          <div
+            class="truncate text-greys-1 max-sm:text-sm text-base font-semibold"
+          >
+            {{ number }}
+          </div>
+          <div class="text-black-1 text-2xl max-sm:text-base font-bold">
+            {{ formatMoneyDecimal(price) }}
+            <span class="text-main-blue text-base font-medium leading-7"
+              >UZS</span
+            >
+          </div>
         </div>
-      </div>
-    </router-link>
-  </div>
+      </router-link>
+    </div>
+  </transition>
 </template>
 <script setup lang="ts">
 import { defineProps, onBeforeMount, ref } from "vue";

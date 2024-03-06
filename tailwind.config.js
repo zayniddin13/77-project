@@ -10,6 +10,8 @@ export default {
         "grey-4": "#EAEDF0",
         "grey-border": "#D6D6D680",
         "br-grey-4": "rgba(214, 214, 214, 0.50)",
+        "main-grey": "#F0F3F7",
+        "greys-0": "#63676C",
         "greys-1": "#8E9297",
         "greys-2": "#B8BBBD",
         "grey-3": "#D5D8DB",

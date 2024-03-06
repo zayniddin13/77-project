@@ -3,9 +3,9 @@
     class="w-full absolute left-0 flex items-center shadow-drop gap-9 !z-20 flex-wrap rounded-xl border bg-white border-grey-4 p-5 mt-3"
   >
     <div
-      class="arrow absolute h-4 w-4 rotate-45 z-0 top-0 -translate-y-1/2 border-l border-t border-l-grey-4 border-t-grey-4 bg-white"
-      :class="position"
-    ></div>
+      class="arrow absolute h-4 w-4 rotate-45 z-0 top-0 -translate-y-1/2 border-l border-t border-l-grey-4 border-t-grey-4 bg-white transition-500"
+      :style="position"
+    />
     <div v-for="(item, index) in categoryChilds" :key="index">
       <div class="flex items-center flex-wrap gap-9 p-3">
         <router-link :to="'/more-product?categoty_id=' + item.id"
@@ -30,5 +30,5 @@ const props = defineProps({
   positionForX: String,
 });
 let position = ref();
-position.value = `left-[${props.positionForX}px]`;
+position.value = `left:${props.positionForX}px`;
 </script>

@@ -1,14 +1,21 @@
 <template>
   <div
-    class="flex items-center rounded-xl shadow-little border border-gray-300 px-3 py-3 group hover:border-blue-500 hover:cursor-pointer transition-300"
+    :class="active ? ' border-main-blue' : ' border-gray-300'"
+    class="flex items-center rounded-xl shadow-little border px-3 py-3 group hover:border-blue-500 hover:cursor-pointer transition-300"
   >
     <div
       :id="title"
-      class="p-4 ml-0 -translate-x-1/2 my-auto mr-6 bg-white border border-gray-300 shadow-some rounded-md group-hover:border-blue-500"
+      :class="
+        active
+          ? 'bg-main-blue border border-main-blue'
+          : 'bg-white border border-gray-300'
+      "
+      class="img-card p-4 ml-0 -translate-x-1/2 my-auto mr-6 shadow-some rounded-md group-hover:border-blue-500"
     >
       <img
         name="prefix"
-        class="category-icon relative w-8 h-6"
+        :class="active ? 'active' : 'category-icon'"
+        class="relative w-8 h-6"
         :src="image"
         alt=""
       />
@@ -36,11 +43,16 @@ const props = defineProps<{
   title?: string;
   adds?: number;
   image?: string;
+  active?: boolean;
 }>();
 </script>
 <style scoped>
 .category-icon {
   filter: invert(54%) sepia(52%) saturate(4419%) hue-rotate(194deg)
     brightness(98%) contrast(95%);
+}
+.active {
+  filter: invert(98%) sepia(3%) saturate(985%) hue-rotate(236deg)
+    brightness(120%) contrast(100%);
 }
 </style>

@@ -117,11 +117,16 @@
                 ref="target"
                 :adds="item.ads_count"
                 :image="item.icon || '/images/defaultImg.svg'"
+                :active="item.name == tooltipName"
               >
                 <template v-if="item.childs.length" #suffix>
                   <span
                     @click="showToolTip(item)"
-                    :class="item.name == tooltipName ? '' : '-rotate-90'"
+                    :class="
+                      item.name == tooltipName
+                        ? 'text-main-blue'
+                        : '-rotate-90 '
+                    "
                     class="icon-to-bottom text-greys-2 text-[8px] p-2 group-hover:text-blue-500 group-hover:translate-x-1.5 duration-500"
                   ></span>
                 </template>

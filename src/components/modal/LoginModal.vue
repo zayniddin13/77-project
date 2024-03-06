@@ -149,10 +149,12 @@ onMounted(async () => {
     >
       <div class="flex items-center justify-between titles">
         <div class="left">
-          <h1 class="mb-2 text-2xl font-bold leading-130 text-dark title">
+          <h1 class="mb-2 text-2xl font-bold leading-130 text-black-1 title">
             {{ $t("modal.title") }}
           </h1>
-          <p class="text-sm font-medium text-secondary leading-130 mb-7 desc">
+          <p
+            class="text-sm font-medium text-secondary text-greys-1 leading-130 mb-7 desc"
+          >
             {{ $t("modal.minTitle") }}
           </p>
         </div>
@@ -165,7 +167,7 @@ onMounted(async () => {
         <div class="flex flex-col items-start gap-2 form-box">
           <label
             for="login"
-            class="text-sm font-medium leading-5 text-gray-600"
+            class="text-sm font-medium leading-5 text-greys-0"
             >{{ $t("modal.loginLabel") }}</label
           >
           <Input
@@ -175,7 +177,7 @@ onMounted(async () => {
             maxlength="15"
             :placeholder="$t('modal.loginInput')"
             styles="disabled:text-gray-400 !bg-gray-200 focus-within:bg-white"
-            class="w-full px-4 py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white focus-within:border-blue-400"
+            class="w-full px-4 py-3 text-base leading-5 transition duration-300 border border-transparent rounded-lg outline-none sm:text-sm text-black-1 disabled:text-greys-2 bg-main-grey focus-within:bg-white focus-within:border-blue-400"
           />
         </div>
         <div
@@ -183,7 +185,7 @@ onMounted(async () => {
         >
           <label
             for="password"
-            class="text-sm font-medium leading-5 text-gray-600"
+            class="text-sm font-medium leading-5 text-greys-0"
             >{{ $t("modal.passwordLabel") }}</label
           >
           <Input
@@ -192,17 +194,17 @@ onMounted(async () => {
             :type="passwordInputType"
             :placeholder="$t('modal.passwordInput')"
             styles="disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
-            class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
+            class="w-full py-3 text-base leading-5 transition duration-300 border border-transparent rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-greys-2 bg-main-grey focus-within:bg-white"
           />
           <transition name="fade" mode="ease-out">
             <i
               @click="showHidePassword"
               :class="
                 passwordInputType === 'password'
-                  ? 'icon-eye-closed '
-                  : 'icon-eye-opened'
+                  ? 'icon-eye-closed text-xl'
+                  : 'icon-eye-opened text-2xl'
               "
-              class="absolute z-50 text-xl leading-6 transition duration-300 cursor-pointer hover:text-dark right-4 top-10 text-gray-400"
+              class="absolute z-50 leading-6 transition duration-300 cursor-pointer hover:text-black-1 right-4 top-10 text-greys-2"
             ></i>
           </transition>
         </div>
@@ -222,13 +224,13 @@ onMounted(async () => {
           </EnterButton>
           <div class="flex items-center gap-2">
             <hr class="w-full h-px border-none bg-secondaryGray" />
-            <span class="text-xs whitespace-nowrap text-gray-1 leading-130">{{
+            <span class="text-xs whitespace-nowrap text-greys-1 leading-130">{{
               $t("modal.wantSeller")
             }}</span>
             <hr class="w-full h-px border-none bg-secondaryGray" />
           </div>
           <button
-            class="border border-blue text-blue hover:bg-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-gray-2 w-full switcher"
+            class="border border-blue text-main-blue hover:bg-main-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-greys-2 w-full switcher"
             @click="switchTypeModal('signup')"
             type="button"
           >
@@ -243,10 +245,12 @@ onMounted(async () => {
     >
       <div class="flex titles">
         <div class="left">
-          <h1 class="mb-2 text-2xl font-bold leading-130 text-dark title">
+          <h1 class="mb-2 text-2xl font-bold leading-130 text-black-1 title">
             {{ t("signupModal.title") }}
           </h1>
-          <p class="text-sm font-medium text-secondary leading-130 mb-7 desc">
+          <p
+            class="text-sm font-medium text-secondary text-greys-1 leading-130 mb-7 desc"
+          >
             {{ t("signupModal.minTitle") }}
           </p>
         </div>
@@ -259,13 +263,13 @@ onMounted(async () => {
       </div>
 
       <div class="flex flex-col items-start gap-2 form-box">
-        <label for="fio" class="text-sm font-medium leading-5 text-gray-1">
+        <label for="fio" class="text-sm font-medium leading-5 text-greys-1">
           {{ t("signupModal.loginLabel") }}
         </label>
         <Input
           v-model.trim="signUpForm.full_name"
           :error="sign$?.full_name?.$error"
-          class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
+          class="w-full py-3 text-base leading-5 transition duration-300 border border-transparent rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-main-grey focus-within:bg-white"
           :placeholder="t('signupModal.loginInput')"
           type="text"
         />
@@ -273,21 +277,21 @@ onMounted(async () => {
       <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
         <label
           for="product-name"
-          class="text-sm font-medium leading-5 text-gray-1"
+          class="text-sm font-medium leading-5 text-greys-1"
           >{{ $t("signupModal.productLabel") }}</label
         >
         <Input
           v-model.trim="signUpForm.project_name"
           :error="sign$?.project_name?.$error"
           type="text"
-          class="w-full py-3 text-base leading-5 transition duration-300 border rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-gray-200 focus-within:bg-white"
+          class="w-full py-3 text-base leading-5 transition duration-300 border border-transparent rounded-lg outline-none focus-within:border-blue-400 ps-4 pe-10 sm:text-sm text-black-1 disabled:text-gray-400 bg-main-grey focus-within:bg-white"
           :placeholder="$t('signupModal.productPlaseholder')"
         />
       </div>
       <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
         <label
           for="product-category"
-          class="text-sm font-medium leading-5 text-gray-1"
+          class="text-sm font-medium leading-5 text-greys-1"
           >{{ $t("signupModal.categoryLabel") }}</label
         >
         <Dropdown
@@ -295,19 +299,20 @@ onMounted(async () => {
           :error="sign$?.category?.$error"
           :title="$t('signupModal.categoryPlaceholder')"
           :options="categories"
+          class="bg-main-grey rounded-lg"
         />
       </div>
       <div class="flex flex-col gap-2 mt-4 mb-2 form-box">
-        <label for="phone" class="text-sm font-medium leading-5 text-gray-1">{{
+        <label for="phone" class="text-sm font-medium leading-5 text-greys-1">{{
           $t("signupModal.numberLabel")
         }}</label>
         <div class="relative">
           <InputMask
             v-model="signUpForm.phone_number"
             :error="sign$?.phone_number?.$error"
-            :class="!sign$?.phone_number?.$error ? '' : 'border-red-500 '"
+            :class="!sign$?.phone_number?.$error ? '' : 'border-red-500'"
             mask="+999 99 999 99 99"
-            class="w-full px-4 py-3 text-base leading-5 transition duration-300 border rounded-lg focus-within:border-blue-400 outline-none ps-10 focus-within:border-blue pe-10 sm:text-sm text-dark bg-gray-2"
+            class="w-full px-4 py-3 text-base leading-5 transition duration-300 border border-transparent rounded-lg focus-within:border-blue-400 outline-none ps-10 focus-within:border-blue p-10 sm:text-sm text-black-1 bg-main-grey"
             placeholder="+___ (__) ___-__-__"
             type="text"
             name="phone"
@@ -325,15 +330,15 @@ onMounted(async () => {
         >
         </EnterButton>
         <div class="flex items-center gap-2">
-          <hr class="w-full h-px border-none bg-secondaryGray" />
-          <span class="text-xs whitespace-nowrap text-gray-1 leading-130">{{
+          <hr class="w-full h-px border-none bg-grey-4" />
+          <span class="text-xs whitespace-nowrap text-greys-1 leading-130">{{
             $t("modal.wantSeller")
           }}</span>
-          <hr class="w-full h-px border-none bg-secondaryGray" />
+          <hr class="w-full h-px border-none bg-grey-4" />
         </div>
         <button
           @click="switchTypeModal('login')"
-          class="border border-blue text-blue hover:bg-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-gray-2 w-full switcher"
+          class="border border-main-blue text-main-blue hover:bg-main-blue/10 px-6 md:px-7 py-2.5 md:py-3 text-sm md:text-base font-semibold leading-130 rounded-lg relative transition-300 active:scale-95 disabled:text-greys-2 w-full switcher"
           type="button"
         >
           Войти
@@ -358,10 +363,10 @@ onMounted(async () => {
     >
       <button
         @click="emit('close:modal')"
-        class="text-3xl w-7 h-7 absolute text-black top-5 right-5 rounded-full shrink-0 flex-center transition-300 hover:text-red hover:bg-transparent active:scale-95"
+        class="text-3xl w-7 h-7 absolute text-black-1/50 top-5 right-5 rounded-full shrink-0 flex-center transition-300 hover:text-red hover:bg-transparent active:scale-95 group"
       >
         <span
-          class="icon-close text-xl font-thin group-hover:text-red transition-300"
+          class="icon-close text-xl font-thin group-hover:text-black-1 transition-300"
         ></span>
       </button>
       <div class="pt-16 p-5 flex flex-col text-center">
@@ -370,10 +375,10 @@ onMounted(async () => {
           src="../../../public/images/success.svg"
           alt="Register success illustration"
         />
-        <h2 class="text-lg font-semibold leading-130">
+        <h2 class="text-lg font-semibold leading-130 text-black-1">
           {{ $t("finellyModal.title") }}
         </h2>
-        <p class="text-sm leading-140 text-gray-1 mt-2 mb-14">
+        <p class="text-sm leading-140 text-greys-1 mt-2 mb-14">
           {{ $t("finellyModal.subTitle") }}
         </p>
         <EnterButton

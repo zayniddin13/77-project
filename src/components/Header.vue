@@ -41,7 +41,7 @@
         </div>
         <transition name="fade" mode="out-in">
           <div
-            v-show="show"
+            :class="show ? 'opacity-100' : 'opacity-0'"
             class="lang_modal absolute left-0 translate-y-full translate-x-3 rounde-lg overflow-hidden z-40 -bottom-1 shadow-grey bg-white pr-3.5"
           >
             <ul>
