@@ -51,7 +51,7 @@ defineProps({
     </div>
     <div v-if="type === 'SingleProduct'">
       <div role="status" class="animate-pulse md:flex gap-4">
-        <div class="w-full h-full rounded dark:bg-gray-700">
+        <div class="w-full h-full rounded">
           <svg
             class="w-250 h-250 max-sm:w-full max-sm:h-[300px] text-gray-200 dark:text-gray-600"
             aria-hidden="true"
