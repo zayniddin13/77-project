@@ -386,9 +386,9 @@ watch(data, () => {
     });
   }
 });
-const regex = /^[a-zA-Z0-9]+$/;
+
 async function filterData(a) {
-  let routId = route.query.categoty_id.split(" ").join("");
+  let routId = route.query.categoty_id;
   if (a) {
     a.preventDefault();
   } else if (routId) {
@@ -436,6 +436,7 @@ async function filterData(a) {
     });
 
     page.value++;
+    console.log(response.data.results);
     product.value = response.data.results;
     count.value += product?.value?.count || 0;
     return;
