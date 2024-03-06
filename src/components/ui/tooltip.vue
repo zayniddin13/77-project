@@ -29,5 +29,6 @@ const props = defineProps({
   categoryChildAdds: Object,
   positionForX: String,
 });
-let position = `left-[${props.positionForX}px]`;
+let position = ref();
+position.value = `left-[${props.positionForX}px]`;
 </script>
