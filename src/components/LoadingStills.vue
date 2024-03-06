@@ -113,7 +113,7 @@ defineProps({
         </div>
         <div class="w-full">
           <div
-            class="skeleton-loading space-x-4 flex items-center justify-between w-full h-22 border rounded-2xl border-gray-100 p-8 my-3"
+            class="skeleton-loading space-x-4 flex items-center justify-between w-full h-22 border rounded-2xl p-8 my-3"
           >
             <div
               class="icon-part h-full w-[16%] flex items-center justify-center"
