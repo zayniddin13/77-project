@@ -1,68 +1,36 @@
 {
   "routes": [
     {
-      "path": "/",
-      "name": "home",
-      "meta": {
-        " layout": "default"
-      },
-      "component": "Main"
+      "src": "/",
+      "dest": "/"
     },
     {
-      "path": "/saved",
-      "name": "saved",
-      "meta": {
-        " layout": "default"
-      },
-      "component": "Saved"
+      "src": "/saved",
+      "dest": "/"
     },
     {
-      "path": "/search-products/:slug",
-      "name": "searchSingleProduct",
-      "meta": {
-        "layout": "default"
-      },
-      "component": "searchSingleProduct"
+      "src": "/search-products/:slug",
+      "dest": "/"
     },
     {
-      "path": "/products/:slug",
-      "name": "SingleProduct",
-      "meta": {
-        " layout": "default"
-      },
-      "component": "SingleProduct"
+      "src": "/products/:slug",
+      "dest": "/"
     },
     {
-      "path": "/pages/:slug",
-      "name": "siteDirection",
-      "meta": {
-        "layout": "default"
-      },
-      "component": "SiteDirection"
+      "src": "/pages/:slug",
+      "dest": "/"
     },
     {
-      "path": "/more-product",
-      "name": "MoreAddSection",
-      "meta": {
-        "layout": "default"
-      },
-      "component": "MoreAddSection"
+      "src": "/more-product",
+      "dest": "/"
     },
     {
-      "path": "/more-product-categoty_id/:id",
-      "name": "MoreAddSectionCateg",
-      " meta": {
-        "layout": "default"
-      },
-      "component": "MoreAddSection"
+      "src": "/more-product-categoty_id/:id",
+      "dest": "/"
     },
     {
-      "path": "/:path(.*)",
-      "name": "NotFoundComponent",
-      " meta": {
-        "layout": "empty"
-      },
-      "component": "NotFoundComponent"
+      "src": "/:path(.*)",
+      "dest": "/"
     }
   ]
 }
