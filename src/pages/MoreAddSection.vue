@@ -11,18 +11,20 @@
         class="rounded-2xl max-sm:scroll-style left-[12%] overflow-y-auto overflow-x-hidden max-md:max-h-[85vh] col-span-4 p-4 bg-white md:rounded-xl lg:col-span-3 max-md:absolute max-md:w-9/12 max-md:z-50 max-md:mx-auto -top-4"
       >
         <div class="flex justify-between items-center">
-          <h2 class="mb-4 text-xl font-semibold leading-130 text-primary title">
+          <h2
+            class="mb-4 text-xl text-black-1 font-semibold leading-130 text-primary title"
+          >
             {{ $t("sitebarMoreProduct.filtr") }}
           </h2>
           <button @click="showSiteBar">
             <span
-              class="md:hidden icon-close text-xl font-normal text-gray-400"
+              class="md:hidden icon-close text-xl font-normal text-greys-0"
             ></span>
           </button>
         </div>
         <form class="flex flex-col gap-5" @submit="filterData">
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray">{{
+            <label for="" class="text-sm font-medium leading-5 text-greys-0">{{
               $t("sitebarMoreProduct.province")
             }}</label>
             <Dropdown
@@ -33,7 +35,7 @@
           </div>
           <!-- <div @click="getCity" class="flex flex-col gap-2"> -->
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray">{{
+            <label for="" class="text-sm font-medium leading-5 text-greys-0">{{
               $t("sitebarMoreProduct.provinOrCity")
             }}</label>
             <Dropdown
@@ -46,7 +48,7 @@
           <!-- </div> -->
 
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray">{{
+            <label for="" class="text-sm font-medium leading-5 text-greys-0">{{
               $t("sitebarMoreProduct.sort")
             }}</label>
             <div
@@ -55,7 +57,7 @@
               class="flex flex-col"
             >
               <label
-                class="transition group inline-flex items-center relative select-none min-h-[20px] cursor-pointer"
+                class="transition group inline-flex items-center relative select-none min-h-5 cursor-pointer"
                 style="min-height: 20px"
                 ><input
                   @click="sortData(item.price)"
@@ -68,7 +70,7 @@
                   style="width: 20px; height: 20px"
                 ></span
                 ><span
-                  class="w-full py-3 text-sm font-medium border-b leading-130 md:group-hover:text-blue-400 transition-300 border-gray-400 group-last:border-b-0 text-black"
+                  class="w-full py-3 text-sm font-medium border-b leading-130 md:group-hover:text-blue-400 transition-300 border-gray-400 group-last:border-b-0 text-black-1"
                   >{{ $t(item.name) }}</span
                 ></label
               >
@@ -76,14 +78,14 @@
           </div>
 
           <div class="flex flex-col gap-2">
-            <label for="" class="text-sm font-medium leading-5 text-gray-400">{{
+            <label for="" class="text-sm font-medium leading-5 text-greys-0">{{
               $t("sitebarMoreProduct.subcategories")
             }}</label>
             <div>
               <div class="flex flex-col gap-4">
                 <div class="block">
                   <div
-                    class="group w-full flex items-center gap-2 relative select-none min-h-[20px] cursor-pointer border-b border-gray-300 py-2.5"
+                    class="group w-full flex items-center gap-2 relative select-none min-h-5 cursor-pointer border-b border-gray-300 py-2.5"
                   >
                     <span
                       @click="allCheck"
@@ -101,7 +103,7 @@
                     </span>
                     <div class="">
                       <span
-                        class="text-sm font-medium leading-130 text-black transition-300 group-hover:text-blue-400"
+                        class="text-sm font-medium leading-130 text-black-1 transition-300 group-hover:text-main-blue"
                         >{{ $t("sitebarMoreProduct.allSection") }}</span
                       >
                     </div>
@@ -131,79 +133,83 @@
         <div>
           <div class="w-full">
             <h1
-              class="mb-3 text-2xl md:text-3.5xl leading-130 font-bold text-primary gap-2 title"
+              class="mb-3 text-2xl text-black-1 md:text-3.5xl leading-130 font-bold text-primary gap-2 title"
             >
               {{ $t("products.product") }}
             </h1>
 
             <div class="flex items-center justify-between mt-10">
-              <p class="text-lg font-medium text-gray-400 leading-130 count">
+              <p class="text-lg font-medium text-greys-0 leading-130 count">
                 {{ count }} {{ $t("products.title") }}
               </p>
               <div class="flex items-center gap-2">
                 <button
                   @click="showSiteBar"
-                  :class="show ? 'text-blue-400' : 'text-gray-400'"
+                  :class="show ? 'text-blue-400' : 'text-grey-3'"
                   class="md:hidden block text-2xl leading-7 hover:text-blue-400/90 icon-burger transition-300"
                 ></button>
                 <button
                   @click="doBlock"
-                  :class="block ? 'text-blue-400' : 'text-gray-400'"
+                  :class="block ? 'text-blue-400' : 'text-grey-3'"
                   class="text-3xl leading-7 hover:text-blue-400/90 icon-block transition-300"
                 ></button>
                 <button
                   @click="doGrid"
-                  :class="grid ? 'text-blue-400' : 'text-gray-400'"
+                  :class="grid ? 'text-blue-400' : 'text-grey-3'"
                   class="text-3xl leading-7 hover:text-blue-400/90 icon-grid transition-300"
                 ></button>
               </div>
             </div>
           </div>
+          <transition mode="out-in">
+            <div
+              v-if="grid && product"
+              class="grid grid-cols-2 gap-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
+            >
+              <div
+                v-show="!loading"
+                v-for="(item, index) in product"
+                :key="index"
+                class="cursor-pointer transition-300"
+              >
+                <ProductCard
+                  :id="item.id"
+                  :title="item.name"
+                  :date="formatPublishedTime(item.published_at)"
+                  number="+998 88 278 96 96"
+                  :price="item.price"
+                  :image="item.photo || '../../public/images/defaultImg.svg'"
+                  :slug="item.slug"
+                  :islike="item.is_liked"
+                />
+              </div>
+            </div>
+          </transition>
 
-          <div
-            v-if="grid && product"
-            class="grid grid-cols-2 gap-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
-          >
+          <transition mode="out-in">
             <div
-              v-show="!loading"
-              v-for="(item, index) in product"
-              :key="index"
-              class="cursor-pointer transition-300"
+              v-if="block && product"
+              class="block gap-y-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
             >
-              <ProductCard
-                :id="item.id"
-                :title="item.name"
-                :date="formatPublishedTime(item.published_at)"
-                number="+998 88 278 96 96"
-                :price="item.price"
-                :image="item.photo || '../../public/images/defaultImg.svg'"
-                :slug="item.slug"
-                :islike="item.is_liked"
-              />
+              <div
+                v-show="!loading"
+                v-for="(item, index) in product"
+                :key="index"
+                class="cursor-pointer transition-300"
+              >
+                <ProductCardBlock
+                  :id="item.id"
+                  :title="item.name"
+                  :date="formatPublishedTime(item.published_at)"
+                  number="+998 88 278 96 96"
+                  :price="item.price"
+                  :image="item.photo || '../../public/images/defaultImg.svg'"
+                  :slug="item.slug"
+                  :islike="item.is_liked"
+                />
+              </div>
             </div>
-          </div>
-          <div
-            v-if="block && product"
-            class="block gap-y-6 pt-6 pb-8 mt-2 mb-6 sm:grid-cols-2 lg:grid-cols-3 md:mb-5 md:mt-0 products"
-          >
-            <div
-              v-show="!loading"
-              v-for="(item, index) in product"
-              :key="index"
-              class="cursor-pointer transition-300"
-            >
-              <ProductCardBlock
-                :id="item.id"
-                :title="item.name"
-                :date="formatPublishedTime(item.published_at)"
-                number="+998 88 278 96 96"
-                :price="item.price"
-                :image="item.photo || '../../public/images/defaultImg.svg'"
-                :slug="item.slug"
-                :islike="item.is_liked"
-              />
-            </div>
-          </div>
+          </transition>
           <div class="w-full" v-if="loading">
             <div
               class="grid grid-cols-2 gap-6 py-8 my-6 sm:grid-cols-2 lg:grid-cols-3 md:my-10 products"
@@ -213,11 +219,11 @@
             <div class="saved__about flex items-center justify-center flex-col">
               <img src="../../public/images/noData.svg" alt="" class="block" />
               <div
-                class="block text-2xl font-bold text-dark leading-6 mt-6 mb-3"
+                class="block text-2xl font-bold text-black-1 leading-6 mt-6 mb-3"
               >
                 {{ $t("noData.noAddsTitle") }}
               </div>
-              <div class="text-base font-normal leading-6 text-dark">
+              <div class="text-base font-normal leading-6 text-black-1">
                 {{ $t("noData.noAddsTitleAbout") }}
               </div>
             </div>
@@ -310,18 +316,6 @@ const sortValue = ref(null);
 const subCategoryValue = ref(null);
 const allAccordionCheck = ref(false);
 
-function allCheck() {
-  allAccordionCheck.value = !allAccordionCheck.value;
-  categories.value.map((el) => {
-    el.checked = !el.checked;
-    if (el.children.length) {
-      el.children.map((item) => {
-        item.checked = !item.checked;
-      });
-    }
-  });
-}
-
 const updateRegionValue = (value) => {
   region.value = value[1];
   for (let i = 0; i < data.value.length; i++) {
@@ -378,6 +372,18 @@ async function getData() {
   } catch (error) {
     console.error(error);
   }
+}
+function allCheck() {
+  allAccordionCheck.value = !allAccordionCheck.value;
+  categories.value.map((el) => {
+    el.checked = allAccordionCheck.value;
+    if (el.children.length) {
+      el.children.map((item) => {
+        item.checked = allAccordionCheck.value;
+      });
+    }
+  });
+  console.log(categories.value);
 }
 watch(data, () => {
   if (data && Array.isArray(data.value)) {

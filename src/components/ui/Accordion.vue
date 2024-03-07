@@ -2,10 +2,10 @@
   <div class="select-none">
     <div class="flex items-center w-full gap-2 group border-b border-gray-300">
       <div
-        class="group block text-left gap-2 relative select-none min-h-[20px] cursor-pointer py-2.5"
+        @click="checkToggle"
+        class="group flex items-center justify-start flex-grow cursor-pointer text-left gap-2 relative select-none min-h-[20px] py-2.5"
       >
         <span
-          @click="checkToggle"
           :class="
             checked === 'all-checked' || element.checked
               ? '!bg-blue-400 !border-blue-400'
@@ -25,17 +25,15 @@
             class="text-[9px] top-1/2 left-1/2 leading-5 text-white transform -translate-x-1/2 -translate-y-1/2 transition-200 absolute z-[1]"
           ></span
         ></span>
-      </div>
-      <div
-        @click="toggleAccordion"
-        class="flex items-center justify-between flex-grow cursor-pointer"
-      >
         <p
           class="text-sm font-medium leading-130 text-black transition-300 group-hover:text-blue-300"
         >
           {{ props.title }}
         </p>
+      </div>
+      <div class="flex items-center justify-end flex-grow cursor-pointer">
         <div
+          @click="toggleAccordion"
           v-if="accordionOptions.length > 0"
           :class="open ? 'rotate-90' : 'rotate-0'"
           class="text-[9px] font-bold leading-5 transition-transform -rotate-90 icon-to-bottom transition-300 text-gray-500"

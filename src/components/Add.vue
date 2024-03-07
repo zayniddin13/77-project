@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div
-      class="rounded-xl group border border-white transition-500 hover:shadow-anounce bg-white flex flex-col gap-2 leading-6 relative"
+      class="rounded-xl group border border-white duration-500 hover:shadow-anounce bg-white flex flex-col gap-2 leading-6 relative"
     >
       <button @click="productLiked(id)" class="absolute top-3 left-3">
         <span :class="like ? 'icon-red-heart' : 'icon-heart'"></span>

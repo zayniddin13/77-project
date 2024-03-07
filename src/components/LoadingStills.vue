@@ -94,21 +94,11 @@ defineProps({
               />
             </svg>
           </div>
-          <div
-            class="p-4 bg-gray-200 rounded-lg dark:bg-gray-700 max-w-[440px] mb-2.5"
-          >
-            <div
-              class="h-5 bg-white rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"
-            ></div>
-            <div
-              class="h-5 bg-white rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"
-            ></div>
-            <div
-              class="h-5 bg-white rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"
-            ></div>
-            <div
-              class="h-5 bg-white rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"
-            ></div>
+          <div class="p-4 bg-gray-200 rounded-lg max-w-[440px] mb-2.5">
+            <div class="h-5 bg-white rounded-full max-w-[440px] mb-2.5"></div>
+            <div class="h-5 bg-white rounded-full max-w-[440px] mb-2.5"></div>
+            <div class="h-5 bg-white rounded-full max-w-[440px] mb-2.5"></div>
+            <div class="h-5 bg-white rounded-full max-w-[440px] mb-2.5"></div>
           </div>
         </div>
         <div class="w-full">

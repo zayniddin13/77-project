@@ -9,7 +9,7 @@
       @click="toggleDrop"
       v-click-outside="closeDrop"
     >
-      <p>
+      <p class="font-normal text-base leading-5 text-black-1">
         {{ dropdownVal }}
       </p>
       <span
