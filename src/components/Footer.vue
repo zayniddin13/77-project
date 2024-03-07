@@ -21,7 +21,6 @@
                 '/pages/' +
                 (fetchDatas && fetchDatas[1] ? fetchDatas[1].slug : '')
               "
-              target="_blank"
               class="flex items-center justify-center gap-1"
             >
               <img src="/public/images/footerLogo.svg" alt="" /><span
@@ -36,7 +35,6 @@
                 '/pages/' +
                 (fetchDatas && fetchDatas[0] ? fetchDatas[0].slug : '')
               "
-              target="_blank"
               class="flex items-center justify-center gap-1"
               ><img src="/public/images/footerLogo.svg" alt="" /><span
                 class="text-black-1 text-base md:text-xl font-semibold leading-6 hover:text-main-blue"
