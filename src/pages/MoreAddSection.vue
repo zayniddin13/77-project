@@ -33,7 +33,7 @@
               :options="regions"
             />
           </div>
-          <!-- <div @click="getCity" class="flex flex-col gap-2"> -->
+          <!--n <div @click="getCity" class="flex flex-col gap-2"> -->
           <div class="flex flex-col gap-2">
             <label for="" class="text-sm font-medium leading-5 text-greys-0">{{
               $t("sitebarMoreProduct.provinOrCity")

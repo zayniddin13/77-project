@@ -29,7 +29,7 @@
         >
           <p
             @click="updateValue(item.name, item.id)"
-            class="text-base font-medium text-dark leading-130"
+            class="text-base font-medium text-black leading-130"
           >
             {{ item.name }}
           </p>

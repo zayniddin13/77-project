@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "name": "home",
+      "meta": {
+        " layout": "default"
+      },
+      "component": "Main"
+    },
+    {
+      "path": "/saved",
+      "name": "saved",
+      "meta": {
+        " layout": "default"
+      },
+      "component": "Saved"
+    },
+    {
+      "path": "/search-products/:slug",
+      "name": "searchSingleProduct",
+      "meta": {
+        "layout": "default"
+      },
+      "component": "searchSingleProduct"
+    },
+    {
+      "path": "/products/:slug",
+      "name": "SingleProduct",
+      "meta": {
+        " layout": "default"
+      },
+      "component": "SingleProduct"
+    },
+    {
+      "path": "/pages/:slug",
+      "name": "siteDirection",
+      "meta": {
+        "layout": "default"
+      },
+      "component": "SiteDirection"
+    },
+    {
+      "path": "/more-product",
+      "name": "MoreAddSection",
+      "meta": {
+        "layout": "default"
+      },
+      "component": "MoreAddSection"
+    },
+    {
+      "path": "/more-product-categoty_id/:id",
+      "name": "MoreAddSectionCateg",
+      " meta": {
+        "layout": "default"
+      },
+      "component": "MoreAddSection"
+    },
+    {
+      "path": "/:path(.*)",
+      "name": "NotFoundComponent",
+      " meta": {
+        "layout": "empty"
+      },
+      "component": "NotFoundComponent"
+    }
+  ]
+}
