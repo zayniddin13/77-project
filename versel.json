@@ -1,36 +1,3 @@
 {
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/"
-    },
-    {
-      "src": "/saved",
-      "dest": "/"
-    },
-    {
-      "src": "/search-products/:slug",
-      "dest": "/"
-    },
-    {
-      "src": "/products/:slug",
-      "dest": "/"
-    },
-    {
-      "src": "/pages/:slug",
-      "dest": "/"
-    },
-    {
-      "src": "/more-product",
-      "dest": "/"
-    },
-    {
-      "src": "/more-product-categoty_id/:id",
-      "dest": "/"
-    },
-    {
-      "src": "/:path(.*)",
-      "dest": "/"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
