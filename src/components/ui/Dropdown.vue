@@ -14,7 +14,7 @@
       </p>
       <span
         :class="open ? 'rotate-90' : 'rotate-0'"
-        class="inline-block text-[9px] leading-6 transition-transform -rotate-90 icon-to-bottom transition-300 text-gray"
+        class="inline-block text-[9px] leading-6 duration-300 -rotate-90 icon-to-bottom transition-300 text-greys-0"
       />
     </div>
     <div
@@ -25,11 +25,11 @@
         <div
           v-for="(item, index) in options"
           :key="index"
-          class="p-4 duration-300 border-b cursor-pointer transition-300 hover:bg-gray-bg border-white-4 last:border-none"
+          class="p-4 duration-300 border-b cursor-pointer transition-300 hover:bg-greys-0 border-white-4 last:border-none"
         >
           <p
             @click="updateValue(item.name, item.id)"
-            class="text-base font-medium text-black leading-130"
+            class="text-base font-medium text-black-1 leading-130"
           >
             {{ item.name }}
           </p>

@@ -97,14 +97,16 @@
         <EnterButton
           @click="openLoginModal"
           title="Войти"
-          resHidden="hidden md:block"
+          resHidden="hidden md:block font-semibold"
           variant="secondary"
         >
           <template #suffix>
-            <span class="icon-logenter text-2xl max-[400px]:text-base"></span>
+            <span
+              class="icon-logenter text-2xl max-[400px]:text-base text-black-1 font-semibold"
+            ></span>
           </template>
         </EnterButton>
-        <transition name="fade" mode="ease">
+        <transition name="fades" mode="out-in">
           <LoginModal @close:modal="closeLoginModal" v-if="toggleLoginModal" />
         </transition>
       </div>

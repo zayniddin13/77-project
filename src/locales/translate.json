@@ -39,7 +39,7 @@
     },
     "noData": {
       "noAddsTitle": "Tanlangan reklamalar yo'q",
-      "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу",
+      "noAddsTitleAbout": "Siz hali sevimlilaringizga hech qanday reklama qo'shmagansiz",
       "didntFind": "Hech narsa topilmadi",
       "didntFindAbout": "Voy! So‘rovingiz bo‘yicha hech qanday mos natija topilmadi"
     },
@@ -135,7 +135,8 @@
     "noData": {
       "noAddsTitle": " Нет избранных объявлений",
       "noAddsTitleAbout": "Вы еще не добавили в избранное ни одну рекламу",
-      "didntFind": "Ничего не найдено"
+      "didntFind": "Ничего не найдено",
+      "didntFindAbout": "Ух ты! По вашему запросу не найдено соответствующих результатов"
     },
     "button": {
       "more": "Загрузить больше",

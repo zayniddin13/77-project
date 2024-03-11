@@ -141,7 +141,7 @@ onMounted(async () => {
 <template>
   <div
     @click.self="emit('close:modal')"
-    class="fixed inset-0 flex items-center justify-center w-full h-screen bg-black/50 z-[100] top-0 left-0 transition-all duration-300 p-3 login-modal-component"
+    class="fixed inset-0 flex items-center justify-center w-full h-screen bg-black/50 z-[100] top-0 left-0 duration-300 p-3"
   >
     <div
       v-if="typeModal === 'login'"
@@ -390,14 +390,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.fade-custom-enter-active,
-.fade-custom-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-custom-enter-from,
-.fade-custom-leave-to {
-  opacity: 0;
-}
-</style>

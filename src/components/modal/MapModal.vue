@@ -193,10 +193,3 @@ async function signUp() {
     </Button>
   </div>
 </template>
-
-<style scoped>
-.map {
-  width: 100%;
-  height: 65%;
-}
-</style>

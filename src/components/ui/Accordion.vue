@@ -77,12 +77,14 @@ const props = defineProps({
   options: Array,
   element: Array,
   allChecked: Boolean,
+  allAccordionCheck: Boolean,
 });
 
 const open = ref(false);
 const checked = ref("none");
 const accordionOptions = ref([]);
 const element = ref([]);
+const allAccordionCheck = ref(false);
 const toggleAccordion = () => {
   open.value = !open.value;
 };
@@ -107,12 +109,14 @@ const toggleCheckOption = (option) => {
 };
 
 onMounted(() => {
+  allAccordionCheck.value = props.allAccordionCheck;
   accordionOptions.value = props.options;
   element.value = props.element;
 });
 
 watch(
   accordionOptions,
+
   () => {
     let checkCheckedOptions = accordionOptions.value.filter(
       (option) => option.checked

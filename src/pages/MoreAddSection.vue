@@ -85,10 +85,10 @@
               <div class="flex flex-col gap-4">
                 <div class="block">
                   <div
+                    @click="allCheck"
                     class="group w-full flex items-center gap-2 relative select-none min-h-5 cursor-pointer border-b border-gray-300 py-2.5"
                   >
                     <span
-                      @click="allCheck"
                       :class="
                         allAccordionCheck
                           ? '!bg-blue-400 border-blue-400'
@@ -114,7 +114,8 @@
                     :title="category.name"
                     :options="category.children"
                     :element="category"
-                    :allChecked="allAccordionCheck"
+                    :categories="categories"
+                    :allAccordionCheck="allAccordionCheck"
                   />
                 </div>
               </div>
