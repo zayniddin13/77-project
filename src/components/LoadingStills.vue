@@ -53,7 +53,7 @@ defineProps({
       <div role="status" class="animate-pulse md:flex gap-4">
         <div class="w-full h-full rounded">
           <svg
-            class="w-250 h-250 max-sm:w-full max-sm:h-[300px] text-gray-200 dark:text-gray-600"
+            class="w-250 h-250 max-sm:w-full max-sm:h-[300px] text-gray-200 dark:text-gray-400"
             aria-hidden="true"
             fill="currentColor"
             viewBox="0 0 20 18"
@@ -64,7 +64,7 @@ defineProps({
           </svg>
           <div class="flex gap-2">
             <svg
-              class="w-40 h-40 text-gray-200 dark:text-gray-600"
+              class="w-40 h-40 text-gray-200 dark:text-gray-400"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 18"
@@ -74,7 +74,7 @@ defineProps({
               />
             </svg>
             <svg
-              class="w-40 h-40 text-gray-200 dark:text-gray-600"
+              class="w-40 h-40 text-gray-200 dark:text-gray-400"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 18"
@@ -84,7 +84,7 @@ defineProps({
               />
             </svg>
             <svg
-              class="w-40 h-40 text-gray-200 dark:text-gray-600"
+              class="w-40 h-40 text-gray-200 dark:text-gray-400"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 18"
@@ -109,7 +109,7 @@ defineProps({
               class="icon-part h-full w-[16%] flex items-center justify-center"
             >
               <svg
-                class="w-20 h-20 text-gray-200 dark:text-gray-600"
+                class="w-20 h-20 text-gray-200 dark:text-gray-400"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 18"
@@ -131,7 +131,7 @@ defineProps({
               class="icon-part h-full w-[16%] flex items-center justify-center"
             >
               <svg
-                class="w-20 h-20 text-gray-200 dark:text-gray-600"
+                class="w-20 h-20 text-gray-200 dark:text-gray-400"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 18"

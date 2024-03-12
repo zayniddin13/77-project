@@ -42,7 +42,7 @@
         <transition name="fade" mode="out-in">
           <div
             :class="show ? 'opacity-100' : 'opacity-0'"
-            class="lang_modal absolute left-0 translate-y-full translate-x-3 rounde-lg overflow-hidden z-40 -bottom-1 shadow-grey bg-white pr-3.5"
+            class="lang_modal absolute left-0 translate-y-full translate-x-3 rounde-lg overflow-hidden z-40 -bottom-1 shadow-grey bg-white pr-3.5 duration-500"
           >
             <ul>
               <li
@@ -66,11 +66,11 @@
         </transition>
         <a
           href="tel:+998882789696"
-          target="_blank"
+          target="_parent"
           class="group flex items-center gap-1 max-lg:hidden"
         >
           <span
-            class="icon-phone text-xl leading-5 text-greys-2 group-hover:text-main-blue transition-colors"
+            class="icon-phone text-xl leading-5 text-greys-2 group-hover:text-main-blue transition-colors duration-300"
           ></span>
           <span
             class="font-medium text-sm text-black-1 hover:text-main-blue transition-colors"
@@ -81,7 +81,7 @@
       <div class="navbar_right flex items-center gap-3">
         <router-link
           to="/saved"
-          class="group navbar__seved flex items-center gap-2 text-black-1 hover:!text-main-blue transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer transition:300"
+          class="group navbar__seved flex items-center gap-2 text-black-1 hover:!text-main-blue transition-all delay-200 max-sm:p-1.5 max-sm:gap-0 max-sm:bg-gray-200 max-sm:rounded-lg hover:cursor-pointer duration-300"
         >
           <span
             class="group icon-blue-heart text-xl max-sm:text-xl leading-5 max-sm:text-center"

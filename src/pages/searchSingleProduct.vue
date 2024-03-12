@@ -58,16 +58,19 @@
               <img class="rounded-2xl" :src="img" />
             </swiper-slide>
           </swiper>
-          <h3 class="my-4 font-inter not-italic font-bold text-xl text-black">
+          <h3 class="my-4 font-inter not-italic font-bold text-xl text-black-1">
             {{ product.name }}
           </h3>
           <div class="flex gap-4 pt-4 pb-6">
-            <div class="bg-gray-300 py-1 px-2 rounded-md">
+            <div
+              v-if="product.updated_time"
+              class="bg-grey-4 text-greys-0 py-1 px-2 rounded-md"
+            >
               {{ formatPublishedTime(product.updated_time) }}
             </div>
             <div
               v-if="product.address"
-              class="bg-gray-300 py-1 px-2 rounded-md font-inter text-sm font-normal"
+              class="bg-grey-4 text-greys-0 py-1 px-2 rounded-md font-inter text-sm font-normal"
             >
               {{ product.address.district.name }}
             </div>
@@ -77,10 +80,10 @@
             class="min-[400px]:flex justify-between items-center block"
           >
             <div>
-              <span class="font-inter font-bold text-3xl text-black">{{
+              <span class="font-inter font-bold text-3xl text-black-1">{{
                 formatMoneyDecimal(product.price)
               }}</span
-              ><span class="font-inter font-mediumn text-lg text-blue-600 ml-2"
+              ><span class="font-inter font-mediumn text-lg text-main-blue ml-2"
                 >UZS</span
               >
             </div>
@@ -98,8 +101,10 @@
           </div>
         </div>
         <div v-if="product" class="px-6 py-5 bg-white rounded-2xl my-4">
-          <h3 class="font-inter font-bold text-black text-2xl">Описание</h3>
-          <div class="font-ibmPlex font-normal text-base !break-words">
+          <h3 class="font-inter font-bold text-black-1 text-2xl">Описание</h3>
+          <div
+            class="font-ibmPlex text-black-1 font-normal text-base !break-words"
+          >
             {{ product.description }}
           </div>
         </div>
@@ -114,10 +119,10 @@
               class="w-10 h-10 rounded-lg"
             />
             <div v-if="product.seller" class="profile_name block">
-              <h1 class="font-semibold text-black font-inter text-base">
+              <h1 class="font-semibold text-black-1 font-inter text-base">
                 {{ product.seller.full_name }}
               </h1>
-              <h3 class="font-inter font-normal text-xs text-gray-500">
+              <h3 class="font-inter font-normal text-xs text-greys-0">
                 ID: {{ product.seller.id }}
               </h3>
             </div>
@@ -126,7 +131,7 @@
             href="tel:  {{ product.seller.phone_number }}"
             target="_blank"
             v-if="product"
-            class="font-inter not-itelic text-black font-semibold text-base"
+            class="font-inter not-itelic text-black-1 font-semibold text-base"
           >
             {{ number }}</a
           >
@@ -141,13 +146,13 @@
         </div>
         <div v-if="product.address" class="bg-white my-4 rounded-2xl">
           <div class="p-4">
-            <h3 class="font-inter font-bold text-xl text-black">
+            <h3 class="font-inter font-bold text-xl text-black-1">
               Местоположение
             </h3>
             <div class="h-[1px] w-full bg-gray-400 my-3"></div>
             <div class="flex gap-2.5">
               <span
-                class="icon-location text-blue-500 text-3xl font-semibold"
+                class="icon-location text-main-blue text-3xl font-semibold"
               ></span>
               <span class="font-inter font-medium text-sm text-black">{{
                 product.address.name
@@ -161,7 +166,7 @@
           class="max-w-xs w-full flex items-center justify-center mb-6"
         >
           <template #suffix>
-            <span class="icon-download text-xl text-blue-500 font-bold"></span>
+            <span class="icon-download text-xl text-main-blue font-bold"></span>
           </template>
         </EnterButton>
       </div>

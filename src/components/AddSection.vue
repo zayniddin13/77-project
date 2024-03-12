@@ -38,11 +38,11 @@
         <router-link to="/more-product">
           <Button
             :title="$t('button.more')"
-            styles="flex group justify-center items-center gap-2 transition duration-300 ease-in-out  bg-grey-4 border-2 font-semibold text-base border-grey-border text-black-1 !rounded-[200px] py-3 px-7 hover:bg-gray-300"
+            styles="flex group justify-center items-center gap-2 ease-in-out  bg-grey-4 border-2 font-semibold text-base border-grey-border text-black-1 !rounded-[200px] py-3 px-7 hover:bg-gray-300"
           >
             <template #suffix
               ><img
-                class="group-hover:-rotate-90"
+                class="group-hover:-rotate-90 transition-all duration-300"
                 src="../../public/images/twoBottom.svg"
             /></template>
           </Button>

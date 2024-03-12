@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center text-sm py-5 font-bold gap-1">
+  <div class="flex items-center text-sm text-black-1 py-5 font-bold gap-1">
     <router-link to="/" class="ml-0">
       {{ $t("breadcrump.mainPage") }}</router-link
     >
